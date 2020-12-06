@@ -14,5 +14,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('manage.home');
 });
+
+Route::get('/home', function () {
+    return view('manage.home');
+});
+
+Route::get('/login', function () {
+    return view('manage.login');
+});
+
+Route::get('/register', function () {
+    return view('manage.register');
+});
+
+Route::get('/table', function () {
+    return view('manage.table');
+});
+

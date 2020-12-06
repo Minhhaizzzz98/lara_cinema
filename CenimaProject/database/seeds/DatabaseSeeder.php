@@ -11,6 +11,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call(NhanVienSeeder::class);
+        $this->call([
+            PhimSeeder::class,
+            DienVienSeeder::class,
+            Phim_DienVienSeeder::class,
+            GheSeeder::class,
+            ChucVuSeeder::class,
+            NhanVienSeeder::class
+
+        ]);
     }
 }
