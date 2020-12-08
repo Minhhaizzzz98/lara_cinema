@@ -10,7 +10,7 @@ class Phim extends Model
     protected $table = 'phims';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'TenPhim', 'TrangThai'
+        'TenPhim','NgayDKChieu','NgayKetThuc','ThoiLuong','HinhAnh', 'TrangThai'
     ];
 
     public function dienviens() {
