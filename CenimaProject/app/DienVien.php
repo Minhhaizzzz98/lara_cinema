@@ -12,4 +12,10 @@ class DienVien extends Model
     protected $fillable = [
         'TenDienVien', 'TrangThai'
     ];
+
+    public function phims()
+    {
+        return $this->belongsToMany('App\Phim', 'phim_dienvien', 'phim_id', 'dienvien_id');
+    }
+    
 }

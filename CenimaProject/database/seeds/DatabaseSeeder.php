@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+
             
             PhimSeeder::class,
             DienVienSeeder::class,
@@ -20,8 +21,14 @@ class DatabaseSeeder extends Seeder
             LoaiPhimSeeder::class,
             Phim_TheLoaiSeeder::class,
             GioiHanTuoiSeeder::class,
-            
 
+            // PhimSeeder::class,
+            // DienVienSeeder::class,
+            // Phim_DienVienSeeder::class,
+            // GheSeeder::class,
+
+            
+            // ViTriSeeder::class,
         ]);
     }
 }
