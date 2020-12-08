@@ -17,7 +17,7 @@ class CreateGhesTable extends Migration
             $table->increments('id');
 
             $table->integer('rap_id')->unsigned();
-            $table->foreign('rap_id')->references('id')->on('raps')->onDelete('cascade');
+            $table->foreign('rap_id')->references('id')->on('raps');
 
             $table->integer('TrangThai')->default(1);
             $table->timestamps();

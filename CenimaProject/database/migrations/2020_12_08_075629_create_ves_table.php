@@ -17,9 +17,9 @@ class CreateVesTable extends Migration
             $table->increments('id');
             $table->double('Gia')->unsigned();
             $table->integer('lichchieu_id')->unsigned();
-            $table->foreign('lichchieu_id')->references('id')->on('lich_chieus')->onDelete('cascade');
+            $table->foreign('lichchieu_id')->references('id')->on('lich_chieus');
             $table->integer('ghe_id')->unsigned();
-            $table->foreign('ghe_id')->references('id')->on('ghes')->onDelete('cascade');
+            $table->foreign('ghe_id')->references('id')->on('ghes');
             $table->integer('TrangThai')->default(1);
             $table->timestamps();
         });
