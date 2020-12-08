@@ -12,10 +12,10 @@ class GheSeeder extends Seeder
     public function run()
     {
         DB::table('ghes')->insert([
-            ['TrangThai' => 1],
-            ['TrangThai' => 1],
-            ['TrangThai' => 1],
-            ['TrangThai' => 1],
+            ['rap_id'=>1,'TrangThai' => 1],
+            ['rap_id'=>2,'TrangThai' => 1],
+            ['rap_id'=>2,'TrangThai' => 1],
+            ['rap_id'=>2,'TrangThai' => 1],
         ]);
     }
 }

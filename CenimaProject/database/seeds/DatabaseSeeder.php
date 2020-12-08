@@ -15,12 +15,21 @@ class DatabaseSeeder extends Seeder
 
             
             PhimSeeder::class,
+           
             DienVienSeeder::class,
             Phim_DienVienSeeder::class,
-            GheSeeder::class,
+          
             LoaiPhimSeeder::class,
             Phim_TheLoaiSeeder::class,
             GioiHanTuoiSeeder::class,
+            ChiNhanhSeeder::class,
+            GiaSeeder::class,
+            ThoiGianChieuSeeder::class,
+           
+            RapSeeder::class,
+            LichChieuSeeder::class,
+            GheSeeder::class,
+            VeSeeder::class,
 
             // PhimSeeder::class,
             // DienVienSeeder::class,
