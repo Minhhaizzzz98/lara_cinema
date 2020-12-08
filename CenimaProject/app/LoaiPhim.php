@@ -13,6 +13,10 @@ class LoaiPhim extends Model
     protected $fillable = [
         'TenLoaiPhim','TrangThai'
     ];
+    public function phims()
+    {
+        return $this->belongsToMany('App\Phim', 'phim_theloai', 'phim_id', 'theloai_id');
+    }
 
    
 }

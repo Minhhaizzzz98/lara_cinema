@@ -14,18 +14,15 @@ class DatabaseSeeder extends Seeder
         $this->call([
 
             
-            PhimSeeder::class,
-           
+            PhimSeeder::class,  
             DienVienSeeder::class,
             Phim_DienVienSeeder::class,
-          
             LoaiPhimSeeder::class,
             Phim_TheLoaiSeeder::class,
             GioiHanTuoiSeeder::class,
             ChiNhanhSeeder::class,
             GiaSeeder::class,
-            ThoiGianChieuSeeder::class,
-           
+            ThoiGianChieuSeeder::class,     
             RapSeeder::class,
             LichChieuSeeder::class,
             GheSeeder::class,
