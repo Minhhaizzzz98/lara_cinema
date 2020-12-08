@@ -19,3 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('/Phim', 'Api\PhimController');
+Route::apiResource('/DienVien', 'Api\DienVienController');
+Route::apiResource('/Ghe', 'Api\GheController');

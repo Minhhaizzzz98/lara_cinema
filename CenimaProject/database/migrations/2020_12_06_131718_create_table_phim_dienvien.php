@@ -16,7 +16,7 @@ class CreateTablePhimDienvien extends Migration
         Schema::create('phim_dienvien', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('phim_id')->unsigned();
-            $table->unsignedInteger('dienvien_id')->unsigned();
+            $table->integer('dienvien_id')->unsigned();
 
             $table->foreign('phim_id')->references('id')->on('phims')->onDelete('cascade');
             $table->foreign('dienvien_id')->references('id')->on('dien_viens')->onDelete('cascade');
