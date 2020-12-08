@@ -33,3 +33,10 @@ Route::get('/table', function () {
     return view('manage.table');
 });
 
+Route::group(['prefix' => 'phim'], function() {
+    Route::get('/index','PhimController@index');
+    Route::get('/create','PhimController@create');
+    Route::post('/store','PhimController@store');
+    Route::get('/edit/{id}','PhimController@edit');
+});
+
