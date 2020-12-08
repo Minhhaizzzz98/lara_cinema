@@ -12,12 +12,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            PhimSeeder::class,
-            DienVienSeeder::class,
-            Phim_DienVienSeeder::class,
-            GheSeeder::class,
+            // PhimSeeder::class,
+            // DienVienSeeder::class,
+            // Phim_DienVienSeeder::class,
+            // GheSeeder::class,
             
-
+            // ViTriSeeder::class,
         ]);
     }
 }
