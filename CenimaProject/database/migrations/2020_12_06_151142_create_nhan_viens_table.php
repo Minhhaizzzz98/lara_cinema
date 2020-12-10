@@ -16,12 +16,13 @@ class CreateNhanViensTable extends Migration
         Schema::create('nhan_viens', function (Blueprint $table) {
 
                 $table->bigIncrements('MaNV');
-                $table->string('HoNV');
-                $table->string('TenNV');
-                $table->unsignedBigInteger('ChucVu');
-                $table->string('TenTK',50)->unique();
-                $table->string('password');
-                $table->unsignedBigInteger('Ma_NQL');
+                $table->string('HoNV');  //
+                $table->string('Anh');   //
+                $table->string('TenNV');  //
+                $table->unsignedBigInteger('ChucVu');  //
+                $table->string('TenTK',50)->unique(); //
+                $table->string('password');  //
+                $table->unsignedBigInteger('Ma_NQL');//
                 $table->date('NgSinh')->nullable();
                 $table->string('DiaChi')->nullable();
                 $table->string('SDT',15)->unique();

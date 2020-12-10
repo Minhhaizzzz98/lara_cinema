@@ -29,8 +29,19 @@ class NhanVien extends Authenticatable
         'SDT',
         'Email',
         'isLocked',
-        'isBigAdmin'
+        'isBigAdmin',
+
     ];
+
+    protected $primaryKey = 'MaNV';
+
+    public function chucvu()
+    {
+        return $this->belongsTo('App\ChucVu');
+    }
+
+
+
 
     /**
      * The attributes that should be hidden for arrays.

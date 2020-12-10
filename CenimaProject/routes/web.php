@@ -33,3 +33,6 @@ Route::get('/table', function () {
     return view('manage.table');
 });
 
+Route::resource('employees', 'Admin\NhanVienController');
+
+Route::resource('positions', 'Admin\ChucVuController');

@@ -11,6 +11,13 @@ class ChucVuSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('chuc_vus')->insert([
+            ['TenCV'=>'Quản lí','TrangThai'=>1],
+            ['TenCV'=>'Nhân viên bán vé','TrangThai'=>1],
+            ['TenCV'=>'Nhân viên bán đồ ăn','TrangThai'=>1],
+            ['TenCV'=>'Nhân viên vệ sinh','TrangThai'=>1],
+            ['TenCV'=>'Nhân viên phòng chiếu','TrangThai'=>1],
+
+        ]);
     }
 }

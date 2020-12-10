@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             Phim_DienVienSeeder::class,
             GheSeeder::class,
             ChucVuSeeder::class,
-            NhanVienSeeder::class
+           // NhanVienSeeder::class
 
         ]);
     }
