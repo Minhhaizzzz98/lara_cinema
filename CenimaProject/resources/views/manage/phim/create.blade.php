@@ -21,12 +21,12 @@
                       </div>
                       <div class="form-group">
                           <label class="text-dark" for="NgayDKChieu">Ngày ĐK chiếu</label>
-                          <input type="datetime" name="NgayDKChieu" class="form-control form-control-user" id="exampleInputEmail" >
+                          <input type="datetime-local" name="NgayDKChieu" class="form-control form-control-user" id="exampleInputEmail" >
                           <p class="text-danger">{{ $errors->first('NgayDKChieu') }}</p>
                       </div>
                       <div class="form-group">
                         <label class="text-dark" for="NgayKetThuc">Ngày kết thúc</label>
-                        <input type="datetime" name="NgayKetThuc" class="form-control form-control-user" id="exampleInputEmail" >
+                        <input type="datetime-local" name="NgayKetThuc" class="form-control form-control-user" id="exampleInputEmail" >
                         <p class="text-danger">{{ $errors->first('NgayKetThuc') }}</p>
                       </div>
                       {{-- <div class="form-group">

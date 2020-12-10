@@ -62,12 +62,6 @@ class PhimController extends Controller
         
         $flag=$phim->save();
 
-        $loaiphim= LoaiPhim::where('TenLoaiPhim',$request->TenLoaiPhim)->get();
-
-        $phim_loaiphim= new Phim_LoaiPhim();
-        $phim_loaiphim->phim_id = $phim->id;
-        $phim_loaiphim->loaiphim_id = $loaiphim->id;
-        $phim_loaiphim->save();
 
         if($flag){
             return redirect('/phim/index');
