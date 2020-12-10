@@ -36,6 +36,7 @@ Route::get('/table', function () {
 Route::resource('employees', 'Admin\NhanVienController');
 
 Route::resource('positions', 'Admin\ChucVuController');
+
 Route::group(['prefix' => 'phim'], function() {
     Route::get('/index','PhimController@index');
     Route::get('/create','PhimController@create');

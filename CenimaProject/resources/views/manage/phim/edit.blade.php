@@ -20,12 +20,12 @@
                         </div>
                         <div class="form-group">
                             <label for="NgayDKChieu">Ngày ĐK chiếu</label>
-                            <input type="datetime" name="NgayDKChieu" class="form-control form-control-user" id="exampleInputEmail" value="{{$phim->NgayDKChieu}}">
+                            <input type="datetime-local" name="NgayDKChieu" class="form-control form-control-user" id="exampleInputEmail" value="{{$phim->NgayDKChieu}}">
                             <p class="help is-danger">{{ $errors->first('NgayDKChieu') }}</p>
                         </div>
                         <div class="form-group">
                           <label for="NgayKetThuc">Ngày kết thúc</label>
-                          <input type="datetime" name="NgayKetThuc" class="form-control form-control-user" id="exampleInputEmail" value="{{$phim->NgayKetThuc}}">
+                          <input type="datetime-local" name="NgayKetThuc" class="form-control form-control-user" id="exampleInputEmail" value="{{$phim->NgayKetThuc}}">
                           <p class="help is-danger">{{ $errors->first('NgayKetThuc') }}</p>
                         </div>
                         <div class="form-group row">
