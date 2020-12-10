@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Phim;
+use App\DienVien;
 
-class PhimController extends Controller
+class DienVienController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class PhimController extends Controller
      */
     public function index()
     {
-        $data = Phim::with('dienviens','theloais')->get();
+        $data = DienVien::with('phims')->get();
         return response()->json($data);
     }
 

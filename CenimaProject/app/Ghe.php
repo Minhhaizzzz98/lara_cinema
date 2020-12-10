@@ -10,12 +10,15 @@ class Ghe extends Model
     protected $table = 'ghes';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'TrangThai'
+        'rap_id', 'TrangThai'
     ];
 
     public function vitri()
     {
         return $this->hasOne('App\ViTri', 'ghe_id', 'id');
+    }
+    public function rap() {
+        return $this->belongsTo('App\Rap', 'rap_id', 'id');
     }
     
 }
