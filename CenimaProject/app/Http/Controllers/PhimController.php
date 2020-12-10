@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Phim;
+use App\LoaiPhim;
+use App\Phim_LoaiPhim;
 
 class PhimController extends Controller
 {
@@ -15,8 +17,8 @@ class PhimController extends Controller
     public function index()
     {
        
-        $list= Phim::all();
-        return view ('manage.phim.index')->with('list',$list);
+        $list['phims']= Phim::paginate(5);
+        return view ('manage.phim.index',$list);
 
     }
 
@@ -28,7 +30,8 @@ class PhimController extends Controller
     public function create()
     {
         //
-        return view('manage.phim.create');
+        $data= LoaiPhim::all();
+        return view('manage.phim.create')->with('loaiphim',$data);
     }
 
     /**
@@ -37,9 +40,42 @@ class PhimController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RequestPhim $request)
+
+    public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+            'TenPhim' => 'required|min:5|max:255',
+            'NgayDKChieu' => 'required',
+            'NgayKetThuc' => 'required',
+            'ThoiLuong' => 'required',
+            'HinhAnh' => 'required',
+        ]);
+ 
+        
+        $phim = new Phim();
+        $phim->TenPhim = $request->TenPhim;
+        $phim->NgayDKChieu= $request->NgayDKChieu;
+        $phim->NgayKetThuc=$request->NgayKetThuc;
+        $phim->ThoiLuong=$request->ThoiLuong;
+        $phim->HinhAnh="http://localhost:8000/data/".$request->HinhAnh;
+        
+        $flag=$phim->save();
+
+        $loaiphim= LoaiPhim::where('TenLoaiPhim',$request->TenLoaiPhim)->get();
+
+        $phim_loaiphim= new Phim_LoaiPhim();
+        $phim_loaiphim->phim_id = $phim->id;
+        $phim_loaiphim->loaiphim_id = $loaiphim->id;
+        $phim_loaiphim->save();
+
+        if($flag){
+            return redirect('/phim/index');
+        }
+        else
+        {
+            return view('manage.phim.create');
+        }
        
 
     }
@@ -78,6 +114,32 @@ class PhimController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validated = $request->validate([
+            'TenPhim' => 'required|unique:posts|max:255',
+            'NgayDKChieu' => 'required',
+            'NgayKetThuc' => 'required',
+            'ThoiLuong' => 'required',
+            'HinhAnh' => 'required',
+        ]);
+    
+        $phim = Phim::find($id);
+
+        $phim->TenPhim = $request->TenPhim;
+        $phim->NgayDKChieu= $request->NgayDKChieu;
+        $phim->NgayKetThuc=$request->NgayKetThuc;
+        $phim->ThoiLuong=$request->ThoiLuong;
+        $phim->HinhAnh="http://localhost:8000/data/".$request->HinhAnh;
+        
+        $flag=$phim->save();
+
+        if($flag){
+            return redirect('/phim/index');
+        }
+        else
+        {
+            return view('manage.phim.edit');
+        }
+        
     }
 
     /**
@@ -89,5 +151,9 @@ class PhimController extends Controller
     public function destroy($id)
     {
         //
+        $phim= Phim::find($id);
+        $phim->TrangThai=0;
+        $flag=$phim->save();    
+        return redirect('/phim/index');
     }
 }

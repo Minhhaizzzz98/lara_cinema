@@ -39,7 +39,9 @@ Route::resource('positions', 'Admin\ChucVuController');
 Route::group(['prefix' => 'phim'], function() {
     Route::get('/index','PhimController@index');
     Route::get('/create','PhimController@create');
-    Route::post('/store','PhimController@store');
+    Route::post('/create','PhimController@store');
     Route::get('/edit/{id}','PhimController@edit');
+    Route::post('/update/{id}','PhimController@update');
+    Route::get('/delete/{id}','PhimController@destroy');
 });
 

@@ -3,10 +3,9 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h2 mb-2 text-center text-success">Phim</h1>
+    <h1 class="h2 mb-2 text-center text-success">Quản lý Phim </h1>
 
-    <br>
-    <br>
+  
 
     <a href="/phim/create" class="btn btn-primary"><i class="fas fa-plus"></i> </a>
 
@@ -28,21 +27,32 @@
                             <th>Thời lượng</th>
                             <th>Hình ảnh</th>
                             <th>Trạng thái</th>
-                            <td>Tool</td>
+                            <td>Hành Động</td>
                         </tr>
                     </thead>
                   
                     <tbody>
-                        @foreach ($list as $item)
+                        @foreach ($phims as $item)
 
                             <tr>
                                 <td>{{ $item->id }}</td>
                                 <td>{{$item->TenPhim}}</td>
                                 <td>{{$item->NgayDKChieu}}</td>
                                 <td>{{$item->NgayKetThuc}}</td>
-                                <td>{{$item->ThoiLuong}}</td>
-                                <td>{{$item->HinhAnh}}</td>
-                                <td>{{$item->TrangThai}}</td>
+                                <td>{{$item->ThoiLuong}} Phút</td>
+                                <td><img width="100px" height="80px" src="{{$item->HinhAnh}}" alt=""></td>
+                                <td>
+                                    @php
+                                    if($item->TrangThai==1){
+                                     echo'Đang chiếu';
+                                    }
+                                    else{
+                                        echo'Đã kết thúc';
+                                       }
+                                   @endphp
+                                </td>
+                               
+                                
                                  <td><a class="btn btn-primary" type="submit" href="/phim/edit/{{$item->id}}">Edit</a>
                                     |<a class="btn btn-danger" type="submit" href="/phim/delete/{{$item->id}}">Delete</a>
                                 </td>
@@ -62,6 +72,7 @@
 
                     </tbody>
                 </table>
+                {{$phims->links()}}
             </div>
         </div>
     </div>
