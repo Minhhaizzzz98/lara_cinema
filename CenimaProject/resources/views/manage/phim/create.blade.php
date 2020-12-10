@@ -1,31 +1,66 @@
 @extends('layout')
 @section('content')
-<form method="POST" action="{{url('/product/create')}}">
-    {{ csrf_field() }}
-    <div class="form-group">
-      <label for="exampleInputEmail1">Tên</label>
-      <input type="text" name="TenPhim" class="form-control">
-      @if ($errors->has('TenPhim'))
-      <span class="error">{{ $errors->first('TenPhim') }}</span>
-      @endif
-    </div>
-    <div class="form-group">
-        <label for="exampleInputEmail1">Image</label>
-        <input type="text" name="IMAGE" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Price</label>
-      <input type="text" name="PRICE" class="form-control">
+
+<div class="card o-hidden border-0 shadow-lg my-5">
+  <div class="card-body p-0">
+      <!-- Nested Row within Card Body -->
+      <div class="col">
+          {{-- <div class="col-lg-5 d-none d-lg-block bg-register-image"></div> --}}
+          <div class="col-lg-6">
+              <div class="p-5">
+                  <div class="text-center">
+                      <h1 class="text-primary">Thêm phim mới</h1>
+                  </div>
+             
+                  <form class="user" method="POST" action="{{url('/phim/create')}}">
+                    {{ csrf_field() }}
+                      <div class="form-group">
+                         <label class="text-dark" for="TenPhim">Tên phim</label>
+                         <input type="text" name="TenPhim" class="form-control form-control-user" id="exampleFirstName"  placeholder="Kẻ sát nhân">
+                         <p class="text-danger">{{ $errors->first('TenPhim') }}</p>
+                      </div>
+                      <div class="form-group">
+                          <label class="text-dark" for="NgayDKChieu">Ngày ĐK chiếu</label>
+                          <input type="datetime" name="NgayDKChieu" class="form-control form-control-user" id="exampleInputEmail" >
+                          <p class="text-danger">{{ $errors->first('NgayDKChieu') }}</p>
+                      </div>
+                      <div class="form-group">
+                        <label class="text-dark" for="NgayKetThuc">Ngày kết thúc</label>
+                        <input type="datetime" name="NgayKetThuc" class="form-control form-control-user" id="exampleInputEmail" >
+                        <p class="text-danger">{{ $errors->first('NgayKetThuc') }}</p>
+                      </div>
+                      {{-- <div class="form-group">
+        
+                        <label class="text-dark">Thể loại phim :</label>
+                        <select name="TenLoaiPhim" id="">
+                            @foreach ($loaiphim as $item)
+                             <option>{{$item->TenLoaiPhim}} </option>
+                            @endforeach   
+                        </select>
+                      
+                   
+                     
+                     
+                      </div> --}}
+                      <div class="form-group row">
+                          <div class="col-sm-5 mb-3 mb-sm-0">
+                            <label class="text-dark" for="ThoiLuong">Thời lượng</label>
+                            <input type="number" name="ThoiLuong" class="form-control form-control-user"id="exampleInputPassword" >
+                            <p class="text-danger">{{ $errors->first('ThoiLuong') }}</p>
+                          </div>
+                  
+                      </div>
+                      <div class="form-group">
+                        <label class="text-dark" for="HinhAnh">Hình ảnh</label>
+                        <input type="file" name="HinhAnh" class="form-control form-control-user" id="exampleInputEmail" />
+                        <p class="text-danger">{{ $errors->first('HinhAnh') }}</p>
+                      </div>
+                      <button class="btn btn-primary btn-user btn-block">Thêm mới</button>
+                  </form>
+                  <hr>
+              </div>
+          </div>
+      </div>
   </div>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Status</label>
-    <input type="text" name="STATUS" class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Group_Product</label>
-    <input type="text" name="GROUP_PRODUCT" class="form-control">
-  </div>
-    
-    <a href="/product/store" type="submit" class="btn btn-primary">Create</a>
-  </form>
+</div>
 @endsection
