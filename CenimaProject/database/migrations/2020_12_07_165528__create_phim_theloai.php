@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTablePhimDienvien extends Migration
+class CreatePhimTheloai extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class CreateTablePhimDienvien extends Migration
      */
     public function up()
     {
-        Schema::create('phim_dienvien', function (Blueprint $table) {
+        //
+        Schema::create('phim_theloai', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('phim_id')->unsigned();
-            $table->integer('dienvien_id')->unsigned();
-
+            
+            $table->unsignedInteger('phim_id');
             $table->foreign('phim_id')->references('id')->on('phims')->onDelete('cascade');
-            $table->foreign('dienvien_id')->references('id')->on('dien_viens')->onDelete('cascade');
-            $table->timestamps();
+
+            $table->unsignedInteger('loaiphim_id');
+            $table->foreign('loaiphim_id')->references('id')->on('loai_phims')->onDelete('cascade');
+            
         });
     }
 
@@ -31,6 +33,7 @@ class CreateTablePhimDienvien extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phim_dienvien');
+        //
+        Schema::dropIfExists('phim_theloai');
     }
 }

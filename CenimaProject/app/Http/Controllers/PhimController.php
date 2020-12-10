@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Phim;
 
@@ -15,8 +14,21 @@ class PhimController extends Controller
      */
     public function index()
     {
-        $data = Phim::with('dienviens','theloais')->get();
-        return response()->json($data);
+       
+        $list= Phim::all();
+        return view ('manage.phim.index')->with('list',$list);
+
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+        return view('manage.phim.create');
     }
 
     /**
@@ -25,9 +37,11 @@ class PhimController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequestPhim $request)
     {
         //
+       
+
     }
 
     /**
@@ -39,6 +53,19 @@ class PhimController extends Controller
     public function show($id)
     {
         //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+        $phim=Phim::find($id);
+        return view('manage.phim.edit')->with('phim',$phim);
     }
 
     /**

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePhimsTable extends Migration
+class CreateRapsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,14 @@ class CreatePhimsTable extends Migration
      */
     public function up()
     {
-        Schema::create('phims', function (Blueprint $table) {
+        Schema::create('raps', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('TenPhim')->nullable(false);
-            $table->integer('TrangThai')->default(1);
+            $table->string('TenRap');
             
+            $table->integer('chinhanh_id')->unsigned();
+            $table->foreign('chinhanh_id')->references('id')->on('chi_nhanhs')->onDelete('cascade');
 
-            
-            $table->datetime('NgayDKChieu');
-            $table->datetime('NgayKetThuc');
-            $table->integer('ThoiLuong');
-            $table->string('HinhAnh');
-            
+            $table->integer('TrangThai')->default(1);
             $table->timestamps();
         });
     }
@@ -36,6 +32,6 @@ class CreatePhimsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phims');
+        Schema::dropIfExists('raps');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePhimsTable extends Migration
+class CreateVesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,14 @@ class CreatePhimsTable extends Migration
      */
     public function up()
     {
-        Schema::create('phims', function (Blueprint $table) {
+        Schema::create('ves', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('TenPhim')->nullable(false);
+            $table->double('Gia')->unsigned();
+            $table->integer('lichchieu_id')->unsigned();
+            $table->foreign('lichchieu_id')->references('id')->on('lich_chieus');
+            $table->integer('ghe_id')->unsigned();
+            $table->foreign('ghe_id')->references('id')->on('ghes');
             $table->integer('TrangThai')->default(1);
-            
-
-            
-            $table->datetime('NgayDKChieu');
-            $table->datetime('NgayKetThuc');
-            $table->integer('ThoiLuong');
-            $table->string('HinhAnh');
-            
             $table->timestamps();
         });
     }
@@ -36,6 +32,6 @@ class CreatePhimsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phims');
+        Schema::dropIfExists('ves');
     }
 }

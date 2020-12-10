@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGhesTable extends Migration
+class CreateLoaiphim extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateGhesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ghes', function (Blueprint $table) {
+        //
+        Schema::create('loai_phims', function (Blueprint $table) {
             $table->increments('id');
-            
+            $table->string('TenLoaiPhim')->nullable(false);
             $table->integer('TrangThai')->default(1);
+            
             $table->timestamps();
         });
     }
@@ -28,6 +30,7 @@ class CreateGhesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ghes');
+        //
+        Schema::dropIfExists('loaiphim');
     }
 }
