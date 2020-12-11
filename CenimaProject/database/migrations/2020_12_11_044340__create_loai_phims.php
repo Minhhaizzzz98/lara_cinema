@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVesTable extends Migration
+class CreateLoaiPhims extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateVesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ves', function (Blueprint $table) {
+        //
+        Schema::create('loai_phims', function (Blueprint $table) {
             $table->increments('id');
-            $table->double('Gia')->unsigned();
-            $table->integer('lichchieu_id')->unsigned();
-            $table->foreign('lichchieu_id')->references('id')->on('lich_chieus');
-            $table->integer('ghe_id')->unsigned();
-            $table->foreign('ghe_id')->references('id')->on('ghes');
+            $table->string('TenLoaiPhim')->nullable(false);
+
+           
+
             $table->integer('TrangThai')->default(1);
+            
             $table->timestamps();
         });
     }
@@ -32,6 +33,7 @@ class CreateVesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ves');
+        //
+        Schema::dropIfExists('loai_phims');
     }
 }

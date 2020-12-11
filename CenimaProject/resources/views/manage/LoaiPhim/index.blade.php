@@ -3,7 +3,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h2 mb-2 text-center text-primary">QUẢN LÝ PHIM</h1>
+    <h1 class="h2 mb-2 text-center text-primary">QUẢN LÝ THỂ LOẠI PHIM</h1>
 
   
 
@@ -20,42 +20,34 @@
                     cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Mã Phim</th>
-                            <th>Tên phim</th>
-                            <th>Ngày ĐK chiếu</th>
-                            <th>Ngày kết thúc</th>
-                            <th>Thời lượng</th>
-                            <th>Hình ảnh</th>
+                            <th>Mã loại</th>
+                            <th>Tên thể loại</th>
                             <th>Trạng thái</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
                   
                     <tbody>
-                        @foreach ($phims as $item)
+                        @foreach ($list as $item)
 
                             <tr>
                                 <td>{{ $item->id }}</td>
-                                <td>{{$item->TenPhim}}</td>
-                                <td>{{$item->NgayDKChieu}}</td>
-                                <td>{{$item->NgayKetThuc}}</td>
-                                <td>{{$item->ThoiLuong}} Phút</td>
-                                <td><img width="100px" height="80px" src="{{$item->HinhAnh}}" alt=""></td>
+                                <td>{{$item->TenLoaiPhim}}</td>
                                 <td>
                                     @php
                                     if($item->TrangThai==1){
-                                     echo'Đang chiếu';
+                                     echo'Sử dụng';
                                     }
                                     else{
-                                        echo'Đã kết thúc';
+                                        echo'Đã loại bỏ';
                                        }
                                    @endphp
                                 </td>
                                
                                 
                                  <td>
-                                     <a class="btn btn-info" type="submit" href="/phim/edit/{{$item->id}}">Chỉnh sửa</a>
-                                     <a class="btn btn-danger" type="submit" href="/phim/delete/{{$item->id}}">Xóa phim</a>
+                                     <a class="btn btn-info" type="submit" href="/loaiphim/edit/{{$item->id}}">Chỉnh sửa</a>
+                                     <a class="btn btn-danger" type="submit" href="/loaiphim/delete/{{$item->id}}">Xóa thể loại</a>
                                 </td>
                                 {{-- <td> <a class="btn btn-warning" href="{{route('positions.show',$chucvu->MaCV)}}"> <i class="fas fa-eye"></i> </a> </td>
 
@@ -73,7 +65,7 @@
 
                     </tbody>
                 </table>
-                {{$phims->links()}}
+               
             </div>
         </div>
     </div>

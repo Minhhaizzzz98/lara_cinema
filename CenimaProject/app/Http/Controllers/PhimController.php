@@ -46,8 +46,8 @@ class PhimController extends Controller
         //
         $validated = $request->validate([
             'TenPhim' => 'required|min:5|max:255',
-            'NgayDKChieu' => 'required',
-            'NgayKetThuc' => 'required',
+            'NgayDKChieu' => 'required|date_format:Y-m-d H:i:s',
+            'NgayKetThuc' => 'required|date_format:Y-m-d H:i:s',
             'ThoiLuong' => 'required',
             'HinhAnh' => 'required',
         ]);
@@ -109,9 +109,9 @@ class PhimController extends Controller
     {
         //
         $validated = $request->validate([
-            'TenPhim' => 'required|unique:posts|max:255',
-            'NgayDKChieu' => 'required',
-            'NgayKetThuc' => 'required',
+            'TenPhim' => 'required|max:255',
+            'NgayDKChieu' => 'required|date_format:Y-m-d H:i:s',
+            'NgayKetThuc' => 'required|date_format:Y-m-d H:i:s',
             'ThoiLuong' => 'required',
             'HinhAnh' => 'required',
         ]);

@@ -114,6 +114,13 @@
                 <a class="nav-link" href="{{route('positions.index')}}">
                         <i class="fas fa-user "></i>
                         <span>Positions</span></a>
+            </li>
+
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/phim/index">
+                        <i class="fas fa-film"></i>
+                        <span>Film</span></a>
                 </li>
             <!-- Divider -->
 
@@ -365,7 +372,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle" src="{{asset('img/undraw_profile.svg')}}">
-                                <img class="img-profile rounded-circle" src="{{ asset('img/undraw_profile.svg')}}">
+                               
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -443,6 +450,18 @@
         </div>
     </div>
 
+    <script>
+        function previewFile(input){
+            var file= $("input[type=file]").get(0).files[0];
+            if(file){
+                var reader= new FileReader();
+                reader.onload=function(){
+                    $("#previewImage").attr("src",reader.result);
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
     <!-- Bootstrap core JavaScript-->
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
