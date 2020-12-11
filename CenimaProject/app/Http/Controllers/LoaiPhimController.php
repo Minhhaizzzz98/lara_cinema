@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\LoaiPhim;
 
 class LoaiPhimController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
