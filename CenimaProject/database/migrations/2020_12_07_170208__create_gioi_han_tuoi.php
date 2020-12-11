@@ -18,6 +18,7 @@ class CreateGioiHanTuoi extends Migration
             $table->bigIncrements('id');
             $table->string('TenGioiHan');
             $table->integer('TrangThai')->default(1);
+            $table->timestamps();
             
         });
     }
@@ -30,5 +31,6 @@ class CreateGioiHanTuoi extends Migration
     public function down()
     {
         //
+        Schema::dropIfExists('gioi_han_tuoi');
     }
 }
