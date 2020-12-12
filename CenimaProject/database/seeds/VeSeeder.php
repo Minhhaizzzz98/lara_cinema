@@ -16,8 +16,8 @@ class VeSeeder extends Seeder
             ['Gia' => 10000, 'lichchieu_id' => 1,'ghe_id'=>1,'TrangThai'=>1],
             ['Gia' => 10000, 'lichchieu_id' => 2,'ghe_id'=>2,'TrangThai'=>1],
             ['Gia' => 10000, 'lichchieu_id' => 3,'ghe_id'=>3,'TrangThai'=>1],
-
-
+            ['Gia' => 10000, 'lichchieu_id' => 2,'ghe_id'=>4,'TrangThai'=>1],
+           
         ]);
     }
 }

@@ -74,9 +74,9 @@
                                     <div class="form-group">
                                         <label class="control-label"> Manage by </label> <br>
                                         <select name="Ma_NQL">
-                                            @foreach ($quanlies as $quanli)
-                                                <option value="{{$quanli->MaNV}}">
-                                                    {{$quanli->HoNV." ".$quanli->TenNV}}
+                                            @foreach ($nhanviens as $nhanvien)
+                                                <option value="{{$nhanvien->MaNV}}">
+                                                    {{$nhanvien->HoNV." ".$nhanvien->TenNV}}
                                                 </option>
                                             @endforeach
                                         <select>

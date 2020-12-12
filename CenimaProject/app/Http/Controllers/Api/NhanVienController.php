@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\NhanVien;
-use App\ChucVu;
 class NhanVienController extends Controller
 {
     /**
@@ -15,7 +14,7 @@ class NhanVienController extends Controller
      */
     public function index()
     {
-        $data = NhanVien::with('chucvu')->get();
+        $data = NhanVien::where('isLocked','0')->get();
         return response()->json($data);
     }
 
