@@ -18,10 +18,10 @@ class CreatePhimTheloai extends Migration
             $table->bigIncrements('id');
             
             $table->unsignedInteger('phim_id');
-            $table->foreign('phim_id')->references('id')->on('phims')->onDelete('cascade');
+            $table->foreign('phim_id')->references('id')->on('phims');
 
             $table->unsignedInteger('loaiphim_id');
-            $table->foreign('loaiphim_id')->references('id')->on('loai_phims')->onDelete('cascade');
+            $table->foreign('loaiphim_id')->references('id')->on('loai_phims');
             
         });
     }
