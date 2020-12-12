@@ -123,17 +123,7 @@
                         <span>Film</span></a>
                 </li>
             <!-- Divider -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('chinhanhs.index')}}">
-                        <i class="fas fa-user "></i>
-                        <span>Brands</span></a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('raps.index')}}">
-                            <i class="fas fa-user "></i>
-                            <span>Rooms</span></a>
-                    </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">

@@ -29,6 +29,7 @@ class NhanVien extends Authenticatable
         'SDT',
         'Email',
         'isLocked',
+        'isBigAdmin',
 
     ];
 
@@ -37,16 +38,6 @@ class NhanVien extends Authenticatable
     public function chucvu()
     {
         return $this->belongsTo('App\ChucVu');
-    }
-
-    public function chinhanh()
-    {
-        return $this->hasOne('App\ChiNhanh');
-    }
-
-    public function quanly()
-    {
-        return $this->hasOne('App\QuanLy');
     }
 
 
