@@ -126,6 +126,7 @@
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
             </li>
+            
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -133,7 +134,17 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>Tables</span></a>
             </li>
-
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('/phim')}}">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Phim</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('/rap')}}">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Rạp</span></a>
+                </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -142,12 +153,7 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-            <!-- Sidebar Message -->
-            <div class="sidebar-card">
-                <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="">
-                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-            </div>
+            
 
         </ul>
         <!-- End of Sidebar -->
@@ -421,7 +427,7 @@
     <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
 
     <!-- Page level plugins -->
-    <script src="{{asset('vendor/chart.js/Chart.min.js')}}"></script>
+    <script src="{{asset('vendor/   .js/Chart.min.js')}}"></script>
 
     <!-- Page level custom scripts -->
     <script src="{{asset('js/demo/chart-area-demo.js')}}"></script>

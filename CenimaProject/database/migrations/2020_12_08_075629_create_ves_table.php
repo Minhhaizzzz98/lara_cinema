@@ -21,7 +21,7 @@ class CreateVesTable extends Migration
             $table->integer('ghe_id')->unsigned();
             $table->foreign('ghe_id')->references('id')->on('ghes');
             $table->integer('TrangThai')->default(1);
-            $table->timestamps();
+            $table->timestamps();       
         });
     }
 

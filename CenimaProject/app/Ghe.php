@@ -20,5 +20,9 @@ class Ghe extends Model
     public function rap() {
         return $this->belongsTo('App\Rap', 'rap_id', 'id');
     }
+    public function ves()
+    {
+        return $this->hasMany('App\Ve', 'ghe_id', 'id');
+    }
     
 }

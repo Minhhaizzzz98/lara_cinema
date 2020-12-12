@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ve extends Model
 {
-    public $timestamp = true;
+    public $timestamps = TRUE;
+
     protected $table = 'ves';
     protected $primaryKey = 'id';
     protected $fillable = [

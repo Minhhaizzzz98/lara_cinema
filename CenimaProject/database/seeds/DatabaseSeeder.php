@@ -26,7 +26,9 @@ class DatabaseSeeder extends Seeder
             RapSeeder::class,
             LichChieuSeeder::class,
             GheSeeder::class,
+            
             VeSeeder::class,
+            
 
             // PhimSeeder::class,
             // DienVienSeeder::class,

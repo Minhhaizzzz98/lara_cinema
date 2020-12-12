@@ -34,9 +34,18 @@ Route::get('/table', function () {
 });
 
 Route::group(['prefix' => 'phim'], function() {
+    Route::get('/','PhimController@index');
     Route::get('/index','PhimController@index');
     Route::get('/create','PhimController@create');
     Route::post('/store','PhimController@store');
     Route::get('/edit/{id}','PhimController@edit');
+});
+
+Route::group(['prefix' => 'rap'], function() {
+    Route::get('/','RapController@index');
+    Route::get('/index','RapController@index');
+    Route::get('/create','RapController@create');
+    Route::post('/store','RapController@store');
+    Route::get('/edit/{id}','RapController@edit');
 });
 

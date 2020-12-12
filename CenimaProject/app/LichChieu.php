@@ -29,4 +29,8 @@ class LichChieu extends Model
     {
         return $this->belongsTo('App\Rap', 'rap_id', 'id');
     }
+    public function ves()
+    {
+        return $this->hasMany('App\Ve', 'lichchieu_id', 'id');
+    }
 }
