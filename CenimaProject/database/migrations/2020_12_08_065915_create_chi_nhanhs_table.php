@@ -17,9 +17,13 @@ class CreateChiNhanhsTable extends Migration
             $table->increments('id');
             $table->string('TenChiNhanh');
             $table->string('DiaChi');
+            $table->integer('SoLuongRap');
             $table->string('SDT');
+            $table->unsignedBigInteger('MaNV');
             $table->integer('TrangThai')->default(1);
             $table->timestamps();
+
+            $table->foreign('MaNV')->references('MaNV')->on('nhan_viens');
         });
     }
 

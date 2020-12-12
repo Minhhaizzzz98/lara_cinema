@@ -55,3 +55,6 @@ Route::group(['prefix' => 'LoaiPhim'], function() {
     Route::get('/delete/{id}','PhimController@destroy');
 });
 
+Route::resource('chinhanhs', 'Admin\ChiNhanhController');
+Route::resource('raps', 'Admin\RapController');
+

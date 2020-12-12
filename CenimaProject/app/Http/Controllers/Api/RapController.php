@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\NhanVien;
-use App\ChucVu;
-class NhanVienController extends Controller
+use App\Rap;
+class RapController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class NhanVienController extends Controller
      */
     public function index()
     {
-        $data = NhanVien::with('chucvu')->get();
+        $data = Rap::with('chinhanh')->get();
         return response()->json($data);
     }
 

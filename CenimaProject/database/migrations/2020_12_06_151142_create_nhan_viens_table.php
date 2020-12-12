@@ -29,14 +29,15 @@ class CreateNhanViensTable extends Migration
                 $table->string('Email',100)->unique();
                 $table->timestamp('email_verified_at')->nullable();
                 $table->tinyInteger('isLocked');
-                $table->boolean('isBigAdmin');
+
                 $table->rememberToken();
                 $table->timestamps();
 
 
+                $table->foreign('Ma_NQL')->references('MaNV')->on('quan_lies');
 
-                $table->foreign('Ma_NQL')->references('MaNV')->on('nhan_viens');
                 $table->foreign('ChucVu')->references('MaCV')->on('chuc_vus');
+
 
         });
     }

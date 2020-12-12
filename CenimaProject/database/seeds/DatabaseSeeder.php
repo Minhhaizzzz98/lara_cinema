@@ -13,7 +13,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
 
-            GioiHanTuoiSeeder::class,
+
+            BigAdminSeeder::class,
+            ChucVuSeeder::class,
+
             PhimSeeder::class,
             DienVienSeeder::class,
            
@@ -22,22 +25,20 @@ class DatabaseSeeder extends Seeder
            
             LoaiPhimSeeder::class,
             Phim_TheLoaiSeeder::class,
-            
-            ChiNhanhSeeder::class,
+            GioiHanTuoiSeeder::class,
+            QuanLiSeeder::class,
+            NhanVienSeeder::class,
+
             GiaSeeder::class,
             ThoiGianChieuSeeder::class,
+            ChiNhanhSeeder::class,
             RapSeeder::class,
-            LichChieuSeeder::class,
+
             GheSeeder::class,
+            LichChieuSeeder::class,
             VeSeeder::class,
 
-            // PhimSeeder::class,
-            // DienVienSeeder::class,
-            // Phim_DienVienSeeder::class,
-            // GheSeeder::class,
 
-
-            // ViTriSeeder::class,
         ]);
     }
 }

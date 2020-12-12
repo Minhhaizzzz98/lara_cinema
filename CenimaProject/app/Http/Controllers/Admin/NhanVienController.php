@@ -8,6 +8,8 @@ use App\NhanVien;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\NhanVienRequest;
+use App\QuanLy;
+
 class NhanVienController extends Controller
 {
     /**
@@ -21,6 +23,8 @@ class NhanVienController extends Controller
         ->join('chuc_vus as cv','nv.ChucVu', 'cv.MaCV')->orderBy('cv.MaCV','asc')
         ->get();
 
+
+
             return view('manage.NhanVien.index',compact('nhanviens'));
     }
 
@@ -31,9 +35,9 @@ class NhanVienController extends Controller
      */
     public function create()
     {
-        $nhanviens= NhanVien::where('ChucVu','1')->get();
+        $quanlies= QuanLy::where('isLocked','0')->get();
         $chucvus = ChucVu::where('TrangThai','1')->get();
-        return view('manage.NhanVien.create',compact('chucvus','nhanviens'));
+        return view('manage.NhanVien.create',compact('chucvus','quanlies'));
     }
 
     /**
@@ -91,9 +95,6 @@ class NhanVienController extends Controller
         $nhanvien = NhanVien::find($id);
 
         $chucvu = ChucVu::find($nhanvien->ChucVu);
-
-
-
 
             return view('manage.NhanVien.show',compact('nhanvien','chucvu'));
     }

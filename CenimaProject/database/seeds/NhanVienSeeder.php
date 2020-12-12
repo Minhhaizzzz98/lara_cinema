@@ -12,8 +12,11 @@ class NhanVienSeeder extends Seeder
     public function run()
     {
         DB::table('nhan_viens')->insert([
-             ['HoNV' => 'John','Anh'=>'no anh','TenNV'=>'Wick','ChucVu'=>1,'TenTK'=>'johnwick','password'=>'gfghfhfgh', 'Ma_NQL' => 1,'NgSinh'=>'2020-12-01','DiaChi'=>'USA','SDT'=>'43432234','Email'=>'john@gmail.com','isLocked'=>1,'isBigAdmin'=>2],
-            
+
+            ["HoNV"=>"Tô Minh","TenNV"=>"Hải","Anh"=>"no image","ChucVu"=>"2","TenTK"=>"abcdef","password"=>"abcabc","Ma_NQL"=>1,"SDT"=>"0987654321","Email"=>"quoctrong@gmail.com","isLocked"=>0],
+
+
+
         ]);
     }
     
