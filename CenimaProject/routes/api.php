@@ -25,3 +25,7 @@ Route::apiResource('/GioiHanTuoi', 'Api\GioiHanTuoiController');
 Route::apiResource('/DienVien', 'Api\DienVienController');
 Route::apiResource('/Ghe', 'Api\GheController');
 
+Route::apiResource('/NhanVien','Api\NhanVienController');
+
+Route::apiResource('/ChiNhanh', 'Api\ChiNhanhController');
+Route::apiResource('/Rap', 'Api\RapController');

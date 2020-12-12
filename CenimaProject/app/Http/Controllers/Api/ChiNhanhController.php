@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\ChiNhanh;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\NhanVien;
-use App\ChucVu;
-class NhanVienController extends Controller
+
+class ChiNhanhController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class NhanVienController extends Controller
      */
     public function index()
     {
-        $data = NhanVien::with('chucvu')->get();
+        $data = ChiNhanh::all();
         return response()->json($data);
     }
 

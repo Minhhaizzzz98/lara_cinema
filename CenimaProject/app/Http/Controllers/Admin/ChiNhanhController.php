@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Admin;
 
+use App\ChiNhanh;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\NhanVien;
-use App\ChucVu;
-class NhanVienController extends Controller
+use Illuminate\Support\Facades\DB;
+class ChiNhanhController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,21 @@ class NhanVienController extends Controller
      */
     public function index()
     {
-        $data = NhanVien::with('chucvu')->get();
-        return response()->json($data);
+        $chinhanhs = DB::table('chi_nhanhs as cn')
+        ->join('quan_lies as ql','cn.MaNV', 'ql.MaNV')
+        ->select('cn.*','ql.HoNV','ql.TenNV')->get();
+
+        return view('manage.ChiNhanh.index',compact('chinhanhs'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -42,6 +55,17 @@ class NhanVienController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -61,6 +85,15 @@ class NhanVienController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $chinhanh = ChiNhanh::find($id);
+       if($chinhanh->TrangThai == 0)
+       $chinhanh->TrangThai = 1;
+       else
+       if($chinhanh->TrangThai == 1)
+       $chinhanh->TrangThai = 0;
+
+       $chinhanh->save();
+
+       return redirect()->route('chinhanhs.index');
     }
 }

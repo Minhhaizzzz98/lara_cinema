@@ -24,4 +24,9 @@ class Rap extends Model
     {
         return $this->hasMany('App\Ghe', 'rap_id', 'id');
     }
+
+    public function chinhanh()
+    {
+        return $this->belongsTo('App\ChiNhanh');
+    }
 }

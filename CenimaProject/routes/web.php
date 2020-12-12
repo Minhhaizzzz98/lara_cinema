@@ -43,3 +43,6 @@ Route::group(['prefix' => 'phim'], function() {
     Route::get('/edit/{id}','PhimController@edit');
 });
 
+Route::resource('chinhanhs', 'Admin\ChiNhanhController');
+Route::resource('raps', 'Admin\RapController');
+

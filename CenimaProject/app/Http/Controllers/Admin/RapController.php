@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Rap;
 use Illuminate\Http\Request;
-use App\NhanVien;
-use App\ChucVu;
-class NhanVienController extends Controller
+use Illuminate\Support\Facades\DB;
+class RapController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,21 @@ class NhanVienController extends Controller
      */
     public function index()
     {
-        $data = NhanVien::with('chucvu')->get();
-        return response()->json($data);
+        $raps = DB::table('raps as r')
+        ->join('chi_nhanhs as cn','r.chinhanh_id', 'cn.id')
+        ->select('r.*','cn.TenChiNhanh','cn.DiaChi')->get();
+
+        return view('manage.Rap.index',compact('raps'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -42,6 +55,17 @@ class NhanVienController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -61,6 +85,15 @@ class NhanVienController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $rap = Rap::find($id);
+        if($rap->TrangThai == 0)
+        $rap->TrangThai = 1;
+        else
+        if($rap->TrangThai == 1)
+        $rap->TrangThai = 0;
+
+        $rap->save();
+
+        return redirect()->route('raps.index');
     }
 }
