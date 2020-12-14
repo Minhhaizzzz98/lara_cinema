@@ -6,9 +6,7 @@ use Illuminate\Http\Request;
 use App\Phim;
 use App\LoaiPhim;
 use App\GioiHanTuoi;
-
 use App\Phim_LoaiPhim;
-use App\GioiHanTuoi;
 
 class PhimController extends Controller
 {
@@ -33,14 +31,8 @@ class PhimController extends Controller
     public function create()
     {
         //
-<<<<<<< Updated upstream
         $data= GioiHanTuoi::all();
         return view('manage.phim.create')->with('gioihantuoi',$data);
-=======
-        $data= LoaiPhim::all();
-        $data2=GioiHanTuoi::all();
-        return view('manage.phim.create')->with('gioihantuoi',$data2);
->>>>>>> Stashed changes
     }
 
     /**
@@ -57,26 +49,20 @@ class PhimController extends Controller
             'TenPhim' => 'required|min:5|max:255',
             'NgayDKChieu' => 'required',
             'NgayKetThuc' => 'required',
-<<<<<<< Updated upstream
             'ThoiLuong' => 'required',
             'HinhAnh' => 'required',
         ]);
  
         $gioihantuoi = GioiHanTuoi::where('TenGioiHan',$request->GioiHanTuoi)->first();
-=======
-            'ThoiLuong' => 'required|min:0',
-            'HinhAnh' => 'required',
-        ]);
  
         $data = GioiHanTuoi::find($request->TenGioiHan);
         
->>>>>>> Stashed changes
+
         $phim = new Phim();
         $phim->TenPhim = $request->TenPhim;
         $phim->NgayDKChieu= $request->NgayDKChieu;
         $phim->NgayKetThuc=$request->NgayKetThuc;
         $phim->ThoiLuong=$request->ThoiLuong;
-<<<<<<< Updated upstream
         $phim->gioihantuoi_id = $gioihantuoi->id;
         $phim->daodien_id=1;
         $phim->HinhAnh="http://localhost:8000/data/".$request->HinhAnh;
@@ -104,30 +90,16 @@ class PhimController extends Controller
      */
     public function add_theloai(Request $request, $id)
     {
-
         $loaiphim = LoaiPhim::where('TenLoaiPhim', $request->TenLoaiPhim)->first();
-
         
         $chitietloaiphim =  new Phim_LoaiPhim();
+
         $chitietloaiphim->loaiphim_id = $loaiphim->id;
         $chitietloaiphim->phim_id= $id;
-  
         $flag= $chitietloaiphim->save();
-
         $request->session()->forget('id_phim_new');
-
-        if($flag){
-=======
-        $phim->gioihantuoi_id=2;
-        $phim->HinhAnh="http://localhost:8000/data/".$request->HinhAnh;
-        
-        $flag=$phim->save();
-        
-        
-        
-
+       
         if($flag){         
->>>>>>> Stashed changes
             return redirect('/phim/index');
         }
         else
