@@ -50,6 +50,7 @@ Route::group(['prefix' => 'phim'], function() {
 
 Route::group(['prefix' => 'LoaiPhim'], function() {
     Route::get('/index','LoaiPhimController@index');
+<<<<<<< Updated upstream
     Route::get('/create','PhimController@create');
     Route::post('/create','PhimController@store');
    
@@ -57,5 +58,12 @@ Route::group(['prefix' => 'LoaiPhim'], function() {
    
     Route::post('/update/{id}','PhimController@update');
     Route::get('/delete/{id}','PhimController@destroy');
+=======
+    Route::get('/create','LoaiPhimController@create');
+    Route::post('/create','LoaiPhimController@store');
+    Route::get('/edit/{id}','LoaiPhimController@edit');
+    Route::post('/update/{id}','LoaiPhimController@update');
+    Route::get('/delete/{id}','LoaiPhimController@destroy');
+>>>>>>> Stashed changes
 });
 

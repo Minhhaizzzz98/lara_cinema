@@ -7,7 +7,7 @@
 
   
 
-    <a href="/phim/create" class="btn btn-primary"><i class="fa fa-film" aria-hidden="true"> Phim mới</i></a>
+    <a href="/LoaiPhim/create" class="btn btn-primary"><i class="fa fa-film" aria-hidden="true"> Phim mới</i></a>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -46,8 +46,8 @@
                                
                                 
                                  <td>
-                                     <a class="btn btn-info" type="submit" href="/loaiphim/edit/{{$item->id}}">Chỉnh sửa</a>
-                                     <a class="btn btn-danger" type="submit" href="/loaiphim/delete/{{$item->id}}">Xóa thể loại</a>
+                                     <a class="btn btn-info" type="submit" href="/LoaiPhim/edit/{{$item->id}}">Chỉnh sửa</a>
+                                     <a class="btn btn-danger" type="submit" href="/LoaiPhim/delete/{{$item->id}}">Xóa thể loại</a>
                                 </td>
                                 {{-- <td> <a class="btn btn-warning" href="{{route('positions.show',$chucvu->MaCV)}}"> <i class="fas fa-eye"></i> </a> </td>
 

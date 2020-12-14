@@ -5,7 +5,6 @@
     <!-- Page Heading -->
     <h1 class="h2 mb-2 text-center text-primary">QUẢN LÝ PHIM</h1>
 
-  
 
     <a href="/phim/create" class="btn btn-primary"><i class="fa fa-film" aria-hidden="true"> Phim mới</i></a>
 

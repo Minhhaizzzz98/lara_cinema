@@ -15,7 +15,7 @@ class LoaiPhimController extends Controller
     public function index()
     {
         //
-        $list=LoaiPhim::all();
+        $list=LoaiPhim::where('TrangThai','1')->get();
         return view ('manage.LoaiPhim.index')->with('list',$list);
 
     }
@@ -28,6 +28,7 @@ class LoaiPhimController extends Controller
     public function create()
     {
         //
+        return view('manage.LoaiPhim.create');
     }
 
     /**
@@ -39,6 +40,24 @@ class LoaiPhimController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+            'TenLoaiPhim' => 'required|min:5|max:255',
+            
+        ]);
+
+        $data = new LoaiPhim();
+        $data->TenLoaiPhim=$request->TenLoaiPhim;
+        $flag = $data->save();
+
+        
+        if($flag){
+            return redirect('/LoaiPhim/index');
+        }
+        else
+        {
+            return view('manage.LoaiPhim.create');
+        }
+       
     }
 
     /**
@@ -61,6 +80,8 @@ class LoaiPhimController extends Controller
     public function edit($id)
     {
         //
+        $loaiphim=LoaiPhim::find($id);
+        return view('manage.LoaiPhim.edit')->with('loaiphim',$loaiphim);
     }
 
     /**
@@ -73,6 +94,23 @@ class LoaiPhimController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validated = $request->validate([
+            'TenLoaiPhim' => 'required|min:5|max:255',
+            
+        ]);
+        $data = LoaiPhim::find($id);
+        $data->TenLoaiPhim=$request->TenLoaiPhim;
+        $flag = $data->save();
+
+        
+        if($flag){
+            return redirect('/LoaiPhim/index');
+        }
+        else
+        {
+            return view('manage.LoaiPhim.create');
+        }
+       
     }
 
     /**
@@ -84,5 +122,9 @@ class LoaiPhimController extends Controller
     public function destroy($id)
     {
         //
+        $phim= LoaiPhim::find($id);
+        $phim->TrangThai=0;
+        $flag=$phim->save();    
+        return redirect('/LoaiPhim/index');
     }
 }
