@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-<link rel="shortcut icon"  href="{{asset('img/clapperboard.svg')}}"/>
-    <title>SB Admin 2 - Dashboard</title>
+    <link rel="shortcut icon"  href="{{asset('img/clapperboard.svg')}}"/>
+    <title>Quản lý rạp chiếu phim</title>
 
     <!-- Custom fonts for this template-->
 

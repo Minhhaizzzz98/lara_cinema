@@ -9,51 +9,15 @@
           <div class="col-lg-6">
               <div class="p-5">
                   <div class="text-center">
-                      <h1 class="text-primary">Thêm phim mới</h1>
+                      <h1 class="text-primary">THÊM THỂ LOẠI PHIM MỚI</h1>
                   </div>
              
-                  <form class="user" method="POST" action="{{url('/phim/create')}}">
+                  <form class="user" method="POST" action="{{url('/LoaiPhim/create')}}">
                     {{ csrf_field() }}
                       <div class="form-group">
-                         <label class="text-dark" for="TenPhim">Tên phim</label>
-                         <input type="text" name="TenPhim" class="form-control form-control-user" id="exampleFirstName"  placeholder="Kẻ sát nhân">
-                         <p class="text-danger">{{ $errors->first('TenPhim') }}</p>
-                      </div>
-                      <div class="form-group">
-                          <label class="text-dark" for="NgayDKChieu">Ngày ĐK chiếu</label>
-                          <input type="datetime-local" name="NgayDKChieu" class="form-control form-control-user" id="exampleInputEmail" >
-                          <p class="text-danger">{{ $errors->first('NgayDKChieu') }}</p>
-                      </div>
-                      <div class="form-group">
-                        <label class="text-dark" for="NgayKetThuc">Ngày kết thúc</label>
-                        <input type="datetime-local" name="NgayKetThuc" class="form-control form-control-user" id="exampleInputEmail" >
-                        <p class="text-danger">{{ $errors->first('NgayKetThuc') }}</p>
-                      </div>
-                      {{-- <div class="form-group">
-        
-                        <label class="text-dark">Thể loại phim :</label>
-                        <select name="TenLoaiPhim" id="">
-                            @foreach ($loaiphim as $item)
-                             <option>{{$item->TenLoaiPhim}} </option>
-                            @endforeach   
-                        </select>
-                      
-                   
-                     
-                     
-                      </div> --}}
-                      <div class="form-group row">
-                          <div class="col-sm-5 mb-3 mb-sm-0">
-                            <label class="text-dark" for="ThoiLuong">Thời lượng</label>
-                            <input type="number" name="ThoiLuong" class="form-control form-control-user"id="exampleInputPassword" >
-                            <p class="text-danger">{{ $errors->first('ThoiLuong') }}</p>
-                          </div>
-                  
-                      </div>
-                      <div class="form-group">
-                        <label class="text-dark" for="HinhAnh">Hình ảnh</label>
-                        <input type="file" name="HinhAnh" class="form-control form-control-user" id="exampleInputEmail" />
-                        <p class="text-danger">{{ $errors->first('HinhAnh') }}</p>
+                         <label class="text-dark" for="TenLoaiPhim">Tên thể loại </label>
+                         <input type="text" name="TenLoaiPhim" class="form-control form-control-user" id="exampleFirstName"  placeholder="Hành động">
+                         <p class="text-danger">{{ $errors->first('TenLoaiPhim') }}</p>
                       </div>
                       <button class="btn btn-primary btn-user btn-block">Thêm mới</button>
                   </form>

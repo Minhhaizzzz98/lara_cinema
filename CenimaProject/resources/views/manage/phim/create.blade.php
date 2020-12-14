@@ -12,7 +12,7 @@
                       <h1 class="text-primary">Thêm phim mới</h1>
                   </div>
              
-                  <form class="user" method="POST" action="{{url('/phim/create')}}">
+                  <form class="user" method="POST" action="{{url('/phim/create/')}}">
                     {{ csrf_field() }}
                       <div class="form-group">
                          <label class="text-dark" for="TenPhim">Tên phim</label>
@@ -29,30 +29,61 @@
                         <input type="datetime-local" name="NgayKetThuc" class="form-control form-control-user" id="exampleInputEmail" >
                         <p class="text-danger">{{ $errors->first('NgayKetThuc') }}</p>
                       </div>
-                      {{-- <div class="form-group">
+                      <div class="form-group">
         
-                        <label class="text-dark">Thể loại phim :</label>
-                        <select name="TenLoaiPhim" id="">
-                            @foreach ($loaiphim as $item)
-                             <option>{{$item->TenLoaiPhim}} </option>
+                        <label class="text-dark">Giới hạn tuổi :</label>
+                        <select name="GioiHanTuoi" id="">
+                            @foreach ($gioihantuoi as $item)
+                             <option name="GioiHanTuoi">{{$item->TenGioiHan}} </option>
                             @endforeach   
                         </select>
-                      
-                   
                      
-                     
-                      </div> --}}
+<<<<<<< Updated upstream
+                      </div>
                       <div class="form-group row">
                           <div class="col-sm-5 mb-3 mb-sm-0">
                             <label class="text-dark" for="ThoiLuong">Thời lượng</label>
-                            <input type="number" name="ThoiLuong" class="form-control form-control-user"id="exampleInputPassword" >
+                            <input type="number" name="ThoiLuong" min="0" class="form-control form-control-user"id="exampleInputPassword" >
+=======
+                      </div> --}}
+                      {{-- <div class="form-group">
+                        <label class="text-dark" for="LoaiPhim">Thể loại</label>
+                        <select name="TenLoaiPhim" id="">
+                          @foreach ($loaiphim as $item)
+                            <option value="">{{$item->TenLoaiPhim}}</option>
+                          @endforeach
+                        </select> 
+                        
+                      </div> --}}
+
+                      <div class="form-group">
+                        <label class="text-dark" for="LoaiPhim">Thể loại</label>
+                        <select name="TenGioiHan" id="">
+                          @foreach ($gioihantuoi as $item)
+                            <option value="">{{$item->TenGioiHan}}</option>
+                          @endforeach
+                        </select> 
+                        
+                      </div>
+
+                      <div class="form-group row">
+                          <div class="col-sm-5 mb-3 mb-sm-0">
+                            <label class="text-dark" for="ThoiLuong">Thời lượng</label>
+                            <input type="number" min="0" name="ThoiLuong" class="form-control form-control-user"id="exampleInputPassword" >
+>>>>>>> Stashed changes
                             <p class="text-danger">{{ $errors->first('ThoiLuong') }}</p>
                           </div>
                   
                       </div>
                       <div class="form-group">
                         <label class="text-dark" for="HinhAnh">Hình ảnh</label>
-                        <input type="file" name="HinhAnh" class="form-control form-control-user" id="exampleInputEmail" />
+<<<<<<< Updated upstream
+                        <input type="file" name="HinhAnh" alt="Profile Image" onchange="previewFile(this)" class="form-control form-control-user" id="exampleInputEmail" />
+                        <img id="previewImage" width="300px" height="200px" alt="">
+=======
+                        <input type="file" name="HinhAnh" alt="Profile Image" onchange="previewFile(this)">
+                        <img id="previewImage" width="300px" height="200px"  src="" alt="">
+>>>>>>> Stashed changes
                         <p class="text-danger">{{ $errors->first('HinhAnh') }}</p>
                       </div>
                       <button class="btn btn-primary btn-user btn-block">Thêm mới</button>

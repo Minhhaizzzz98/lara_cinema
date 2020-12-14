@@ -5,7 +5,6 @@
     <!-- Page Heading -->
     <h1 class="h2 mb-2 text-center text-primary">QUẢN LÝ PHIM</h1>
 
-  
 
     <a href="/phim/create" class="btn btn-primary"><i class="fa fa-film" aria-hidden="true"> Phim mới</i></a>
 
@@ -54,8 +53,9 @@
                                
                                 
                                  <td>
-                                     <a class="btn btn-info" type="submit" href="/phim/edit/{{$item->id}}">Chỉnh sửa</a>
-                                     <a class="btn btn-danger" type="submit" href="/phim/delete/{{$item->id}}">Xóa phim</a>
+                                     <a class="btn btn-primary" type="submit" href="/phim/edit/{{$item->id}}">Edit</a>
+                                     <a class="btn btn-info" type="submit" href="/phim/details/{{$item->id}}">Details</a>
+                                     <a class="btn btn-danger" type="submit" href="/phim/delete/{{$item->id}}">Delete</a>
                                 </td>
                                 {{-- <td> <a class="btn btn-warning" href="{{route('positions.show',$chucvu->MaCV)}}"> <i class="fas fa-eye"></i> </a> </td>
 

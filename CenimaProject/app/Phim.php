@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\DaoDien;
 
 class Phim extends Model
 {
@@ -10,7 +11,7 @@ class Phim extends Model
     protected $table = 'phims';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'TenPhim','NgayDKChieu','NgayKetThuc','ThoiLuong','HinhAnh', 'TrangThai'
+        'TenPhim','NgayDKChieu','daodien_id','NgayKetThuc','ThoiLuong','HinhAnh', 'TrangThai'
     ];
 
     public function dienviens() {
@@ -20,6 +21,11 @@ class Phim extends Model
     public function theloais() {
         return $this->belongsToMany('App\LoaiPhim', 'phim_theloai', 'phim_id', 'loaiphim_id');
     }
+
+    public function daodiens() {
+        return $this->belongsTo('App\DaoDien', 'daodien_id', 'id');
+    }
+    
 
     public function lichchieus()
     {
