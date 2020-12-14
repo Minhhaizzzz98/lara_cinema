@@ -1,27 +1,7 @@
 @extends('layout')
 @section('content')
 
-    {{-- <div class="card shadow mb-4">
-        <div class="row">
-            <div class="col-md-5">
-                <img width="400px" height="400px" src="{{$phim->HinhAnh}}" alt="Image" class="img-fluid">
-              </div>
-              <div class="col-md-6">
-                <h1 class="text-dark">{{$phim->TenPhim}}</h1><br>    
-                <h6 class="text-dark">Đạo diễn: {{$phim->daodiens->HoTen}}</h6><br>  
-                <h6 class="text-dark">Loại phim: Kinh dị</h6><br>
-                <h6 class="text-dark">Diễn viên: Tường Vy, Quốc Trọng</h6><br>      
-                <h6 class="text-dark">Thời lượng: {{$phim->ThoiLuong}}</h6><br>
-                <h6 class="text-dark">Thể loại: Kinh dị</h6><br>
-                <h6 class="text-dark">Độ tuổi: Trên 18</h6><br>
-                <h6 class="text-dark">Ngày đăng kí chiếu: 16/06/2020</h6><br>
-                <h6 class="text-dark">Ngày kết thúc chiếu: 17/07/2020</h6><br>
-                <h6 class="text-dark">Trạng thái: Đang chiếu</h6><br>
-              </div>
-            </div>
-        </div>
-     
-    </div> --}}
+ 
     <div class="site-section">
         <div class="container">
           <div class="row">

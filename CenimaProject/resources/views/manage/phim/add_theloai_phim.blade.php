@@ -1,15 +1,4 @@
 
-    
-<!-- Button trigger modal -->
-  
-  {{-- //  $id_phim_new="";
-  // if (request()->session()->has('id_phim_new'))
-  // {
-  //   $id_phim_new=request()->session()->get('id_phim_new');
-  //   echo $id_phim_new;
-  //   exit;
-  // } --}}
-
 
   @extends('layout')
   @section('content')
@@ -27,19 +16,13 @@
              
                   <form class="user" method="POST" action="{{url('/phim/create/add_theloai/'.request()->session()->get('id_phim_new'))}}">
                     @csrf
-                    
-                    
-                     
                         @foreach ($loaiphim as $item)
-                        <div class="form-group">
-                            <label class="text-dark" for="TenPhim">{{$item->TenLoaiPhim}}</label>
-                            <input type="checkbox" name="theloai{{$item->id}}" value="{{$item->TenLoaiPhim}}"/>
-                          </div>
+                            <div class="form-group">
+                              <label class="text-dark" for="TenPhim">{{$item->TenLoaiPhim}}</label>
+                              <input type="checkbox" name="theloai{{$item->id}}" value="{{$item->TenLoaiPhim}}"/>
+                            </div>
                         @endforeach
-                      </select>
-                      <p class="text-danger">{{ $errors->first('TenPhim') }}</p>
-                  
-                        
+              
                       <button class="btn btn-primary btn-user btn-block">Xác nhận</button>
                   </form>
                   <hr>

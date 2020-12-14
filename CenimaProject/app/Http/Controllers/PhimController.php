@@ -54,10 +54,7 @@ class PhimController extends Controller
         ]);
  
         $gioihantuoi = GioiHanTuoi::where('TenGioiHan',$request->GioiHanTuoi)->first();
- 
-        $data = GioiHanTuoi::find($request->TenGioiHan);
-        
-
+  
         $phim = new Phim();
         $phim->TenPhim = $request->TenPhim;
         $phim->NgayDKChieu= $request->NgayDKChieu;
@@ -84,18 +81,18 @@ class PhimController extends Controller
      /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request 
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function add_theloai(Request $request, $id)
     {
-        $loaiphim = LoaiPhim::where('TenLoaiPhim', $request->TenLoaiPhim)->first();
-        
-        $chitietloaiphim =  new Phim_LoaiPhim();
+        $loaiphim = LoaiPhim::where('TenLoaiPhim', $request->theloai1)->first();
 
+        $chitietloaiphim =  new Phim_LoaiPhim();
         $chitietloaiphim->loaiphim_id = $loaiphim->id;
         $chitietloaiphim->phim_id= $id;
+
         $flag= $chitietloaiphim->save();
         $request->session()->forget('id_phim_new');
        
