@@ -15,7 +15,7 @@ class PhimController extends Controller
      */
     public function index()
     {
-        $data = Phim::with('dienviens','theloais')->get();
+        $data = Phim::where('TrangThai', 1)->with('dienviens','theloais')->get();
         return response()->json($data);
     }
 

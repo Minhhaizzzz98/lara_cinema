@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLoaiPhims extends Migration
+class CreateDaoDiens extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,11 @@ class CreateLoaiPhims extends Migration
     public function up()
     {
         //
-        Schema::create('loai_phims', function (Blueprint $table) {
+        Schema::create('dao_diens', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('TenLoaiPhim')->nullable(false);
-
-            $table->integer('TrangThai')->default(1);
-            
+            $table->string('HoTen');
+            $table->date('NamSinh');
+            $table->integer('TrangThai');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ class CreateLoaiPhims extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('loai_phims');
+        Schema::dropIfExists('dao_diens');
     }
 }
