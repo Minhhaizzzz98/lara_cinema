@@ -6,16 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rap extends Model
 {
-    public $timestamp = true;
     protected $table = 'raps';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'TenPhim', 'TrangThai'
+        'TenRap', 'chinhanh_id', 'TrangThai'
     ];
 
-    public function dienviens() {
-        return $this->belongsToMany('App\DienVien', 'phim_dienvien', 'phim_id', 'dienvien_id');
-    }
+    
+   
     public function lichchieus()
     {
         return $this->hasMany('App\LichChieu', 'phim_id', 'id');
@@ -23,5 +21,9 @@ class Rap extends Model
     public function ghes()
     {
         return $this->hasMany('App\Ghe', 'rap_id', 'id');
+    }
+    public function chinhanh()
+    {
+        return $this->belongsTo('App\ChiNhanh', 'chinhanh_id', 'id');
     }
 }
