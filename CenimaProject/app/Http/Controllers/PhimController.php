@@ -192,7 +192,6 @@ class PhimController extends Controller
         ],$arr_validate);
     
         $phim = Phim::find($id);
-
         $phim->TenPhim = $request->TenPhim;
         $phim->NgayDKChieu= $request->NgayDKChieu;
         $phim->NgayKetThuc=$request->NgayKetThuc;
