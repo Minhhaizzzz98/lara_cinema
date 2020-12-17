@@ -7,6 +7,7 @@ use App\Phim;
 use App\LoaiPhim;
 use App\GioiHanTuoi;
 use App\Phim_LoaiPhim;
+use App\QuocGia;
 
 class PhimController extends Controller
 {
@@ -31,8 +32,14 @@ class PhimController extends Controller
     public function create()
     {
         //
+        $quocgia = QuocGia::all();
         $data= GioiHanTuoi::all();
-        return view('manage.phim.create')->with('gioihantuoi',$data);
+       
+        return view('manage.phim.create')->with([
+        'gioihantuoi' => $data,
+        'quocgia'=>$quocgia,
+		
+	]);
     }
 
     /**
@@ -45,15 +52,30 @@ class PhimController extends Controller
     public function store(Request $request)
     {
         //
+        $arr_validate =[
+            'TenPhim.required'=>'Tên phim không được bỏ trống',
+            'TenPhim.min'=>'Vui lòng nhập ít nhất 5 kí tự',
+            'TenPhim.max'=>'Vui lòng nhập ít hơn 255 kí tự',
+            'NgayDKChieu.required'=>'Ngày ĐK chiếu không được bỏ trống',
+            'NgayKetThuc.required'=>'Ngày kết thúc không được bỏ trống',
+            'ThoiLuong.required'=>'Thời lượng không được bỏ trống',
+            'HinhAnh.required'=>'Hình ảnh không được bỏ trống',
+            'DaoDien.required'=>'Đạo diễn không được bỏ trống',
+            'DaoDien.min'=>'Tên đạo diễn ít nhất 5 kí tự',
+            'DaoDien.max'=>'Tên đạo diễn phải ít hơn 255 kí tự',
+        ];
         $validated = $request->validate([
+
             'TenPhim' => 'required|min:5|max:255',
             'NgayDKChieu' => 'required',
             'NgayKetThuc' => 'required',
             'ThoiLuong' => 'required',
             'HinhAnh' => 'required',
-        ]);
- 
+            'DaoDien'=>'required|min:5|max:255',
+        ],$arr_validate);
+      
         $gioihantuoi = GioiHanTuoi::where('TenGioiHan',$request->GioiHanTuoi)->first();
+        $quocgia = QuocGia::where('TenQuocGia',$request->QuocGia)->first();
   
         $phim = new Phim();
         $phim->TenPhim = $request->TenPhim;
@@ -61,7 +83,8 @@ class PhimController extends Controller
         $phim->NgayKetThuc=$request->NgayKetThuc;
         $phim->ThoiLuong=$request->ThoiLuong;
         $phim->gioihantuoi_id = $gioihantuoi->id;
-        $phim->daodien_id=1;
+        $phim->DaoDien= $request->DaoDien;
+        $phim->quocgia_id = $quocgia->id;
         $phim->HinhAnh="http://localhost:8000/data/".$request->HinhAnh;
         
         $flag=$phim->save();
@@ -87,13 +110,14 @@ class PhimController extends Controller
      */
     public function add_theloai(Request $request, $id)
     {
-        $loaiphim = LoaiPhim::where('TenLoaiPhim', $request->theloai1)->first();
+        
+        $loaiphim1 = LoaiPhim::where('TenLoaiPhim', $request->theloai1)->first();
 
         $chitietloaiphim =  new Phim_LoaiPhim();
-        $chitietloaiphim->loaiphim_id = $loaiphim->id;
+        $chitietloaiphim->loaiphim_id = $loaiphim1->id;
         $chitietloaiphim->phim_id= $id;
+        $flag=$chitietloaiphim->save();
 
-        $flag= $chitietloaiphim->save();
         $request->session()->forget('id_phim_new');
        
         if($flag){         
@@ -115,7 +139,10 @@ class PhimController extends Controller
     public function show($id)
     {
         //
-        $phim = Phim::find($id);
+        $phim = Phim::where('id', $id)->with('quocgias','dienviens','gioihantuoi')->get()->first();
+
+
+        // return $phim;
         return view('manage.phim.details')->with('phim',$phim);
     }
 
@@ -142,13 +169,27 @@ class PhimController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $arr_validate =[
+            'TenPhim.required'=>'Tên phim không được bỏ trống',
+            'TenPhim.min'=>'Vui lòng nhập ít nhất 5 kí tự',
+            'TenPhim.max'=>'Vui lòng nhập ít hơn 255 kí tự',
+            'NgayDKChieu.required'=>'Ngày ĐK chiếu không được bỏ trống',
+            'NgayKetThuc.required'=>'Ngày kết thúc không được bỏ trống',
+            'ThoiLuong.required'=>'Thời lượng không được bỏ trống',
+            'HinhAnh.required'=>'Hình ảnh không được bỏ trống',
+            'DaoDien.required'=>'Đạo diễn không được bỏ trống',
+            'DaoDien.min'=>'Tên đạo diễn ít nhất 5 kí tự',
+            'DaoDien.max'=>'Tên đạo diễn phải ít hơn 255 kí tự',
+        ];
         $validated = $request->validate([
-            'TenPhim' => 'required|max:255',
-            'NgayDKChieu' => 'required|date_format:Y-m-d H:i:s',
-            'NgayKetThuc' => 'required|date_format:Y-m-d H:i:s',
+
+            'TenPhim' => 'required|min:5|max:255',
+            'NgayDKChieu' => 'required',
+            'NgayKetThuc' => 'required',
             'ThoiLuong' => 'required',
             'HinhAnh' => 'required',
-        ]);
+            'DaoDien'=>'required|min:5|max:255',
+        ],$arr_validate);
     
         $phim = Phim::find($id);
 

@@ -19,8 +19,7 @@ class CreatePhims extends Migration
             $table->datetime('NgayKetThuc');
             $table->integer('ThoiLuong');
             $table->string('HinhAnh');
-            
-            
+            $table->string('DaoDien');
             $table->unsignedBigInteger('gioihantuoi_id');
             $table->foreign('gioihantuoi_id')->references('id')->on('gioi_han_tuoi')->onDelete('cascade');;
 

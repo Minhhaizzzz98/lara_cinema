@@ -16,7 +16,7 @@
                     {{ csrf_field() }}
                       <div class="form-group">
                          <label class="text-dark" for="TenPhim">Tên phim</label>
-                         <input type="text" name="TenPhim" class="form-control form-control-user" id="exampleFirstName"  placeholder="Kẻ sát nhân">
+                         <input type="text" name="TenPhim" class="form-control form-control-user" id="exampleFirstName"  >
                          <p class="text-danger">{{ $errors->first('TenPhim') }}</p>
                       </div>
                       <div class="form-group">
@@ -31,10 +31,24 @@
                       </div>
 
                       <div class="form-group">
+                        <label class="text-dark" for="TenPhim">Đạo diễn</label>
+                        <input type="text" name="DaoDien" class="form-control form-control-user" id="exampleFirstName" >
+                        <p class="text-danger">{{ $errors->first('DaoDien') }}</p>
+                     </div>
+
+                      <div class="form-group">
                         <label class="text-dark">Giới hạn tuổi :</label>
                         <select name="GioiHanTuoi" id="">
                             @foreach ($gioihantuoi as $item)
                              <option name="GioiHanTuoi">{{$item->TenGioiHan}} </option>
+                            @endforeach   
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label class="text-dark">Quốc gia :</label>
+                        <select name="QuocGia" id="">
+                            @foreach ($quocgia as $item)
+                             <option name="QuocGia">{{$item->TenQuocGia}} </option>
                             @endforeach   
                         </select>
                       </div>
