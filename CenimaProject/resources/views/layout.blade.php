@@ -119,9 +119,22 @@
             
             <li class="nav-item">
                 <a class="nav-link" href="/phim/index">
-                        <i class="fas fa-film"></i>
-                        <span>Film</span></a>
-                </li>
+                    <i class="fas fa-film"></i>
+                    <span>Film</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('/rap/')}}">
+                    <i class="fas fa-table"></i>
+                    <span>Rạp</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('/chinhanh/')}}">
+                    <i class="fas fa-table"></i>
+                    <span>Chi nhánh</span>
+                </a>
+            </li>
             <!-- Divider -->
 
 
