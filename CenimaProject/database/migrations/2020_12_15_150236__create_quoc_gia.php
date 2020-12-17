@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDaoDiens extends Migration
+class CreateQuocGia extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,9 @@ class CreateDaoDiens extends Migration
     public function up()
     {
         //
-        Schema::create('dao_diens', function (Blueprint $table) {
+        Schema::create('quoc_gias', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('HoTen');
-            $table->date('NamSinh');
-            $table->integer('TrangThai');
+            $table->string('TenQuocGia');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateDaoDiens extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('dao_diens');
+        Schema::dropIfExists('quoc_gias');
     }
 }

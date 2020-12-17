@@ -3,7 +3,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h2 mb-2 text-center text-primary">QUẢN LÝ PHIM</h1>
+    <h1 class="h2 mb-1 text-center text-primary">QUẢN LÝ PHIM</h1>
 
 
     <a href="/phim/create" class="btn btn-primary"><i class="fa fa-film" aria-hidden="true"> Phim mới</i></a>
@@ -21,8 +21,7 @@
                         <tr>
                             <th>Mã Phim</th>
                             <th>Tên phim</th>
-                            <th>Ngày ĐK chiếu</th>
-                            <th>Ngày kết thúc</th>
+                            <th>Đạo diễn</th>
                             <th>Thời lượng</th>
                             <th>Hình ảnh</th>
                             <th>Trạng thái</th>
@@ -36,8 +35,7 @@
                             <tr>
                                 <td>{{ $item->id }}</td>
                                 <td>{{$item->TenPhim}}</td>
-                                <td>{{$item->NgayDKChieu}}</td>
-                                <td>{{$item->NgayKetThuc}}</td>
+                                <td>{{$item->DaoDien}}</td>
                                 <td>{{$item->ThoiLuong}} Phút</td>
                                 <td><img width="100px" height="80px" src="{{$item->HinhAnh}}" alt=""></td>
                                 <td>

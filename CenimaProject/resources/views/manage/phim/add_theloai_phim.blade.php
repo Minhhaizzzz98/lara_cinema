@@ -13,7 +13,6 @@
                   <div class="text-center">
                         <h3>Chọn thể loại phim</h3>
                   </div>
-             
                   <form class="user" method="POST" action="{{url('/phim/create/add_theloai/'.request()->session()->get('id_phim_new'))}}">
                     @csrf
                         @foreach ($loaiphim as $item)

@@ -22,6 +22,8 @@ class CreatePhimTheloai extends Migration
 
             $table->unsignedInteger('loaiphim_id');
             $table->foreign('loaiphim_id')->references('id')->on('loai_phims');
+
+            $table->timestamps();
             
         });
     }

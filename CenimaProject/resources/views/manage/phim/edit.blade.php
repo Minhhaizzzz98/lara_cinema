@@ -30,6 +30,12 @@
                           <input type="datetime" name="NgayKetThuc" class="form-control form-control-user" id="exampleInputEmail" value="{{$phim->NgayKetThuc}}">
                           <p class="text-danger">{{ $errors->first('NgayKetThuc') }}</p>
                         </div>
+                        <div class="form-group">
+                          <label class="text-dark" for="TenPhim">Đạo diễn</label>
+                          <input type="text" value="{{$phim->DaoDien}}" name="DaoDien" class="form-control form-control-user" id="exampleFirstName" >
+                          <p class="text-danger">{{ $errors->first('DaoDien') }}</p>
+                       </div>
+  
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                               <label class="text-dark" for="ThoiLuong">Thời lượng</label>
