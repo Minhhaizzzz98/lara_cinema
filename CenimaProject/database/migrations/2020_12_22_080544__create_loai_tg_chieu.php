@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRapsTable extends Migration
+class CreateLoaiTgChieu extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateRapsTable extends Migration
      */
     public function up()
     {
-        Schema::create('raps', function (Blueprint $table) {
+        Schema::create('loai_tg_chieus', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('TenRap');
-            
-            $table->integer('chinhanh_id')->unsigned();
-            $table->foreign('chinhanh_id')->references('id')->on('chi_nhanhs')->onDelete('cascade');
-
+            $table->string('TenLoaiTGChieu');
+            $table->double('Gia_TG');
             $table->integer('TrangThai')->default(1);
             $table->timestamps();
         });
@@ -32,6 +29,6 @@ class CreateRapsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('raps');
+        Schema::dropIfExists('loai_tg_chieu');
     }
 }

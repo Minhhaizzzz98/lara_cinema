@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateThoiGianChieusTable extends Migration
+class CreateRapTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateThoiGianChieusTable extends Migration
      */
     public function up()
     {
-        Schema::create('thoi_gian_chieus', function (Blueprint $table) {
+        Schema::create('raps', function (Blueprint $table) {
             $table->increments('id');
-            $table->dateTime('ThoiGianChieu');
+            $table->string('TenRap');
+            $table->string('DiaChi');
+            $table->string('SDT');
             $table->integer('TrangThai')->default(1);
             $table->timestamps();
         });
@@ -28,6 +30,6 @@ class CreateThoiGianChieusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('thoi_gian_chieus');
+        Schema::dropIfExists('raps');
     }
 }

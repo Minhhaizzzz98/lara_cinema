@@ -11,10 +11,8 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
     <link rel="shortcut icon"  href="{{asset('img/clapperboard.svg')}}"/>
     <title>Quản lý rạp chiếu phim</title>
-
     <!-- Custom fonts for this template-->
-
-<link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
 
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVesTable extends Migration
+class CreateVes extends Migration
 {
     /**
      * Run the migrations.
@@ -15,11 +15,11 @@ class CreateVesTable extends Migration
     {
         Schema::create('ves', function (Blueprint $table) {
             $table->increments('id');
-            $table->double('Gia')->unsigned();
-            $table->integer('lichchieu_id')->unsigned();
-            $table->foreign('lichchieu_id')->references('id')->on('lich_chieus');
+            $table->integer('suatchieu_id')->unsigned();
+            $table->foreign('suatchieu_id')->references('id')->on('suat_chieus');
             $table->integer('ghe_id')->unsigned();
             $table->foreign('ghe_id')->references('id')->on('ghes');
+            $table->double('GiaVe');
             $table->integer('TrangThai')->default(1);
             $table->timestamps();
         });

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChiNhanhsTable extends Migration
+class CreatePhongTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateChiNhanhsTable extends Migration
      */
     public function up()
     {
-        Schema::create('chi_nhanhs', function (Blueprint $table) {
+        Schema::create('phongs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('TenChiNhanh');
-            $table->string('DiaChi');
-            $table->string('SDT');
+            $table->string('TenPhong');
+            $table->integer('rap_id')->unsigned();
+            $table->foreign('rap_id')->references('id')->on('raps')->onDelete('cascade');
             $table->integer('TrangThai')->default(1);
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ class CreateChiNhanhsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chi_nhanhs');
+        Schema::dropIfExists('phongs');
     }
 }
