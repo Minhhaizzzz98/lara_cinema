@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+   
     <link rel="shortcut icon"  href="{{asset('img/clapperboard.svg')}}"/>
     <title>Quản lý rạp chiếu phim</title>
 
@@ -119,22 +120,9 @@
             
             <li class="nav-item">
                 <a class="nav-link" href="/phim/index">
-                    <i class="fas fa-film"></i>
-                    <span>Film</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{url('/rap/')}}">
-                    <i class="fas fa-table"></i>
-                    <span>Rạp</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{url('/chinhanh/')}}">
-                    <i class="fas fa-table"></i>
-                    <span>Chi nhánh</span>
-                </a>
-            </li>
+                        <i class="fas fa-film"></i>
+                        <span>Film</span></a>
+                </li>
             <!-- Divider -->
 
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGiasTable extends Migration
+class CreateGioChieus extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateGiasTable extends Migration
      */
     public function up()
     {
-        Schema::create('gias', function (Blueprint $table) {
+        Schema::create('gio_chieus', function (Blueprint $table) {
             $table->increments('id');
-            $table->double('DonGia');
-            $table->string('LoaiGia');
+            $table->integer('loaitgchieu_id')->unsigned();
+            $table->foreign('loaitgchieu_id')->references('id')->on('loai_tg_chieus');
+            $table->time('GioBatDau');
             $table->integer('TrangThai')->default(1);
             $table->timestamps();
         });
@@ -29,6 +30,6 @@ class CreateGiasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gias');
+        Schema::dropIfExists('gio_chieus');
     }
 }

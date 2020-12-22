@@ -15,10 +15,9 @@ class CreateGhesTable extends Migration
     {
         Schema::create('ghes', function (Blueprint $table) {
             $table->increments('id');
-
-            $table->integer('rap_id')->unsigned();
-            $table->foreign('rap_id')->references('id')->on('raps');
-
+            $table->integer('phong_id')->unsigned();
+            $table->foreign('phong_id')->references('id')->on('phongs');
+            $table->double('GiaGhe');
             $table->integer('TrangThai')->default(1);
             $table->timestamps();
         });
