@@ -39,6 +39,8 @@ class LoaiPhimController extends Controller
     public function show($id)
     {
         //
+        $data = LoaiPhim::find($id);
+        return response()->json($data);
     }
 
     /**

@@ -60,6 +60,25 @@ Route::group(['prefix' => 'LoaiPhim'], function() {
 });
 
 
+Route::group(['prefix' => 'DienVien'], function() {
+    Route::get('/index','DienVienController@index');
+    Route::get('/create','DienVienController@create');
+    Route::post('/create','DienVienController@store');
+    Route::get('/edit/{id}','DienVienController@edit');
+    Route::post('/update/{id}','DienVienController@update');
+    Route::get('/delete/{id}','DienVienController@destroy');
+});
+Route::group(['prefix' => 'GioiHanTuoi'], function() {
+    Route::get('/index','GioiHanTuoiController@index');
+    Route::get('/create','GioiHanTuoiController@create');
+    Route::post('/create','GioiHanTuoiController@store');
+    Route::get('/edit/{id}','GioiHanTuoiController@edit');
+    Route::post('/update/{id}','GioiHanTuoiController@update');
+    Route::get('/delete/{id}','GioiHanTuoiController@destroy');
+});
+
+
+
 //rap
 Route::group(['prefix' => 'rap'], function() {
     Route::get('/','RapController@index');
@@ -88,3 +107,4 @@ Route::group(['prefix' => 'chinhanh'], function() {
     Route::get('/active/{id}','ChiNhanhController@active');
     
 });
+

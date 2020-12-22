@@ -18,8 +18,9 @@ class PhimController extends Controller
      */
     public function index()
     {
-       
+        
         $list['phims']= Phim::paginate(5);
+        session()->flush();
         return view ('manage.phim.index',$list);
 
     }
@@ -109,26 +110,29 @@ class PhimController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function add_theloai(Request $request, $id)
-    {
-        
-        $loaiphim1 = LoaiPhim::where('TenLoaiPhim', $request->theloai1)->first();
+    {     
+        $loaiphim1 = LoaiPhim::where('TenLoaiPhim', $request->TenTheLoai)->first();
+        $data= LoaiPhim::all();
+        $dem = 0;
+        $list = Phim_LoaiPhim::all();
 
-        $chitietloaiphim =  new Phim_LoaiPhim();
-        $chitietloaiphim->loaiphim_id = $loaiphim1->id;
-        $chitietloaiphim->phim_id= $id;
-        $flag=$chitietloaiphim->save();
 
-        $request->session()->forget('id_phim_new');
-       
-        if($flag){         
-            return redirect('/phim/index');
-        }
-        else
-        {
-            return view('manage.phim.create');
-        }
-        
+            $chitietloaiphim =  new Phim_LoaiPhim();
+            $chitietloaiphim->loaiphim_id = $loaiphim1->id;
+            $chitietloaiphim->phim_id= $id;
+            $flag=$chitietloaiphim->save();   
+            if($flag){         
+                return view('manage.phim.add_theloai_phim')->with('loaiphim',$data);
+            }
+            else
+            {
+                return view('manage.phim.create');
+            }
     }
+     
+       
+    
+    
 
     /**
      * Display the specified resource.

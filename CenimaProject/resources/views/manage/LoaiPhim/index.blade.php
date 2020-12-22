@@ -1,19 +1,75 @@
 @extends('layout')
 @section('content')
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5  class="modal-title" id="exampleModalLongTitle">Thêm thể loại phim</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <form action="/LoaiPhim/create" method="POST" id="user-form" >
+          {{ csrf_field() }}
+             <div class="form-group">
+                    <label class="text-dark" for="TenLoaiPhim">Tên thể loại </label>
+                    <input id="TenTheLoai" type="text" name="TenLoaiPhim" class="form-control form-control-user" id="exampleFirstName"  placeholder="Hành động">
+                    <p class="text-danger">{{ $errors->first('TenLoaiPhim') }}</p>
+             </div>
+             <input type="submit" id="add-data" value="Thêm" type="button" class="btn btn-primary">
+         </form>
+         <div class="alert alert-success" style="display: none"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+     
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5  class="modal-title" id="exampleModalLongTitle">Chỉnh sửa thể loại thể loại</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <form action="">
+             <div class="form-group">
+                    <label class="text-dark" for="TenLoaiPhim">Tên thể loại </label>
+                    <input type="text" name="TenLoaiPhim" class="form-control form-control-user" id="exampleFirstName"  placeholder="Hành động">
+                    <p class="text-danger">{{ $errors->first('TenLoaiPhim') }}</p>
+             </div>
+         </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+          <button type="button" class="btn btn-primary">Lưu lại</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 <div class="container-fluid">
 
     <!-- Page Heading -->
     <h1 class="h2 mb-2 text-center text-primary">QUẢN LÝ THỂ LOẠI PHIM</h1>
 
-  
+    <button data-toggle="modal" data-target="#add" class="btn btn-primary"><i class="fa fa-film" aria-hidden="true"> Thêm mới</i></button>
 
-    <a href="/LoaiPhim/create" class="btn btn-primary"><i class="fa fa-film" aria-hidden="true"> Phim mới</i></a>
-
-    <!-- DataTales Example -->
+    
     <div class="card shadow mb-4">
-        {{-- <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-        </div> --}}
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered text-center table-stripped table-hover" id="dataTable" width="100%"
@@ -25,11 +81,9 @@
                             <th>Trạng thái</th>
                             <th>Hành động</th>
                         </tr>
-                    </thead>
-                  
+                    </thead>               
                     <tbody>
                         @foreach ($list as $item)
-
                             <tr>
                                 <td>{{ $item->id }}</td>
                                 <td>{{$item->TenLoaiPhim}}</td>
@@ -43,32 +97,123 @@
                                        }
                                    @endphp
                                 </td>
-                               
-                                
+                                   
                                  <td>
-                                     <a class="btn btn-info" type="submit" href="/LoaiPhim/edit/{{$item->id}}">Chỉnh sửa</a>
-                                     <a class="btn btn-danger" type="submit" href="/LoaiPhim/delete/{{$item->id}}">Xóa thể loại</a>
+                                     <button data-toggle="modal" data-target="#edit" class="btn btn-info" type="submit">Chỉnh sửa</button>
+                                     <button data-url="/LoaiPhim/delete/{{$item->id}}" id="delete" class="btn btn-danger" type="submit" >Xóa thể loại</button>
                                 </td>
-                                {{-- <td> <a class="btn btn-warning" href="{{route('positions.show',$chucvu->MaCV)}}"> <i class="fas fa-eye"></i> </a> </td>
-
-                                <td> <a class="btn btn-success"> <i class="fas fa-user-edit"></i> </a> </td>
-
-                                @if ($chucvu->TrangThai == 1)
-                                <td>  <form method="POST" action="{{route('positions.destroy',$chucvu->MaCV)}}"> @method('DELETE') @csrf <button type="submit" class="btn btn-danger"> <i class="fa fa-lock"> </i></button> </form></td>
-                                @endif
-
-                                @if ($chucvu->TrangThai == 0)
-                                <td>  <form method="POST" action="{{route('positions.destroy',$chucvu->MaCV)}}"> @method('DELETE') @csrf <button type="submit" class="btn btn-success"> <i class="fa fa-unlock"> </i></button> </form> </td>
-                                @endif --}}
                             </tr>
                         @endforeach
-
                     </tbody>
-                </table>
-               
+                </table> 
             </div>
         </div>
     </div>
-
 </div>
+
+
 @endsection
+
+<script>
+  $(document).ready(function()
+    {
+      
+        
+        $("#add-data").click(function(){         
+           e.preventDefault();
+          
+           $.ajaxSetup({
+               headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+
+          $.ajax({
+            url:"{{url('/LoaiPhim/create')}}",
+            method: 'POST',
+            data:{
+              TenTheLoai:$('#TenTheLoai').val(),
+              success: function(result){
+             
+              }   
+            }
+
+          })
+        });
+        
+        $("#delete").click(function(){
+          var url = $(this).attr('data-url');
+         }
+         $.ajax({
+           url:a,
+           method: 'GET',
+           data:{
+             success: function(result){
+               window.location.reload();
+             }   
+           }
+
+         })
+
+
+        })
+
+
+       
+
+    //     $("#add-data").on('submit',function(e)
+    //     {
+    //         e.stopImmediatePropagation();
+
+          
+
+    //         // var form_data=$(this).serialize();
+    //         // var button_action=$('#button_action').val();
+    //         // var phone=$('#phone').val();
+
+    //         var TenTheLoai=$('#TenTheLoai').val();
+    //         var _token   = $('meta[name="csrf-token"]').attr('content');
+
+    //         $.ajax({
+    //             url:"/LoaiPhim/create",
+    //             method:"POST",
+    //             data:{
+    //                 TenTheLoai:TenTheLoai,         
+    //                 _token:_token
+    //             },
+    //             success:function(data)
+    //             {
+    //               toastr.success('Thêm thành công');
+    //               $('#add').modal('hide');
+    //               setTimeout(function(){
+    //                 window.location.href="/LoaiPhim/index";
+    //               },500);
+    //             },
+    //             error:function(jqXhr,textStatus,errorThrown)
+    //             {
+    //                 alert("Thêm thất bại");
+    //             }
+    //         });
+    //     });
+        
+    //     $('.ad_button-delete').click(function(e)
+    //     {
+    //         var a=$(this).attr('data-index');
+    //         console.log("click vao xoa thanh cong"+a);
+    //         $.ajax({
+    //             url:"/LoaiPhim/delete",
+    //             method:"GET",
+    //             dataType:"JSON",
+    //             data:{
+    //                 id:a
+    //             },success:function(data)
+    //             {
+    //                 console.log("Thanh cong");
+    //             },
+    //             error:function(jqXhr,textStatus,errorThrown)
+    //             {
+    //                 console.log("that bai");
+    //             }
+    //         });
+    //     });
+    // });
+</script>
