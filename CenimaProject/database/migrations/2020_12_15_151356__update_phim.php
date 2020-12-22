@@ -16,8 +16,11 @@ class UpdatePhim extends Migration
         //
         Schema::table('phims', function (Blueprint $table) {
            
+            $table->string('Trailer');
+            $table->string('Blog')->blob();
             $table->integer('quocgia_id')->unsigned();
             $table->foreign('quocgia_id')->references('id')->on('quoc_gias')->onDelete('cascade');
+
 
             // $table->integer('daodien_id')->unsigned();
             // $table->foreign('daodien_id')->references('id')->on('dao_diens');

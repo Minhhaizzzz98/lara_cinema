@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{csrf_token()}}">
     <link rel="shortcut icon"  href="{{asset('img/clapperboard.svg')}}"/>
     <title>Quản lý rạp chiếu phim</title>
 
@@ -120,8 +121,24 @@
             <li class="nav-item">
                 <a class="nav-link" href="/phim/index">
                         <i class="fas fa-film"></i>
-                        <span>Film</span></a>
-                </li>
+                        <span>Phim</span></a>
+           </li>
+           <li class="nav-item">
+            <a class="nav-link" href="/LoaiPhim/index">
+                    <i class="fas fa-film"></i>
+                    <span>Thể loại</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/DienVien/index">
+                       <i class="fas fa-user-friends"></i>
+                        <span>Diễn viên</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/GioiHanTuoi/index">
+                    <i class="fas fa-baby"></i>
+                     <span>Giới hạn tuổi</span></a>
+            </li>
+   
             <!-- Divider -->
 
 
