@@ -17,12 +17,9 @@ class PhimController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        
-        $list['phims']= Phim::paginate(5);
-        session()->flush();
-        return view ('manage.phim.index',$list);
-
+    {    
+        $list['phims']= Phim::where('TrangThai',1)->paginate(5);
+        return view('manage.phim.index')->with($list);
     }
 
     /**
@@ -49,7 +46,11 @@ class PhimController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
+    public function get()
+    {
+        $data= Phim::where('TrangThai',1)->get();
+        return json_encode($data);
+    }
     public function store(Request $request)
     {
         //
@@ -72,29 +73,32 @@ class PhimController extends Controller
             'NgayKetThuc' => 'required',
             'ThoiLuong' => 'required',
             'HinhAnh' => 'required',
+            'GiaPhim' => 'required',
             'DaoDien'=>'required|min:5|max:255',
+            'QuocGia'=>'required|min:2|max:255',
+            'GioiHanTuoi'=>'required|min:2|max:255',
+            'Trailer'=>'required|min:2|max:255',
+
         ],$arr_validate);
-      
-        $gioihantuoi = GioiHanTuoi::where('TenGioiHan',$request->GioiHanTuoi)->first();
-        $quocgia = QuocGia::where('TenQuocGia',$request->QuocGia)->first();
+    
   
         $phim = new Phim();
         $phim->TenPhim = $request->TenPhim;
         $phim->NgayDKChieu= $request->NgayDKChieu;
         $phim->NgayKetThuc=$request->NgayKetThuc;
         $phim->ThoiLuong=$request->ThoiLuong;
-        $phim->gioihantuoi_id = $gioihantuoi->id;
+        $phim->GioiHanTuoi= $request->GioiHanTuoi;
         $phim->DaoDien= $request->DaoDien;
-        $phim->quocgia_id = $quocgia->id;
-        $phim->HinhAnh="http://localhost:8000/data/".$request->HinhAnh;
-        
+        $phim->QuocGia = $request->QuocGia;
+        $phim->GiaPhim=$request->GiaPhim;
+        $temp= substr($request->HinhAnh, 12);  
+        $phim->Trailer= $request->Trailer;
+        $phim->HinhAnh="http://localhost:8000/data/".$temp;     
         $flag=$phim->save();
-        $id=$phim->id;
-        $request->session()->put('id_phim_new', $id);
-        $data= LoaiPhim::all();
+        $data= Phim::where('TrangThai',1)->get();
 
         if($flag){
-            return view('manage.phim.add_theloai_phim')->with('loaiphim',$data);
+            return json_encode($data);
         }
         else
         {
@@ -129,11 +133,7 @@ class PhimController extends Controller
                 return view('manage.phim.create');
             }
     }
-     
-       
     
-    
-
     /**
      * Display the specified resource.
      *
@@ -143,24 +143,20 @@ class PhimController extends Controller
     public function show($id)
     {
         //
-        $phim = Phim::where('id', $id)->with('quocgias','dienviens','gioihantuoi')->get()->first();
-
-
-        // return $phim;
-        return view('manage.phim.details')->with('phim',$phim);
+        $phim = Phim::find($id);
+        return response()->json($phim);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response  $request
      */
     public function edit($id)
     {
-        //
+
         $phim=Phim::find($id);
-        return view('manage.phim.edit')->with('phim',$phim);
+        return response()->json($phim);
     }
 
     /**
@@ -192,20 +188,31 @@ class PhimController extends Controller
             'NgayKetThuc' => 'required',
             'ThoiLuong' => 'required',
             'HinhAnh' => 'required',
+            'GiaPhim' => 'required',
             'DaoDien'=>'required|min:5|max:255',
+            'QuocGia'=>'required|min:2|max:255',
+            'GioiHanTuoi'=>'required|min:2|max:255',
+            'Trailer'=>'required|min:2|max:255',
+
         ],$arr_validate);
-    
+  
         $phim = Phim::find($id);
         $phim->TenPhim = $request->TenPhim;
         $phim->NgayDKChieu= $request->NgayDKChieu;
         $phim->NgayKetThuc=$request->NgayKetThuc;
         $phim->ThoiLuong=$request->ThoiLuong;
-        $phim->HinhAnh="http://localhost:8000/data/".$request->HinhAnh;
-        
-        $flag=$phim->save();
+        $phim->GioiHanTuoi= $request->GioiHanTuoi;
+        $phim->DaoDien= $request->DaoDien;
+        $phim->QuocGia = $request->QuocGia;
+        $phim->GiaPhim=$request->GiaPhim;
+        $temp= substr($request->HinhAnh, 12);  
+        $phim->Trailer= $request->Trailer;
+        $phim->HinhAnh="http://localhost:8000/data/".$temp;     
+        $flag= $phim->save();
+        $data= Phim::where('TrangThai',1)->get();
 
         if($flag){
-            return redirect('/phim/index');
+            return json_encode($data);
         }
         else
         {
@@ -226,6 +233,6 @@ class PhimController extends Controller
         $phim= Phim::find($id);
         $phim->TrangThai=0;
         $flag=$phim->save();    
-        return redirect('/phim/index');
+        return json_encode($phim);
     }
 }

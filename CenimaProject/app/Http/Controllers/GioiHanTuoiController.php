@@ -54,8 +54,9 @@ class GioiHanTuoiController extends Controller
         $gioihan = new GioiHanTuoi();
         $gioihan->TenGioiHan = $request->TenGioiHan;
         $flag = $gioihan->save();
+        $data = GioiHanTuoi::where('TrangThai',1)->get();
         if($flag){
-            return redirect('/GioiHanTuoi/index');
+            return json_encode($data);
         }
         else
         {
@@ -73,9 +74,6 @@ class GioiHanTuoiController extends Controller
     {
         //
         $gioihan = GioiHanTuoi::find($id);
-
-
-        // return $phim;
         return view('manage.GioiHanTuoi.details')->with('dienvien',$gioihan);
     }
 
@@ -88,7 +86,7 @@ class GioiHanTuoiController extends Controller
     public function edit($id)
     {
         $GioiHanTuoi = GioiHanTuoi::find($id);
-        return view('manage.GioiHanTuoi.edit')->with('gioihantuoi',$GioiHanTuoi);
+        return response()->json($GioiHanTuoi);
     }
 
     /**
@@ -115,8 +113,9 @@ class GioiHanTuoiController extends Controller
         $gioihan = GioiHanTuoi::find($id);
         $gioihan->TenGioiHan = $request->TenGioiHan;
         $flag = $gioihan->save();
+        $data = GioiHanTuoi::where('TrangThai',1)->get();
         if($flag){
-            return redirect('/GioiHanTuoi/index');
+            return json_encode($data);
         }
         else
         {
@@ -136,6 +135,7 @@ class GioiHanTuoiController extends Controller
         $GioiHanTuoi = GioiHanTuoi::find($id);
         $GioiHanTuoi->TrangThai=0;
         $GioiHanTuoi->save();
-        return redirect('/GioiHanTuoi/index');
+        $data = GioiHanTuoi::where('TrangThai',1)->get();
+        return json_encode($data);
     }
 }

@@ -7,7 +7,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5  class="modal-title" id="exampleModalLongTitle">Thêm thể loại phim</h5>
+          <h5  class="modal-title" id="exampleModalLongTitle">Thêm loại TG chiếu</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -15,12 +15,16 @@
         <div class="modal-body">
          <form  id="form-add" >
           @csrf
-          @method('POST')
              <div class="form-group">
-                    <label class="text-dark">Tên thể loại </label>
-                    <input id="TenTheLoai" type="text" name="TenLoaiPhim" class="form-control form-control-user" >
-                    <p class="text-danger">{{ $errors->first('TenLoaiPhim') }}</p>
+                    <label class="text-dark">Tên loại TG chiếu</label>
+                    <input id="TenLoaiTGChieu" type="text" name="TenLoaiTGChieu" class="form-control form-control-user" >
+                    <p class="text-danger">{{ $errors->first('TenLoaiTGChieu') }}</p>
              </div>
+             <div class="form-group">
+                <label class="text-dark">Giá TG chiếu</label>
+                <input id="GiaTGChieu" type="number" name="GiaTGChieu" class="form-control form-control-user" >
+                <p class="text-danger">{{ $errors->first('GiaTGChieu') }}</p>
+         </div>
              <button type="submit" id="add-data" class="btn btn-primary">Thêm mới</button>
          </form>
          <div class="alert alert-success" style="display: none"></div>
@@ -36,7 +40,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5  class="modal-title" id="exampleModalLongTitle">Chỉnh sửa thể loại thể loại</h5>
+          <h5  class="modal-title" id="exampleModalLongTitle">Chỉnh sửa loại TG chiếu</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -45,14 +49,19 @@
          <form  id="form-edit">
              @csrf
              <div class="form-group">
-                    <label class="text-dark" for="id">Mã thể loại</label>
-                    <input disabled=true type="text" id="id" name="id" class="form-control form-control-user">
+                    <label class="text-dark" for="id">Mã loại</label>
+                    <input disabled=true type="text" id="eid" name="eid" class="form-control form-control-user">
              </div>
              <div class="form-group">
-                    <label class="text-dark" for="TenLoaiPhim">Tên thể loại </label>
-                    <input type="text" id="TenLoaiPhim" name="TenLoaiPhim" class="form-control form-control-user">
-                    <p class="text-danger">{{ $errors->first('TenLoaiPhim') }}</p>
+                    <label class="text-dark" for="TenLoaiPhim">Tên loại TG chiếu</label>
+                    <input type="text" id="editTenLoaiTGChieu" name="editTenLoaiTGChieu" class="form-control form-control-user">
+                    <p class="text-danger">{{ $errors->first('TenLoaiTGChieu') }}</p>
              </div>
+             <div class="form-group">
+                <label class="text-dark" for="TenLoaiPhim">Giá TG chiếu</label>
+                <input type="number" id="editGiaTGChieu" name="editGiaTGChieu" class="form-control form-control-user">
+                <p class="text-danger">{{ $errors->first('GiaTGChieu') }}</p>
+         </div>
              <button type="submit" id="edit-data" class="btn btn-primary">Lưu lại</button>
          </form>
         </div>
@@ -66,7 +75,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h2 mb-2 text-center text-primary">QUẢN LÝ THỂ LOẠI PHIM</h1>
+    <h1 class="h2 mb-2 text-center text-primary">QUẢN LÝ LOẠI THỜI GIAN CHIẾU</h1>
 
     <button data-toggle="modal" data-target="#add" class="btn btn-primary"><i class="fa fa-film" aria-hidden="true"> Thêm mới</i></button>
 
@@ -79,8 +88,8 @@
                     <thead>
                         <tr>
                             <th>Mã loại</th>
-                            <th>Tên thể loại</th>
-                            <th>Trạng thái</th>
+                            <th>Tên loại TG chiếu</th>
+                            <th>Giá TG chiếu</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>               
@@ -88,21 +97,11 @@
                         @foreach ($list as $item)
                             <tr id="sid{{$item->id}}">
                                 <td>{{ $item->id }}</td>
-                                <td>{{$item->TenLoaiPhim}}</td>
-                                <td>
-                                    @php
-                                    if($item->TrangThai==1){
-                                     echo'Sử dụng';
-                                    }
-                                    else{
-                                        echo'Đã loại bỏ';
-                                       }
-                                   @endphp
-                                </td>
-                                   
+                                <td>{{$item->TenLoaiTGChieu}}</td>
+                                <td>{{$item->Gia_TG}}</td>     
                                  <td>
-                                     <a href="javascript:void(0)" data-toggle="modal" onclick="suaLoaiPhim({{$item->id}})" data-target="#edit" class="btn btn-info" type="submit">Chỉnh sửa</a>|
-                                     <a href="javascript:void(0)"  class="btn btn-danger" onclick="xoaLoaiPhim({{$item->id}})" >Xóa thể loại</a>
+                                     <a href="javascript:void(0)" data-toggle="modal" onclick="suaLoaiTG({{$item->id}})" data-target="#edit" class="btn btn-info" type="submit">Chỉnh sửa</a>|
+                                     <a href="javascript:void(0)"  class="btn btn-danger" onclick="xoaLoaiTG({{$item->id}})" >Xóa loại TG</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -123,7 +122,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 
 
-{{-- Thêm thể loại phim --}}
+{{-- Thêm loại TG chiếu--}}
 <script>
 
    $(document).ready(function(){
@@ -132,30 +131,28 @@
 
                   e.preventDefault();
                   e.stopImmediatePropagation();
-                  var TenTheLoai= $("input[name=TenLoaiPhim]").val();
+                  var TenLoaiTGChieu= $("input[name=TenLoaiTGChieu]").val();
+                  var GiaTGChieu= $("input[name=GiaTGChieu]").val();
                   var token= $("input[name=_token]").val();
 
                   $.ajax({
                         type:'POST',
-                        url:"{{route('LoaiPhim.add')}}",
-                        data:$("#form-add").serialize(),
+                        url:"{{route('LoaiTGChieu.add')}}",
+                        data:{
+                            TenLoaiTGChieu:TenLoaiTGChieu,
+                            Gia_TG:GiaTGChieu,
+                            _token:token
+                        },
                         success:function(response){    
                           var array=JSON.parse(response);               
                           var string="";
                           $("#add").modal('hide');
                           for(let i =0; i<array.length;i++)
                           {
-                            string+="<tr id='sid"+array[i].id +"'"+"><td>"+array[i].id+"</td>"+"<td>"+array[i].TenLoaiPhim+"</td>";
-                            if(array[i].TrangThai==1)
-                            {
-                              string+="<td>"+"Đang sử dụng"+"</td>"
-                            }
-                            else
-                            { 
-                              string+="<td>"+"Không sử dụng"+"</td>"
-                            }
-                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaLoaiPhim('"+array[i].id+"')"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
-                            string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaLoaiPhim("+array[i].id+")'"+">Xóa thể loại</a>"+"</td></tr>"
+                            string+="<tr id='sid"+array[i].id +"'"+"><td>"+array[i].id+"</td>"+"<td>"+array[i].TenLoaiTGChieu+"</td>";
+                            string+="<td>"+array[i].Gia_TG+"</td>";
+                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaLoaiTG('"+array[i].id+"')"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
+                            string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaLoaiTG("+array[i].id+")'"+">Xóa loại TG</a>"+"</td></tr>"
                           }
                             $(".modal-backdrop").remove();
                             $("#body").html(string);
@@ -173,16 +170,16 @@
 </script>
 
 
-{{-- Xóa thể loại phim --}}
+{{-- Xóa loại TG Chiếu --}}
 <script>
-   function xoaLoaiPhim(id)
+   function xoaLoaiTG(id)
    {
 
       if(confirm('Bạn có chắc muốn xóa không'))
       {
         var _token = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
-          url:"/LoaiPhim/delete/"+id,
+          url:"/LoaiTGChieu/delete/"+id,
           type:'GET',
           data:{
               _token:_token,
@@ -203,11 +200,12 @@
 {{-- Chỉnh sửa thể loại phim --}}
 <script>
 
-    function suaLoaiPhim(id)
+    function suaLoaiTG(id)
     { 
-      $.get('/LoaiPhim/edit/'+id, function(LoaiPhim){  
-        $("#id").val(LoaiPhim.id); 
-        $("#TenLoaiPhim").val(LoaiPhim.TenLoaiPhim);
+      $.get('/LoaiTGChieu/edit/'+id, function(LoaiTGChieu){  
+        $("#eid").val(LoaiTGChieu.id); 
+        $("#editTenLoaiTGChieu").val(LoaiTGChieu.TenLoaiTGChieu);
+        $("#editGiaTGChieu").val(LoaiTGChieu.Gia_TG);
         $("#edit").modal("toggle");
       });
     } 
@@ -215,43 +213,39 @@
     $(document).ready(function(){
         $('#form-edit').on('submit',function(e){
               e.preventDefault();
-              var id= $("#id").val();
+              e.stopImmediatePropagation();
+              var id= $("#eid").val();
+              var TenLoaiTGChieu= $("input[name=editTenLoaiTGChieu]").val();
+              var GiaTGChieu= $("input[name=editGiaTGChieu]").val();
+              var token= $("input[name=_token]").val();
             
              $.ajax({
                     type:'POST',
-                    url:"/LoaiPhim/update/"+id,
-                    data: $("#form-edit").serialize(),
-                    success:function(response){       
-                      
-                      var array=JSON.parse(response);
-                      
-                      var string="";
-   
-                      $("#edit").modal('hide');
+                    url:"/LoaiTGChieu/update/"+id,
+                    data:{
+                           TenLoaiTGChieu:TenLoaiTGChieu,
+                            Gia_TG:GiaTGChieu,
+                           _token:token,
+                    },
 
-                      for(let i =0; i<array.length;i++)
-                      {
-                          string+="<tr id='sid"+array[i].id +"'"+"><td>"+array[i].id+"</td>"+"<td>"+array[i].TenLoaiPhim+"</td>";
-                          if(array[i].TrangThai==1)
+                    success:function(response){                
+                         var array=JSON.parse(response);               
+                          var string="";
+                          $("#edit").modal('hide');
+                          for(let i =0; i<array.length;i++)
                           {
-                            string+="<td>"+"Đang sử dụng"+"</td>"
+                            string+="<tr id='sid"+array[i].id +"'"+"><td>"+array[i].id+"</td>"+"<td>"+array[i].TenLoaiTGChieu+"</td>";
+                            string+="<td>"+array[i].Gia_TG+"</td>";
+                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaLoaiTG('"+array[i].id+"')"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
+                            string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaLoaiTG("+array[i].id+")'"+">Xóa thể loại</a>"+"</td></tr>"
                           }
-                          else
-                          { 
-                            string+="<td>"+"Không sử dụng"+"</td>"
-                          }
-                          string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaLoaiPhim('"+array[i].id+"')"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
-                          string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaLoaiPhim("+array[i].id+")'"+">Xóa thể loại</a>"+"</td></tr>"
-                      }
-                      $(".modal-backdrop").remove();
-                      $("#body").html(string);
-                      
+                            $(".modal-backdrop").remove();
+                            $("#body").html(string);          
                     },
                     error: function(error){
                       alert("Cập nhật thất bại");
                     }    
                 });
-
           });
       });
     
