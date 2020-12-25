@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ChiNhanh extends Model
+class Rap extends Model
 {
     public $timestamp = false;
-    protected $table = 'chi_nhanhs';
+    protected $table = 'raps';
     protected $primaryKey = 'id';
     protected $fillable = [
         'TenRap', 'DiaChi', 'SDT', 'TrangThai'
     ];
-    public function raps()
+    public function phongs()
     {
         return $this->hasMany('App\Rap', 'chinhanh_id', 'id');
     }

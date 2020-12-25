@@ -15,18 +15,15 @@ class CreatePhims extends Migration
         Schema::create('phims', function (Blueprint $table) {
             $table->increments('id');
             $table->string('TenPhim')->nullable(false);
-            $table->datetime('NgayDKChieu');
-            $table->datetime('NgayKetThuc');
+            $table->date('NgayDKChieu');
+            $table->date('NgayKetThuc');
             $table->integer('ThoiLuong');
             $table->string('HinhAnh');
+            $table->string('Trailer');
             $table->string('DaoDien');
-            $table->double('Gia');
-            $table->unsignedBigInteger('gioihantuoi_id');
-            $table->foreign('gioihantuoi_id')->references('id')->on('gioi_han_tuoi')->onDelete('cascade');;
-
-            // $table->integer('daodien_id')->unsigned();
-            // $table->foreign('daodien_id')->references('id')->on('dao_diens');
-            
+            $table->string('QuocGia');
+            $table->string('GioiHanTuoi');
+            $table->double('GiaPhim'); 
             $table->integer('TrangThai')->default(1);
             $table->timestamps();
         });
