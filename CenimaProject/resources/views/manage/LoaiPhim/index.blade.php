@@ -154,7 +154,7 @@
                             { 
                               string+="<td>"+"Không sử dụng"+"</td>"
                             }
-                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaLoaiPhim('"+array[i].id+"')"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
+                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaLoaiPhim("+array[i].id+")'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
                             string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaLoaiPhim("+array[i].id+")'"+">Xóa thể loại</a>"+"</td></tr>"
                           }
                             $(".modal-backdrop").remove();
@@ -177,7 +177,6 @@
 <script>
    function xoaLoaiPhim(id)
    {
-
       if(confirm('Bạn có chắc muốn xóa không'))
       {
         var _token = $('meta[name="csrf-token"]').attr('content');

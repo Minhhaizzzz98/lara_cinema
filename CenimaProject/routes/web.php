@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PhimDienVienController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,6 +38,24 @@ Route::resource('employees', 'Admin\NhanVienController');
 Route::resource('positions', 'Admin\ChucVuController');
 
 
+Route::group(['prefix' => 'SuatChieu'], function() {
+    Route::get('/index','SuatChieuController@index')->name('SuatChieu.index');
+    Route::get('/create','SuatChieuController@create');
+    Route::post('/create','SuatChieuController@store')->name('SuatChieu.add');
+    Route::get('/edit/{id}','SuatChieuController@edit');
+    Route::get('/get','SuatChieuController@get');
+    Route::post('/update/{id}','SuatChieuController@update');
+    Route::get('/delete/{id}','SuatChieuController@destroy');
+});
+
+Route::group(['prefix' => 'Phim_DienVien'], function() {
+    Route::get('/index','Phim_DienVienController@index')->name('Phim_DienVien.index');
+    Route::get('/create','Phim_DienVienController@create');
+    Route::post('/create','Phim_DienVienController@store')->name('Phim_DienVien.add');
+    Route::get('/edit/{id}','Phim_DienVienController@edit');
+    Route::post('/update/{id}','Phim_DienVienController@update');
+    Route::get('/delete/{id}','Phim_DienVienController@destroy');
+});
 
 Route::group(['prefix' => 'Phim'], function() {
     Route::get('/index','PhimController@index');
@@ -59,6 +77,20 @@ Route::group(['prefix' => 'LoaiPhim'], function() {
     Route::post('/update/{id}','LoaiPhimController@update');
     Route::get('/delete/{id}','LoaiPhimController@destroy');
 });
+
+Route::group(['prefix' => 'GioChieu'], function() {
+    Route::get('/index','GioChieuController@index')->name('GioChieu.index');
+    Route::get('/create','GioChieuController@create');
+    Route::post('/create','GioChieuController@store')->name('GioChieu.add');
+    Route::get('/edit/{id}','GioChieuController@edit');
+    Route::get('/get','GioChieuController@get');
+    Route::get('/getGioChieuID/{id}','GioChieuController@getGioChieuID');
+    Route::get('/getGioChieu','GioChieuController@getGioChieu');
+    Route::post('/update/{id}','GioChieuController@update');
+    Route::get('/delete/{id}','GioChieuController@destroy');
+});
+
+
 
 Route::group(['prefix' => 'LoaiTGChieu'], function() {
     Route::get('/index','LoaiTGChieuController@index')->name('LoaiTGChieu.index');

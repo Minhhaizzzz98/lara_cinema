@@ -129,9 +129,20 @@
                     <span>Thể loại</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/DienVien/index">
+                <a class="nav-link" href="/Phim_DienVien/index">
                        <i class="fas fa-user-friends"></i>
                         <span>Diễn viên phim</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/SuatChieu/index">
+                    <i class="fas fa-ticket-alt"></i>
+                <span>Suất chiếu</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/GioChieu/index">
+                <i class="fas fa-stopwatch"></i>
+                <span>Giờ chiếu</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/LoaiTGChieu/index">

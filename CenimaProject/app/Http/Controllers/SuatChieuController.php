@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\SuatChieu;
 
-class DienVienController extends Controller
+class SuatChieuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,6 +15,8 @@ class DienVienController extends Controller
     public function index()
     {
         //
+        $data = SuatChieu::with('phim','giochieu')->where('TrangThai',1)->get();
+        return view('manage.SuatChieu.index')->with('list',$data);
     }
 
     /**
@@ -35,6 +38,20 @@ class DienVienController extends Controller
     public function store(Request $request)
     {
         //
+        $sc = new SuatChieu();
+        $sc->phim_id = $request->Phim;
+        $sc->giochieu_id = $request->GioChieu;
+        $sc->NgayChieu = $request->NgayChieu;
+        $sc->GiaSuatChieu=0;
+        $flag = $sc->save();
+
+        $data = SuatChieu::with('phim','giochieu')->where('TrangThai',1)->get();
+        if($flag)
+        {
+            return json_encode($data);
+        }
+
+
     }
 
     /**
@@ -57,6 +74,8 @@ class DienVienController extends Controller
     public function edit($id)
     {
         //
+        $data = SuatChieu::find($id);
+        return response()->json($data);
     }
 
     /**
@@ -69,6 +88,18 @@ class DienVienController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $sc = SuatChieu::find($id);
+        $sc->phim_id = $request->Phim;
+        $sc->giochieu_id = $request->GioChieu;
+        $sc->NgayChieu = $request->NgayChieu;
+        $sc->GiaSuatChieu=0;
+        $flag = $sc->save();
+
+        $data = SuatChieu::with('phim','giochieu')->where('TrangThai',1)->get();
+        if($flag)
+        {
+            return json_encode($data);
+        }
     }
 
     /**
@@ -80,5 +111,9 @@ class DienVienController extends Controller
     public function destroy($id)
     {
         //
+        $sc = SuatChieu::find($id);
+        $sc->TrangThai=0;
+        $sc->save();
+        return response()->json($sc);
     }
 }
