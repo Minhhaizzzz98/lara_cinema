@@ -81,6 +81,34 @@ Route::group(['prefix' => 'DienVien'], function() {
 
 
 
+//ghe
+Route::group(['prefix' => 'ghe'], function() {
+    Route::get('/','GheController@index');
+    Route::get('/index','GheController@index');
+    Route::get('/create','GheController@create');  
+    Route::post('/create','GheController@store');
+    Route::get('/details/{id}','GheController@show');
+    Route::get('/edit/{id}','GheController@edit');
+    Route::post('/update/{id}','GheController@update');
+    Route::get('/delete/{id}','GheController@destroy');
+    Route::get('/inactive/{id}','GheController@inactive');
+    Route::get('/active/{id}','GheController@active');
+    
+});
+//phong
+Route::group(['prefix' => 'phong'], function() {
+    Route::get('/','PhongController@index');
+    Route::get('/index','PhongController@index');
+    Route::get('/create','PhongController@create');  
+    Route::post('/create','PhongController@store');
+    Route::get('/details/{id}','PhongController@show');
+    Route::get('/edit/{id}','PhongController@edit');
+    Route::post('/update/{id}','PhongController@update');
+    Route::get('/delete/{id}','PhongController@destroy');
+    Route::get('/inactive/{id}','PhongController@inactive');
+    Route::get('/active/{id}','PhongController@active');
+    
+});
 //rap
 Route::group(['prefix' => 'rap'], function() {
     Route::get('/','RapController@index');
@@ -94,19 +122,3 @@ Route::group(['prefix' => 'rap'], function() {
     Route::get('/inactive/{id}','RapController@inactive');
     Route::get('/active/{id}','RapController@active');
 });
-
-//chi nhanh
-Route::group(['prefix' => 'chinhanh'], function() {
-    Route::get('/','ChiNhanhController@index');
-    Route::get('/index','ChiNhanhController@index');
-    Route::get('/create','ChiNhanhController@create');  
-    Route::post('/create','ChiNhanhController@store');
-    Route::get('/details/{id}','ChiNhanhController@show');
-    Route::get('/edit/{id}','ChiNhanhController@edit');
-    Route::post('/update/{id}','ChiNhanhController@update');
-    Route::get('/delete/{id}','ChiNhanhController@destroy');
-    Route::get('/inactive/{id}','ChiNhanhController@inactive');
-    Route::get('/active/{id}','ChiNhanhController@active');
-    
-});
-

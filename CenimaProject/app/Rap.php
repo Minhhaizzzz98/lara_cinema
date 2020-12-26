@@ -6,24 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rap extends Model
 {
+    public $timestamp = false;
     protected $table = 'raps';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'TenRap', 'chinhanh_id', 'TrangThai'
+        'TenRap', 'DiaChi', 'SDT','TrangThai'
     ];
 
+
+    public function phongs()
+    {
+        return $this->hasMany('App\Phong', 'rap_id', 'id');
+    }
     
-   
-    public function lichchieus()
-    {
-        return $this->hasMany('App\LichChieu', 'phim_id', 'id');
-    }
-    public function ghes()
-    {
-        return $this->hasMany('App\Ghe', 'rap_id', 'id');
-    }
-    public function chinhanh()
-    {
-        return $this->belongsTo('App\ChiNhanh', 'chinhanh_id', 'id');
-    }
 }
