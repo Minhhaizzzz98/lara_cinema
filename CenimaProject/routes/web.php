@@ -39,10 +39,11 @@ Route::resource('positions', 'Admin\ChucVuController');
 
 
 
-Route::group(['prefix' => 'phim'], function() {
+Route::group(['prefix' => 'Phim'], function() {
     Route::get('/index','PhimController@index');
     Route::get('/create','PhimController@create');  
-    Route::post('/create','PhimController@store');
+    Route::get('/get','PhimController@get');  
+    Route::post('/create','PhimController@store')->name('Phim.add');
     Route::get('/details/{id}','PhimController@show');
     Route::post('/create/add_theloai/{id}','PhimController@add_theloai');
     Route::get('/edit/{id}','PhimController@edit');
@@ -51,14 +52,22 @@ Route::group(['prefix' => 'phim'], function() {
 });
 
 Route::group(['prefix' => 'LoaiPhim'], function() {
-    Route::get('/index','LoaiPhimController@index');
+    Route::get('/index','LoaiPhimController@index')->name('LoaiPhim.index');
     Route::get('/create','LoaiPhimController@create');
-    Route::post('/create','LoaiPhimController@store');
+    Route::post('/create','LoaiPhimController@store')->name('LoaiPhim.add');
     Route::get('/edit/{id}','LoaiPhimController@edit');
     Route::post('/update/{id}','LoaiPhimController@update');
     Route::get('/delete/{id}','LoaiPhimController@destroy');
 });
 
+Route::group(['prefix' => 'LoaiTGChieu'], function() {
+    Route::get('/index','LoaiTGChieuController@index')->name('LoaiTGChieu.index');
+    Route::get('/create','LoaiTGChieuController@create');
+    Route::post('/create','LoaiTGChieuController@store')->name('LoaiTGChieu.add');
+    Route::get('/edit/{id}','LoaiTGChieuController@edit');
+    Route::post('/update/{id}','LoaiTGChieuController@update');
+    Route::get('/delete/{id}','LoaiTGChieuController@destroy');
+});
 
 Route::group(['prefix' => 'DienVien'], function() {
     Route::get('/index','DienVienController@index');
@@ -68,14 +77,7 @@ Route::group(['prefix' => 'DienVien'], function() {
     Route::post('/update/{id}','DienVienController@update');
     Route::get('/delete/{id}','DienVienController@destroy');
 });
-Route::group(['prefix' => 'GioiHanTuoi'], function() {
-    Route::get('/index','GioiHanTuoiController@index');
-    Route::get('/create','GioiHanTuoiController@create');
-    Route::post('/create','GioiHanTuoiController@store');
-    Route::get('/edit/{id}','GioiHanTuoiController@edit');
-    Route::post('/update/{id}','GioiHanTuoiController@update');
-    Route::get('/delete/{id}','GioiHanTuoiController@destroy');
-});
+
 
 
 
