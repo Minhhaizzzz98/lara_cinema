@@ -13,5 +13,9 @@ class LoaiTGChieu extends Model
     protected $fillable = [
         'TenLoaiTGChieu', 'Gia_TG','TrangThai'
     ];
+
+    public function giochieu() {
+        return $this->hasMany('App\GioChieu', 'loaitgchieu_id', 'id');
+    }
    
 }

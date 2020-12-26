@@ -129,16 +129,11 @@
                     <span>Thể loại</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/DienVien/index">
-
-                    <i class="fas fa-user-friends"></i>
-                    <span>Diễn viên</span></a>
+                <a class="nav-link" href="/Phim_DienVien/index">
+                  <i class="fas fa-user-friends"></i>
+                  <span>Diễn viên</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/GioiHanTuoi/index">
-                    <i class="fas fa-baby"></i>
-                    <span>Giới hạn tuổi</span></a>
-            </li>
+           
             <li class="nav-item">
                 <a class="nav-link" href="{{url('/ghe/')}}">
                     <i class="fas fa-chair"></i>
@@ -153,10 +148,20 @@
                 <a class="nav-link" href="{{url('/rap/')}}">
                     <i class="fas fa-home"></i>
                     <span>Rạp</span></a>
+            </li class="nav-item">
+                   <i class="fas fa-user-friends"></i>
+                   <span>Diễn viên phim</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/SuatChieu/index">
+                    <i class="fas fa-ticket-alt"></i>
+                <span>Suất chiếu</span></a>
             </li>
 
-                       <i class="fas fa-user-friends"></i>
-                        <span>Diễn viên phim</span></a>
+            <li class="nav-item">
+                <a class="nav-link" href="/GioChieu/index">
+                <i class="fas fa-stopwatch"></i>
+                <span>Giờ chiếu</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/LoaiTGChieu/index">

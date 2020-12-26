@@ -20,6 +20,7 @@ class CreatePhimDienvien extends Migration
 
             $table->foreign('phim_id')->references('id')->on('phims')->onDelete('cascade');
             $table->foreign('dienvien_id')->references('id')->on('dien_viens')->onDelete('cascade');
+            $table->integer('TrangThai')->default(1);
             $table->timestamps();
         });
     }

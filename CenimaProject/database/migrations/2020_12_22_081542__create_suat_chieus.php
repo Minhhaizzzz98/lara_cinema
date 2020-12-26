@@ -17,8 +17,6 @@ class CreateSuatChieus extends Migration
             $table->increments('id');
             $table->integer('phim_id')->unsigned();
             $table->foreign('phim_id')->references('id')->on('phims');
-            $table->integer('phong_id')->unsigned();
-            $table->foreign('phong_id')->references('id')->on('phongs');
             $table->integer('giochieu_id')->unsigned();
             $table->foreign('giochieu_id')->references('id')->on('gio_chieus');
             $table->double('GiaSuatChieu');
