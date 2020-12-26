@@ -122,16 +122,35 @@
                 <a class="nav-link" href="/Phim/index">
                         <i class="fas fa-film"></i>
                         <span>Phim</span></a>
-           </li>
-           <li class="nav-item">
+            </li>
+            <li class="nav-item">
             <a class="nav-link" href="/LoaiPhim/index">
                     <i class="fas fa-film"></i>
                     <span>Thể loại</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/Phim_DienVien/index">
-                       <i class="fas fa-user-friends"></i>
-                        <span>Diễn viên phim</span></a>
+                  <i class="fas fa-user-friends"></i>
+                  <span>Diễn viên</span></a>
+            </li>
+           
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('/ghe/')}}">
+                    <i class="fas fa-chair"></i>
+                    <span>Ghế</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('/phong/')}}">
+                    <i class="fas fa-table"></i>
+                    <span>Phòng</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('/rap/')}}">
+                    <i class="fas fa-home"></i>
+                    <span>Rạp</span></a>
+            </li class="nav-item">
+                   <i class="fas fa-user-friends"></i>
+                   <span>Diễn viên phim</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/SuatChieu/index">
@@ -151,6 +170,7 @@
             </li>
         
    
+
             <!-- Divider -->
 
 

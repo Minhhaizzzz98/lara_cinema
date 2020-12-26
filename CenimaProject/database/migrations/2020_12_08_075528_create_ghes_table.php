@@ -18,6 +18,8 @@ class CreateGhesTable extends Migration
             $table->integer('phong_id')->unsigned();
             $table->foreign('phong_id')->references('id')->on('phongs');
             $table->double('GiaGhe');
+            $table->string('Day');
+            $table->integer('sort');
             $table->integer('TrangThai')->default(1);
             $table->timestamps();
         });

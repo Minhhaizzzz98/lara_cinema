@@ -13,20 +13,16 @@
                     {{ csrf_field() }}
                       <div class="form-group">
                         <label class="text-dark" for="TenRap">Tên rạp </label>
-                        <input type="text" name="TenRap" class="form-control form-control-user" id="exampleFirstName"  value="{{$data->TenRap}}">
+                        <input type="text" name="TenRap" class="form-control form-control-user" id="exampleFirstName" value="{{$data->TenRap}}">
                         <p class="text-danger">{{ $errors->first('TenRap') }}</p>
 
-                        <label class="text-dark" for="TenRap">Chọn chi nhánh: </label>
-                        
-                        <select class="form-control" id="exampleFirstName" name="chinhanh_id" >
-                            @foreach ($list as $item)
-                            @if($item->id == $data->chinhanh_id)
-                              <option value="{{$item->id}}" selected>{{$item->TenChiNhanh}} </option>
-                            @else
-                              <option value="{{$item->id}}" >{{$item->TenChiNhanh}} </option>
-                            @endif
-                            @endforeach   
-                        </select>
+                        <label class="text-dark" for="DiaChi">Địa chỉ: </label>
+                        <input type="text" name="DiaChi" class="form-control form-control-user" id="exampleFirstName" value="{{$data->DiaChi}}" placeholder="Điền địa chỉ">
+                        <p class="text-danger">{{ $errors->first('DiaChi') }}</p>
+
+                        <label class="text-dark" for="SDT">SĐT: </label>
+                        <input type="text" name="SDT" class="form-control form-control-user" id="exampleFirstName" value="{{$data->SDT}}" placeholder="Điền số điện thoại">
+                        <p class="text-danger">{{ $errors->first('SDT') }}</p>
                       </div>
                       <button class="btn btn-primary btn-user btn-block">Cập nhật</button>
                   </form>
