@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Ghe;
+use App\Phong;
 
-class GheController extends Controller
+class PhongController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class GheController extends Controller
      */
     public function index()
     {
-        $data = Ghe::with('phong')->get();
+        $data = Phong::with('ghes', 'rap')->get();
         return response()->json($data);
     }
 

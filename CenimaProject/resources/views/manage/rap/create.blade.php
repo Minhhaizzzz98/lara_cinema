@@ -12,16 +12,17 @@
                 <form class="user" method="POST" action="{{url('/rap/create')}}">
                   {{ csrf_field() }}
                   <div class="form-group">
-                    <label class="text-dark" for="TenRap">Tên rạp </label>
-                    <input type="text" name="TenRap" class="form-control form-control-user" id="exampleFirstName"  placeholder="Tên rạp">
+                    <label class="text-dark" for="TenRap">Tên rạp: </label>
+                    <input type="text" name="TenRap" class="form-control form-control-user" id="exampleFirstName"  placeholder="Điền tên rạp">
                     <p class="text-danger">{{ $errors->first('TenRap') }}</p>
 
-                    <label class="text-dark" for="ChiNhanh">Chọn chi nhánh: </label>
-                    <select class="form-control" id="exampleFirstName" name="chinhanh_id" >
-                        @foreach ($list as $item)
-                          <option value="{{$item->id}}">{{$item->TenChiNhanh}} </option>
-                        @endforeach   
-                    </select>
+                    <label class="text-dark" for="DiaChi">Địa chỉ: </label>
+                    <input type="text" name="DiaChi" class="form-control form-control-user" id="exampleFirstName"  placeholder="Điền địa chỉ">
+                    <p class="text-danger">{{ $errors->first('DiaChi') }}</p>
+
+                    <label class="text-dark" for="SDT">SĐT: </label>
+                    <input type="text" name="SDT" class="form-control form-control-user" id="exampleFirstName"  placeholder="Điền số điện thoại">
+                    <p class="text-danger">{{ $errors->first('SDT') }}</p>
                   </div>
                   <button class="btn btn-primary btn-user btn-block">Thêm mới</button>
                 </form>

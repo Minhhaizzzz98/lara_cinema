@@ -23,5 +23,10 @@ Route::apiResource('/LoaiPhim', 'Api\LoaiPhimController');
 Route::apiResource('/GioiHanTuoi', 'Api\GioiHanTuoiController');
 
 Route::apiResource('/DienVien', 'Api\DienVienController');
+
+
+//api rạp, phòng, ghế
 Route::apiResource('/Ghe', 'Api\GheController');
+Route::apiResource('/Phong', 'Api\PhongController');
+Route::apiResource('/Rap', 'Api\RapController');
 
