@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Phim;
+use App\Rap;
 
-class PhimController extends Controller
+class RapController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class PhimController extends Controller
      */
     public function index()
     {
-        $data = Phim::where('TrangThai', 1) ->get();
+        $data = Rap::with('phongs')->get();
         return response()->json($data);
     }
 

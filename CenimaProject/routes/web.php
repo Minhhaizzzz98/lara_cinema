@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PhimDienVienController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,11 +40,30 @@ Route::resource('positions', 'Admin\ChucVuController');
 Route::resource('customers', 'Admin\KhachHangController');
 
 
+Route::group(['prefix' => 'SuatChieu'], function() {
+    Route::get('/index','SuatChieuController@index')->name('SuatChieu.index');
+    Route::get('/create','SuatChieuController@create');
+    Route::post('/create','SuatChieuController@store')->name('SuatChieu.add');
+    Route::get('/edit/{id}','SuatChieuController@edit');
+    Route::get('/get','SuatChieuController@get');
+    Route::post('/update/{id}','SuatChieuController@update');
+    Route::get('/delete/{id}','SuatChieuController@destroy');
+});
 
-Route::group(['prefix' => 'phim'], function() {
+Route::group(['prefix' => 'Phim_DienVien'], function() {
+    Route::get('/index','Phim_DienVienController@index')->name('Phim_DienVien.index');
+    Route::get('/create','Phim_DienVienController@create');
+    Route::post('/create','Phim_DienVienController@store')->name('Phim_DienVien.add');
+    Route::get('/edit/{id}','Phim_DienVienController@edit');
+    Route::post('/update/{id}','Phim_DienVienController@update');
+    Route::get('/delete/{id}','Phim_DienVienController@destroy');
+});
+
+Route::group(['prefix' => 'Phim'], function() {
     Route::get('/index','PhimController@index');
     Route::get('/create','PhimController@create');
-    Route::post('/create','PhimController@store');
+    Route::get('/get','PhimController@get');
+    Route::post('/create','PhimController@store')->name('Phim.add');
     Route::get('/details/{id}','PhimController@show');
     Route::post('/create/add_theloai/{id}','PhimController@add_theloai');
     Route::get('/edit/{id}','PhimController@edit');
@@ -53,14 +72,36 @@ Route::group(['prefix' => 'phim'], function() {
 });
 
 Route::group(['prefix' => 'LoaiPhim'], function() {
-    Route::get('/index','LoaiPhimController@index');
+    Route::get('/index','LoaiPhimController@index')->name('LoaiPhim.index');
     Route::get('/create','LoaiPhimController@create');
-    Route::post('/create','LoaiPhimController@store');
+    Route::post('/create','LoaiPhimController@store')->name('LoaiPhim.add');
     Route::get('/edit/{id}','LoaiPhimController@edit');
     Route::post('/update/{id}','LoaiPhimController@update');
     Route::get('/delete/{id}','LoaiPhimController@destroy');
 });
 
+Route::group(['prefix' => 'GioChieu'], function() {
+    Route::get('/index','GioChieuController@index')->name('GioChieu.index');
+    Route::get('/create','GioChieuController@create');
+    Route::post('/create','GioChieuController@store')->name('GioChieu.add');
+    Route::get('/edit/{id}','GioChieuController@edit');
+    Route::get('/get','GioChieuController@get');
+    Route::get('/getGioChieuID/{id}','GioChieuController@getGioChieuID');
+    Route::get('/getGioChieu','GioChieuController@getGioChieu');
+    Route::post('/update/{id}','GioChieuController@update');
+    Route::get('/delete/{id}','GioChieuController@destroy');
+});
+
+
+
+Route::group(['prefix' => 'LoaiTGChieu'], function() {
+    Route::get('/index','LoaiTGChieuController@index')->name('LoaiTGChieu.index');
+    Route::get('/create','LoaiTGChieuController@create');
+    Route::post('/create','LoaiTGChieuController@store')->name('LoaiTGChieu.add');
+    Route::get('/edit/{id}','LoaiTGChieuController@edit');
+    Route::post('/update/{id}','LoaiTGChieuController@update');
+    Route::get('/delete/{id}','LoaiTGChieuController@destroy');
+});
 
 Route::group(['prefix' => 'DienVien'], function() {
     Route::get('/index','DienVienController@index');
@@ -70,17 +111,38 @@ Route::group(['prefix' => 'DienVien'], function() {
     Route::post('/update/{id}','DienVienController@update');
     Route::get('/delete/{id}','DienVienController@destroy');
 });
-Route::group(['prefix' => 'GioiHanTuoi'], function() {
-    Route::get('/index','GioiHanTuoiController@index');
-    Route::get('/create','GioiHanTuoiController@create');
-    Route::post('/create','GioiHanTuoiController@store');
-    Route::get('/edit/{id}','GioiHanTuoiController@edit');
-    Route::post('/update/{id}','GioiHanTuoiController@update');
-    Route::get('/delete/{id}','GioiHanTuoiController@destroy');
+
+
+
+
+//ghe
+Route::group(['prefix' => 'ghe'], function() {
+    Route::get('/','GheController@index');
+    Route::get('/index','GheController@index');
+    Route::get('/create','GheController@create');
+    Route::post('/create','GheController@store');
+    Route::get('/details/{id}','GheController@show');
+    Route::get('/edit/{id}','GheController@edit');
+    Route::post('/update/{id}','GheController@update');
+    Route::get('/delete/{id}','GheController@destroy');
+    Route::get('/inactive/{id}','GheController@inactive');
+    Route::get('/active/{id}','GheController@active');
+
 });
+//phong
+Route::group(['prefix' => 'phong'], function() {
+    Route::get('/','PhongController@index');
+    Route::get('/index','PhongController@index');
+    Route::get('/create','PhongController@create');
+    Route::post('/create','PhongController@store');
+    Route::get('/details/{id}','PhongController@show');
+    Route::get('/edit/{id}','PhongController@edit');
+    Route::post('/update/{id}','PhongController@update');
+    Route::get('/delete/{id}','PhongController@destroy');
+    Route::get('/inactive/{id}','PhongController@inactive');
+    Route::get('/active/{id}','PhongController@active');
 
-
-
+});
 //rap
 Route::group(['prefix' => 'rap'], function() {
     Route::get('/','RapController@index');
@@ -94,19 +156,3 @@ Route::group(['prefix' => 'rap'], function() {
     Route::get('/inactive/{id}','RapController@inactive');
     Route::get('/active/{id}','RapController@active');
 });
-
-//chi nhanh
-Route::group(['prefix' => 'chinhanh'], function() {
-    Route::get('/','ChiNhanhController@index');
-    Route::get('/index','ChiNhanhController@index');
-    Route::get('/create','ChiNhanhController@create');
-    Route::post('/create','ChiNhanhController@store');
-    Route::get('/details/{id}','ChiNhanhController@show');
-    Route::get('/edit/{id}','ChiNhanhController@edit');
-    Route::post('/update/{id}','ChiNhanhController@update');
-    Route::get('/delete/{id}','ChiNhanhController@destroy');
-    Route::get('/inactive/{id}','ChiNhanhController@inactive');
-    Route::get('/active/{id}','ChiNhanhController@active');
-
-});
-

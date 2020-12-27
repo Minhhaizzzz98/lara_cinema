@@ -20,9 +20,10 @@
                         <tr>
                             <th>Mã Rạp</th>
                             <th>Tên rạp</th>
-                            <th>Chi nhánh</th>
+                            <th>Địa chỉ</th>
+                            <th>SĐT</th>
                             <th>Trạng thái</th>
-                            <th colspan="2">Công cụ</th>
+                            <th colspan="3">Công cụ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,7 +32,8 @@
                             <tr>
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->TenRap }}</td>
-                                <td>{{ $item->chinhanh->TenChiNhanh }}</td>
+                                <td>{{ $item->DiaChi }}</td>
+                                <td>{{ $item->SDT }}</td>
                                 <td>
                                     @if($item->TrangThai == 1) 
                                         <a href="{{url('/rap/inactive/'.$item->id)}}" class="btn btn-success">Đang hoạt động</a>
@@ -39,7 +41,7 @@
                                         <a href="{{url('/rap/active/'.$item->id)}}" class="btn btn-warning">Ngưng hoạt động</a>
                                     @endif
                                 </td>
-
+                                <td><a class="btn btn-primary" type="submit" href="{{url('/rap/details/'.$item->id)}}">Chi tiết</a></td>
                                 <td><a class="btn btn-primary" type="submit" href="{{url('/rap/edit/'.$item->id)}}">Sửa</a></td>
                                 <td><a class="btn btn-danger" type="submit" href="{{url('/rap/delete/'.$item->id)}}" onclick="return confirm('Bạn muốn xóa {{$item->TenRap}}?')">Xóa</a></td>
                                 </td>

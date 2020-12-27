@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\LoaiPhim;
+use App\SuatChieu;
 
-class LoaiPhimController extends Controller
+class SuatChieuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,9 @@ class LoaiPhimController extends Controller
      */
     public function index()
     {
-        $list=LoaiPhim::where('TrangThai','1')->get();
-        return view ('manage.LoaiPhim.index')->with('list',$list);
+        //
+        $data = SuatChieu::with('phim','giochieu')->where('TrangThai',1)->get();
+        return view('manage.SuatChieu.index')->with('list',$data);
     }
 
     /**
@@ -26,7 +27,6 @@ class LoaiPhimController extends Controller
     public function create()
     {
         //
-        return view('manage.LoaiPhim.create');
     }
 
     /**
@@ -37,24 +37,21 @@ class LoaiPhimController extends Controller
      */
     public function store(Request $request)
     {
+        //
+        $sc = new SuatChieu();
+        $sc->phim_id = $request->Phim;
+        $sc->giochieu_id = $request->GioChieu;
+        $sc->NgayChieu = $request->NgayChieu;
+        $sc->GiaSuatChieu=0;
+        $flag = $sc->save();
 
-        $validated = $request->validate([
-            'TenLoaiPhim' => 'required|min:5|max:255',
-            
-        ]);
-        $data = new LoaiPhim();
-        $data->TenLoaiPhim=$request->TenLoaiPhim;
-        $flag = $data->save();
-        
-        $list= LoaiPhim::where('TrangThai',1)->get(); 
-        if($flag){
-            return json_encode($list);
-        }
-        else
+        $data = SuatChieu::with('phim','giochieu')->where('TrangThai',1)->get();
+        if($flag)
         {
-            return view('manage.LoaiPhim.create');
+            return json_encode($data);
         }
-       
+
+
     }
 
     /**
@@ -65,7 +62,7 @@ class LoaiPhimController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -77,9 +74,8 @@ class LoaiPhimController extends Controller
     public function edit($id)
     {
         //
-        $loaiphim=LoaiPhim::find($id);
-        return response()->json($loaiphim);
-        // return view('manage.LoaiPhim.edit')->with('loaiphim',$loaiphim);
+        $data = SuatChieu::find($id);
+        return response()->json($data);
     }
 
     /**
@@ -92,24 +88,18 @@ class LoaiPhimController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $validated = $request->validate([
-            'TenLoaiPhim' => 'required|min:5|max:255',
-            
-        ]);
-        $data = LoaiPhim::find($id);
-        $data->TenLoaiPhim=$request->TenLoaiPhim;
-        $flag = $data->save();
-        $list= LoaiPhim::where('TrangThai',1)->get();
+        $sc = SuatChieu::find($id);
+        $sc->phim_id = $request->Phim;
+        $sc->giochieu_id = $request->GioChieu;
+        $sc->NgayChieu = $request->NgayChieu;
+        $sc->GiaSuatChieu=0;
+        $flag = $sc->save();
 
-        
-        if($flag){
-            return json_encode($list);
-        }
-        else
+        $data = SuatChieu::with('phim','giochieu')->where('TrangThai',1)->get();
+        if($flag)
         {
-            return view('manage.LoaiPhim.create');
+            return json_encode($data);
         }
-       
     }
 
     /**
@@ -120,9 +110,10 @@ class LoaiPhimController extends Controller
      */
     public function destroy($id)
     {
-        $phim= LoaiPhim::find($id);
-        $phim->TrangThai=0;
-        $flag=$phim->save();    
-        return redirect('/LoaiPhim/index');
+        //
+        $sc = SuatChieu::find($id);
+        $sc->TrangThai=0;
+        $sc->save();
+        return response()->json($sc);
     }
 }

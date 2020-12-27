@@ -8,7 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="csrf-token" content="{{csrf_token()}}">
+
+   <meta name="csrf-token" content="{{csrf_token()}}">
+
     <link rel="shortcut icon"  href="{{asset('img/clapperboard.svg')}}"/>
     <title>Quản lý rạp chiếu phim</title>
     <!-- Custom fonts for this template-->
@@ -124,25 +126,57 @@
 
 
             <li class="nav-item">
-                <a class="nav-link" href="/phim/index">
+                <a class="nav-link" href="/Phim/index">
                         <i class="fas fa-film"></i>
                         <span>Phim</span></a>
-           </li>
-           <li class="nav-item">
+            </li>
+            <li class="nav-item">
             <a class="nav-link" href="/LoaiPhim/index">
                     <i class="fas fa-film"></i>
                     <span>Thể loại</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/DienVien/index">
-                       <i class="fas fa-user-friends"></i>
-                        <span>Diễn viên</span></a>
+                <a class="nav-link" href="/Phim_DienVien/index">
+                  <i class="fas fa-user-friends"></i>
+                  <span>Diễn viên</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('/ghe/')}}">
+                    <i class="fas fa-chair"></i>
+                    <span>Ghế</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/GioiHanTuoi/index">
-                    <i class="fas fa-baby"></i>
-                     <span>Giới hạn tuổi</span></a>
+                <a class="nav-link" href="{{url('/phong/')}}">
+                    <i class="fas fa-table"></i>
+                    <span>Phòng</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('/rap/')}}">
+                    <i class="fas fa-home"></i>
+                    <span>Rạp</span></a>
+            </li class="nav-item">
+                   <i class="fas fa-user-friends"></i>
+                   <span>Diễn viên phim</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/SuatChieu/index">
+                    <i class="fas fa-ticket-alt"></i>
+                <span>Suất chiếu</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/GioChieu/index">
+                <i class="fas fa-stopwatch"></i>
+                <span>Giờ chiếu</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/LoaiTGChieu/index">
+                       <i class="fas fa-user-friends"></i>
+                        <span>Loại TG chiếu</span></a>
+            </li>
+
+
 
             <!-- Divider -->
 
@@ -335,8 +369,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="{{asset('img/undraw_profile_1.svg')}}"
-                                            alt="">
+                                    <img class="rounded-circle" src="{{asset('img/undraw_profile_1.svg')}}">
                                         <img class="rounded-circle" src="{{ asset('img/undraw_profile_1.svg')}}" alt="">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
@@ -348,8 +381,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="{{asset('img/undraw_profile_2.svg')}}"
-                                            alt="">
+                                        <img class="rounded-circle" src="{{asset('img/undraw_profile_2.svg')}}">
                                         <div class="status-indicator"></div>
                                     </div>
                                     <div>
@@ -360,8 +392,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="{{ asset('img/undraw_profile_3.svg') }}"
-                                            alt="">
+                                        <img class="rounded-circle" src="{{ asset('img/undraw_profile_3.svg') }}">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
                                     <div>
@@ -372,8 +403,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                            alt="">
+                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div>
@@ -484,12 +514,15 @@
             }
         }
     </script>
+
     <!-- Bootstrap core JavaScript-->
+
+
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+    {{-- <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script> --}}
 
     <!-- Custom scripts for all pages-->
     <script src="{{asset('js/sb-admin-2.min.js')}}"></script>

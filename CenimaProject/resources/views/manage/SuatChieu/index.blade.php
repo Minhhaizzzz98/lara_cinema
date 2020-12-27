@@ -1,0 +1,354 @@
+@extends('layout')
+@section('content')
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5  class="modal-title" id="exampleModalLongTitle">Thêm suất chiếu</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <form  id="form-add" >
+          @csrf
+            <div class="form-group">
+              <label class="text-dark">Chọn phim: </label>
+               <select name="selectPhim" id="rolePhim">
+                 <option value="">option</option>
+               </select>
+             </div>
+             <div class="form-group">
+                <label class="text-dark">Chọn giờ chiếu: </label>
+                 <select name="selectGioChieu" id="roleGioChieu">
+                   <option value="">option</option>
+                 </select>
+               </div>
+             <div class="form-group">
+                    <label class="text-dark">Ngày chiếu</label>
+                    <input  type="date"  name="NgayChieu" class="form-control form-control-user" >
+                    <p class="text-danger">{{ $errors->first('NgayChieu') }}</p>
+             </div>
+             <button type="submit" id="add-data" class="btn btn-primary">Thêm mới</button>
+         </form>
+         <div class="alert alert-success" style="display: none"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5  class="modal-title" id="exampleModalLongTitle">Chỉnh sửa giờ chiếu</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <form  id="form-edit">
+             @csrf
+             <div class="form-group">
+                <label class="text-dark">Mã suất chiếu</label>
+                <input disabled=true type="text" id="MaSuatChieu" name="MaSuatChieu" class="form-control form-control-user" >
+                <p class="text-danger">{{ $errors->first('MaSuatChieu') }}</p>
+            </div>
+             <div class="form-group">
+                <label class="text-dark">Chọn phim: </label>
+                 <select name="eselectPhim" id="erolePhim">
+                   <option value="">option</option>
+                 </select>
+               </div>
+               <div class="form-group">
+                  <label class="text-dark">Giờ chiếu: </label>
+                   <select name="eselectGioChieu" id="eroleGioChieu">
+                     <option value="">option</option>
+                   </select>
+                 </div>
+               <div class="form-group">
+                      <label class="text-dark">Ngày chiếu</label>
+                      <input  type="date" id="eNgayChieu" name="eNgayChieu" class="form-control form-control-user" >
+                      <p class="text-danger">{{ $errors->first('NgayChieu') }}</p>
+               </div>
+             <button type="submit" id="edit-data" class="btn btn-primary">Lưu lại</button>
+         </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h2 mb-2 text-center text-primary">QUẢN LÝ SUẤT CHIẾU</h1>
+
+    <button onclick="rolePhim_GioChieu()" data-toggle="modal" data-target="#add" class="btn btn-primary"><i class="fa fa-film" aria-hidden="true"> Thêm mới</i></button>
+
+    
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered text-center table-stripped table-hover" id="dataTable" width="100%"
+                    cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Mã suất chiếu</th>
+                            <th>Tên phim</th>
+                            <th>Ngày chiếu</th>
+                            <th>Giờ chiếu</th>                 
+                            <th>Giá suất chiếu</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>               
+                    <tbody id="body">
+                        @foreach ($list as $item)
+                            <tr id="sid{{$item->id}}">
+                                <td>{{ $item->id }}</td>
+                                <td>{{$item->phim->TenPhim}}</td>
+                                <td>{{$item->NgayChieu}}</td>  
+                                <td>{{$item->giochieu->GioBatDau}}</td>  
+                                <td>{{$item->giochieu->loaitgchieu->Gia_TG + $item->phim->GiaPhim}}</td>      
+                                 <td>
+                                     <a href="javascript:void(0)" data-toggle="modal" onclick="suaSuatChieu({{$item->id}});erolePhim({{$item->phim_id}});eroleGioChieu({{$item->giochieu_id}});" data-target="#edit" class="btn btn-info" type="submit">Chỉnh sửa</a>|
+                                     <a href="javascript:void(0)"  class="btn btn-danger" onclick="xoaSuatChieu({{$item->id}})" >Xóa suất chiếu</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table> 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@endsection
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+
+
+
+
+<script>
+  function rolePhim_GioChieu()
+  {      
+          $('#rolePhim').empty();
+          $.get('/Phim/get', function(g){ 
+                  var array=JSON.parse(g);  
+                  for(var i=0;i<array.length;i++)
+                  {
+                      $('#rolePhim').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].TenPhim+'</option>');     
+                  }
+          });   
+
+          $('#roleGioChieu').empty();
+          $.get('/GioChieu/getGioChieu', function(g){ 
+                  var array=JSON.parse(g);  
+                  for(var i=0;i<array.length;i++)
+                  {
+                      $('#roleGioChieu').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].GioBatDau+'</option>');     
+                  }
+          });   
+  }
+
+</script>
+{{-- Thêm loại TG chiếu--}}
+<script>
+
+   $(document).ready(function(){
+
+          $("#form-add").on('submit',function(e){
+
+                  e.preventDefault();
+                  e.stopImmediatePropagation();
+                  var GioChieu = $('select[name=selectGioChieu]').val() 
+                  var Phim = $('select[name=selectPhim]').val() 
+                  var NgayChieu = $('input[name=NgayChieu]').val();
+                  var token= $("input[name=_token]").val();
+
+                  $.ajax({
+                        type:'POST',
+                        url:"{{route('SuatChieu.add')}}",
+                        data:{
+                            GioChieu:GioChieu,
+                            Phim:Phim,
+                            NgayChieu:NgayChieu,
+                            _token:token
+                        },
+                        success:function(response){ 
+                          alert("Thành công");   
+                          var array=JSON.parse(response);               
+                          var string="";
+                          $("#add").modal('hide');
+                          for(let i =0; i<array.length;i++)
+                          {
+                            // var gia = array[i].giochieu.loaitgchieu.Gia_TG + array[i].phim.GiaPhim;
+                            string+="<tr id='sid"+array[i].id +"'"+"><td>"+array[i].id+"</td>"+"<td>"+array[i].phim.TenPhim+"</td>";
+                            string+="<td>"+array[i].NgayChieu+"</td>";
+                            string+="<td>"+array[i].giochieu.GioBatDau+"</td>";
+                            string+="<td>"+(array[i].phim.GiaPhim+array[i].giochieu.loaitgchieu.Gia_TG)+"</td>";
+                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaSuatChieu("+array[i].id+");erole();'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
+                            string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaSuatChieu("+array[i].id+")'"+">Xóa suất chiếu</a>"+"</td></tr>"
+                          }
+                            $(".modal-backdrop").remove();
+                            $("#body").html(string);
+                        },
+                        error: function(error){
+                          alert("Thêm thất bại");
+                        }            
+                 });
+          });  
+
+           
+  
+ });
+
+</script>
+
+
+{{-- Xóa loại TG Chiếu --}}
+<script>
+   function xoaSuatChieu(id)
+   {
+
+      if(confirm('Bạn có chắc muốn xóa không'))
+      {
+        var _token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+          url:"/SuatChieu/delete/"+id,
+          type:'GET',
+          data:{
+              _token:_token,
+          },
+          success:function(response)
+          {
+            console.log('thanh cong');
+              // window.location.reload();
+              $('#sid'+id).remove();
+          } 
+        });
+      }
+   }
+  
+</script> 
+
+
+{{-- Chỉnh sửa giờ chiếu --}}
+
+<script>
+  function erolePhim(id){
+         $('#erolePhim').empty();
+          $.get('/Phim/edit/'+id, function(g){ 
+                //   var array=JSON.parse(g);  
+                $('#erolePhim').append('<option value='+g.id+'>'+g.id+': '+g.TenPhim+'</option>'); 
+          });
+
+          $.get('/Phim/get/', function(g){ 
+                  var array=JSON.parse(g);  
+                  for(var i=0;i<array.length;i++)
+                  {
+                      if(array[i].id != id)
+                     {
+                        $('#erolePhim').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].TenPhim+'</option>');  
+                     }   
+                  }
+          });    
+  }
+</script>
+
+<script>
+    function eroleGioChieu(id)
+    {
+        $('#eroleGioChieu').empty();
+          $.get('/GioChieu/getGioChieuID/'+id, function(g){ 
+                //   var array=JSON.parse(g);  
+                $('#eroleGioChieu').append('<option value='+g.id+'>'+g.id+': '+g.GioBatDau+'</option>'); 
+          });
+
+          $.get('/GioChieu/getGioChieu', function(g){ 
+                  var array=JSON.parse(g);  
+                  for(var i=0;i<array.length;i++)
+                  {
+                      if(array[i] != id)
+                      {
+                        $('#eroleGioChieu').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].GioBatDau+'</option>');     
+                      }
+                  }
+          });   
+    }
+     
+</script>
+
+<script>
+
+    function suaSuatChieu(id)
+    { 
+      $.get('/SuatChieu/edit/'+id, function(g){  
+        $("#MaSuatChieu").val(g.id); 
+        $("#eNgayChieu").val(g.NgayChieu);
+        $("#edit").modal("toggle");
+      });
+    } 
+
+    $(document).ready(function(){
+        $('#form-edit').on('submit',function(e){
+              e.preventDefault();
+              e.stopImmediatePropagation();
+              var id =$("input[name=MaSuatChieu]").val();
+              var GioChieu = $('select[name=eselectGioChieu]').val() 
+              var Phim = $('select[name=eselectPhim]').val() 
+              var NgayChieu = $('input[name=eNgayChieu]').val();
+              var token= $("input[name=_token]").val();
+            
+             $.ajax({
+                    type:'POST',
+                    url:"/SuatChieu/update/"+id,
+                    data:{
+                         GioChieu:GioChieu,
+                         Phim:Phim,
+                         NgayChieu:NgayChieu,
+                        _token:token
+                    },
+
+                    success:function(response){ 
+                         alert("Cập nhật thành công");               
+                         var array=JSON.parse(response);               
+                          var string="";
+                          $("#edit").modal('hide');
+                          for(let i =0; i<array.length;i++)
+                          {
+                            string+="<tr id='sid"+array[i].id +"'"+"><td>"+array[i].id+"</td>"+"<td>"+array[i].phim.TenPhim+"</td>";
+                            string+="<td>"+array[i].NgayChieu+"</td>";
+                            string+="<td>"+array[i].giochieu.GioBatDau+"</td>";
+                            string+="<td>"+(array[i].phim.GiaPhim+array[i].giochieu.loaitgchieu.Gia_TG)+"</td>";
+                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaSuatChieu("+array[i].id+");erole();'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
+                            string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaSuatChieu("+array[i].id+")'"+">Xóa suất chiếu</a>"+"</td></tr>"
+                          }
+                            $(".modal-backdrop").remove();
+                            $("#body").html(string);          
+                    },
+                    error: function(error){
+                      alert("Cập nhật thất bại");
+                    }    
+                });
+          });
+      });
+    
+</script>
+
+
+

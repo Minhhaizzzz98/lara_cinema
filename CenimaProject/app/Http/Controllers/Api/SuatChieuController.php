@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Phim;
+use App\SuatChieu;
 
-class PhimController extends Controller
+class SuatChieuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class PhimController extends Controller
      */
     public function index()
     {
-        $data = Phim::where('TrangThai', 1) ->get();
+        $data = SuatChieu::where('TrangThai', 1) ->get();
         return response()->json($data);
     }
 

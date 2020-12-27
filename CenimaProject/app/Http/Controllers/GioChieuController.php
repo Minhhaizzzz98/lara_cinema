@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Giochieu;
+use App\LoaiTGChieu;
 
-class DienVienController extends Controller
+class GioChieuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,6 +16,8 @@ class DienVienController extends Controller
     public function index()
     {
         //
+        $data = GioChieu::with('loaitgchieu')->where('TrangThai',1)->get();
+        return view('manage.GioChieu.index')->with('list',$data);
     }
 
     /**
@@ -35,6 +39,15 @@ class DienVienController extends Controller
     public function store(Request $request)
     {
         //
+       $g= new GioChieu();
+       $g->loaitgchieu_id = $request->loaitgchieu_id;
+       $g->GioBatDau = $request->GioBatDau;
+       $flag = $g->save();
+       $data = GioChieu::with('loaitgchieu')->where('TrangThai',1)->get();
+       if($flag)
+       {
+        return json_encode($data);
+       }
     }
 
     /**
@@ -47,6 +60,22 @@ class DienVienController extends Controller
     {
         //
     }
+    public function getGioChieuID($id)
+    {
+        $data = GioChieu::find($id);
+       return response()->json($data);
+    }
+    public function getGioChieu()
+    {
+        $data = GioChieu::where('TrangThai',1)->get();
+        return json_encode($data);
+    }
+
+    public function get()
+    {
+        $data = LoaiTGChieu::where('TrangThai',1)->get();
+        return json_encode($data);
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -57,6 +86,8 @@ class DienVienController extends Controller
     public function edit($id)
     {
         //
+        $data = GioChieu::find($id);
+        return response()->json($data);
     }
 
     /**
@@ -69,6 +100,15 @@ class DienVienController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $g = GioChieu::find($id);
+        $g->GioBatDau= $request->GioBatDau;
+        $g->loaitgchieu_id= $request->loaitgchieu_id;
+        $flag = $g->save();
+        $data = GioChieu::with('loaitgchieu')->where('TrangThai',1)->get();
+        if($flag)
+        {
+            return json_encode($data);
+        }
     }
 
     /**
@@ -79,6 +119,9 @@ class DienVienController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $giochieu= GioChieu::find($id);
+        $giochieu->TrangThai=0;
+        $flag=$giochieu->save();    
+        return json_encode($giochieu);
     }
 }

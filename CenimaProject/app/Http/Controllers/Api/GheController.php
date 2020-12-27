@@ -15,7 +15,7 @@ class GheController extends Controller
      */
     public function index()
     {
-        $data = Ghe::with('vitri')->get();
+        $data = Ghe::with('phong')->get();
         return response()->json($data);
     }
 

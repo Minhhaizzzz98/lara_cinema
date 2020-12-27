@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Phim;
+use App\GioChieu;
 
-class PhimController extends Controller
+class GioChieuApi extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class PhimController extends Controller
      */
     public function index()
     {
-        $data = Phim::where('TrangThai', 1) ->get();
+        $data = GioChieu::all();
         return response()->json($data);
     }
 
