@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\KhachHang;
 use Illuminate\Http\Request;
-use App\NhanVien;
-class NhanVienController extends Controller
+
+class KhachHangController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class NhanVienController extends Controller
      */
     public function index()
     {
-        $data = NhanVien::where('status','1')->with('chucvu')->get();
+        $data = KhachHang::where('TrangThai','1')->get();
         return response()->json($data);
     }
 

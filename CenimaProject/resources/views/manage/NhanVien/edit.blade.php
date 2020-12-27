@@ -24,19 +24,13 @@
 
 
 
-                                    <div class="form-group">
-                                        <label class="control-label"> FirstName </label>
-                                        <input value="{{$nhanvien->HoNV}}" class="form-control" name="HoNV"/>
-                                        @error('HoNV')
-                                        <div class="alert alert-danger">The FirstName is requied</div>
-                                         @enderror
-                                    </div>
+
 
                                     <div class="form-group">
-                                        <label class="control-label">LastName </label>
-                                        <input value="{{$nhanvien->TenNV}}" class="form-control" name="TenNV"/>
+                                        <label class="control-label">Họ Tên </label>
+                                        <input value="{{$nhanvien->HoTen}}" class="form-control" name="HoTen"/>
                                         @error('TenNV')
-                                        <div class="alert alert-danger">The LastName is requied</div>
+                                        <div class="alert alert-danger">Họ tên không được để trống</div>
                                   @enderror
                                     </div>
 
@@ -51,41 +45,32 @@
                                         <select>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label class="control-label"> Manage by </label> <br>
-                                        <select name="Ma_NQL">
-                                            @foreach ($nhanviens as $nhanvien)
-                                                <option value="{{$nhanvien->MaNV}}">
-                                                    {{$nhanvien->HoNV." ".$nhanvien->TenNV}}
-                                                </option>
-                                            @endforeach
-                                        <select>
-                                    </div>
+
 
                                     <div class="form-group">
-                                        <label class="control-label"> Image </label>
+                                        <label class="control-label"> Ảnh </label>
                                         <input class="form-control" name="Anh" type="file" />
 
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="control-label"> Birthday </label>
+                                        <label class="control-label"> Ngày sinh </label>
                                         <input value="{{$nhanvien->NgSinh}}" class="form-control" name="NgSinh" type="date" />
                                         @error('NgSinh')
-                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        <div class="alert alert-danger">Ngày sinh không hợp lệ</div>
                                   @enderror
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="control-label">Address </label>
+                                        <label class="control-label">Địa chỉ </label>
                                         <input value="{{$nhanvien->DiaChi}}" class="form-control" name="DiaChi"/>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="control-label">Phone </label>
+                                        <label class="control-label">SĐT </label>
                                         <input value="{{$nhanvien->SDT}}" class="form-control" name="SDT"/>
                                         @error('SDT')
-                                        <div class="alert alert-danger">The phone number is invalid</div>
+                                        <div class="alert alert-danger">Số điện thoại không hợp lệ</div>
                                         @enderror
 
                                     </div>
@@ -94,12 +79,12 @@
                                         <label class="control-label"> Email </label>
                                         <input value="{{$nhanvien->Email}}" class="form-control" name="Email" type="email"/>
                                         @error('Email')
-                                              <div class="alert alert-danger">{{ $message }}</div>
+                                              <div class="alert alert-danger">Email không hợp lệ</div>
                                         @enderror
                                     </div>
 
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary"> Update </button>
+                                        <button type="submit" class="btn btn-primary"> Cập nhật </button>
                                     </div>
 
                                 </form>

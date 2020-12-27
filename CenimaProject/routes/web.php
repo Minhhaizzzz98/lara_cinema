@@ -37,6 +37,8 @@ Route::resource('employees', 'Admin\NhanVienController');
 
 Route::resource('positions', 'Admin\ChucVuController');
 
+Route::resource('customers', 'Admin\KhachHangController');
+
 
 Route::group(['prefix' => 'SuatChieu'], function() {
     Route::get('/index','SuatChieuController@index')->name('SuatChieu.index');
@@ -59,8 +61,8 @@ Route::group(['prefix' => 'Phim_DienVien'], function() {
 
 Route::group(['prefix' => 'Phim'], function() {
     Route::get('/index','PhimController@index');
-    Route::get('/create','PhimController@create');  
-    Route::get('/get','PhimController@get');  
+    Route::get('/create','PhimController@create');
+    Route::get('/get','PhimController@get');
     Route::post('/create','PhimController@store')->name('Phim.add');
     Route::get('/details/{id}','PhimController@show');
     Route::post('/create/add_theloai/{id}','PhimController@add_theloai');
@@ -117,7 +119,7 @@ Route::group(['prefix' => 'DienVien'], function() {
 Route::group(['prefix' => 'ghe'], function() {
     Route::get('/','GheController@index');
     Route::get('/index','GheController@index');
-    Route::get('/create','GheController@create');  
+    Route::get('/create','GheController@create');
     Route::post('/create','GheController@store');
     Route::get('/details/{id}','GheController@show');
     Route::get('/edit/{id}','GheController@edit');
@@ -125,13 +127,13 @@ Route::group(['prefix' => 'ghe'], function() {
     Route::get('/delete/{id}','GheController@destroy');
     Route::get('/inactive/{id}','GheController@inactive');
     Route::get('/active/{id}','GheController@active');
-    
+
 });
 //phong
 Route::group(['prefix' => 'phong'], function() {
     Route::get('/','PhongController@index');
     Route::get('/index','PhongController@index');
-    Route::get('/create','PhongController@create');  
+    Route::get('/create','PhongController@create');
     Route::post('/create','PhongController@store');
     Route::get('/details/{id}','PhongController@show');
     Route::get('/edit/{id}','PhongController@edit');
@@ -139,13 +141,13 @@ Route::group(['prefix' => 'phong'], function() {
     Route::get('/delete/{id}','PhongController@destroy');
     Route::get('/inactive/{id}','PhongController@inactive');
     Route::get('/active/{id}','PhongController@active');
-    
+
 });
 //rap
 Route::group(['prefix' => 'rap'], function() {
     Route::get('/','RapController@index');
     Route::get('/index','RapController@index');
-    Route::get('/create','RapController@create');  
+    Route::get('/create','RapController@create');
     Route::post('/create','RapController@store');
     Route::get('/details/{id}','RapController@show');
     Route::get('/edit/{id}','RapController@edit');
