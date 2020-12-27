@@ -128,11 +128,6 @@
                     <i class="fas fa-film"></i>
                     <span>Thể loại</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/Phim_DienVien/index">
-                  <i class="fas fa-user-friends"></i>
-                  <span>Diễn viên</span></a>
-            </li>
            
             <li class="nav-item">
                 <a class="nav-link" href="{{url('/ghe/')}}">
@@ -148,8 +143,10 @@
                 <a class="nav-link" href="{{url('/rap/')}}">
                     <i class="fas fa-home"></i>
                     <span>Rạp</span></a>
-            </li class="nav-item">
-                   <i class="fas fa-user-friends"></i>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Phim_DienVien/index">  
+                     <i class="fas fa-user-friends"></i>
                    <span>Diễn viên phim</span></a>
             </li>
             <li class="nav-item">
