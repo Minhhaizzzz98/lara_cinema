@@ -1,53 +1,36 @@
-@extends('layout')
-@section('content')
-<div class="container-fluid">
-     <!-- Page Heading -->
-     <h1 class="h2 mb-2 text-center text-success">Position</h1>
-
-
-               <!-- DataTales Example -->
-               <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">
-                                    Edit position
-                                </h6>
-
-                    </div>
-                    <div class="card-body">
-
-                        <div class="row">
-                            <div class="col-md-4">
-
-                                <form  method="POST" action="{{route('positions.update',$chucvu->MaCV)}}"  >
-                                    @csrf
-                                    @method('PUT')
-                                     <div class="form-group">
-                                        <label class="control-label"> Name </label>
-                                     <input class="form-control" name="TenCV" value="{{$chucvu->TenCV}}" />
-                                        @error('TenCV')
-                                        <div class="alert alert-danger"> The Name is invalid</div>
-                                  @enderror
-
-
-                                        <br>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary"> Update </button>
-                                    </div>
-
-                                </form>
-
-
-                            </div>
-
-
-                        <div>
-                            <a class="btn btn-dark" href = "{{route('positions.index')}}">List of positions</a>
-                        </div>
-
-                    </div>
+<div class="modal fade" id="editTaskModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="frmEditTask">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        Sửa chức vụ
+                    </h4>
+                    <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                        ×
+                    </button>
                 </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label>
+                          Tên chức vụ
+                        </label>
+                        <input class="form-control" id="task" name="TenCV" required="" type="text">
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input id="task_id" name="MaCV" type="hidden" value="0">
+                        <input class="btn btn-default" data-dismiss="modal" type="button" value="Cancel">
+                            <button class="btn btn-info" id="btn-edit" type="button" >
+                                Cập nhật
+                            </button>
 
 
-
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-@endsection

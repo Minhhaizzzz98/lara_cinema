@@ -2,14 +2,14 @@
 @section('content')
 <div class="container-fluid">
      <!-- Page Heading -->
-     <h1 class="h2 mb-2 text-center text-success">Nhân viên</h1>
+     <h1 class="h2 mb-2 text-center text-success">Khách hàng</h1>
 
 
                <!-- DataTales Example -->
                <div class="card shadow mb-4">
                     <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">
-                                   Thêm nhân viên mới
+                                   Thêm Khách hàng mới
                                 </h6>
 
                     </div>
@@ -18,55 +18,38 @@
                         <div class="row">
                             <div class="col-md-4">
 
-                                <form  method="POST" action="{{route('employees.store')}}" enctype="multipart/form-data" >
+                                <form  method="POST" action="{{route('customers.store')}}" enctype="multipart/form-data" >
                                     @csrf
                                      <div class="form-group">
                                         <label class="control-label"> Tài khoản </label>
                                         <input class="form-control" name="TenTK" />
-
+                                        @error('HoTen')
+                                        <div class="alert alert-danger">Tên tài khoản không được bỏ trống</div>
+                                  @enderror
                                     </div>
 
                                     <div class="form-group">
                                         <label class="control-label"> Mật khẩu </label>
                                         <input class="form-control" name="password" type="password" />
-
+                                        @error('password')
+                                        <div class="alert alert-danger">Mật khẩu không hợp lệ</div>
+                                  @enderror
                                     </div>
 
                                     <div class="form-group">
                                         <label class="control-label"> Xác nhận mật khẩu </label>
                                         <input class="form-control" name="repassword" type="password" />
-
+                                        @error('repassword')
+                                        <div class="alert alert-danger">Xác nhận mật khẩu phải trùng với mật khẩu</div>
+                                  @enderror
                                     </div>
 
                                     <div class="form-group">
                                         <label class="control-label"> Họ tên </label>
                                         <input class="form-control" name="HoTen"/>
-
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label class="control-label"> Position </label> <br>
-                                        <select name="ChucVu">
-                                            @foreach ($chucvus as $chucvu)
-                                                <option value="{{$chucvu->MaCV}}">
-                                                    {{$chucvu->TenCV}}
-                                                </option>
-                                            @endforeach
-                                        <select>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label class="control-label"> Ảnh </label>
-                                        <input class="form-control" name="Anh" type="file" />
-
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="control-label"> Birthday </label>
-                                        <input class="form-control" name="NgSinh" type="date" />
-
+                                        @error('HoTen')
+                                        <div class="alert alert-danger">Họ tên không được bỏ trống</div>
+                                  @enderror
                                     </div>
 
                                     <div class="form-group">
@@ -77,18 +60,22 @@
                                     <div class="form-group">
                                         <label class="control-label">Số điện thoại </label>
                                         <input class="form-control" name="SDT"/>
-
+                                        @error('SDT')
+                                              <div class="alert alert-danger">Số điện thoại không hợp lệ</div>
+                                        @enderror
 
                                     </div>
 
                                     <div class="form-group">
                                         <label class="control-label"> Email </label>
                                         <input class="form-control" name="Email" type="email"/>
-
+                                        @error('Email')
+                                        <div class="alert alert-danger">Email không hợp lệ</div>
+                                  @enderror
                                     </div>
 
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary"> Thêm nhân viên mới </button>
+                                        <button type="submit" class="btn btn-primary"> Thêm Khách hàng mới </button>
                                     </div>
 
                                 </form>
@@ -96,7 +83,7 @@
                         </div>
 
                         <div>
-                            <a class="btn btn-dark" href = "{{route('employees.index')}}">Danh sách nhân viên</a>
+                            <a class="btn btn-dark" href = "{{route('customers.index')}}">Danh sách Khách hàng</a>
                         </div>
 
                     </div>

@@ -37,11 +37,13 @@ Route::resource('employees', 'Admin\NhanVienController');
 
 Route::resource('positions', 'Admin\ChucVuController');
 
+Route::resource('customers', 'Admin\KhachHangController');
+
 
 
 Route::group(['prefix' => 'phim'], function() {
     Route::get('/index','PhimController@index');
-    Route::get('/create','PhimController@create');  
+    Route::get('/create','PhimController@create');
     Route::post('/create','PhimController@store');
     Route::get('/details/{id}','PhimController@show');
     Route::post('/create/add_theloai/{id}','PhimController@add_theloai');
@@ -83,7 +85,7 @@ Route::group(['prefix' => 'GioiHanTuoi'], function() {
 Route::group(['prefix' => 'rap'], function() {
     Route::get('/','RapController@index');
     Route::get('/index','RapController@index');
-    Route::get('/create','RapController@create');  
+    Route::get('/create','RapController@create');
     Route::post('/create','RapController@store');
     Route::get('/details/{id}','RapController@show');
     Route::get('/edit/{id}','RapController@edit');
@@ -97,7 +99,7 @@ Route::group(['prefix' => 'rap'], function() {
 Route::group(['prefix' => 'chinhanh'], function() {
     Route::get('/','ChiNhanhController@index');
     Route::get('/index','ChiNhanhController@index');
-    Route::get('/create','ChiNhanhController@create');  
+    Route::get('/create','ChiNhanhController@create');
     Route::post('/create','ChiNhanhController@store');
     Route::get('/details/{id}','ChiNhanhController@show');
     Route::get('/edit/{id}','ChiNhanhController@edit');
@@ -105,6 +107,6 @@ Route::group(['prefix' => 'chinhanh'], function() {
     Route::get('/delete/{id}','ChiNhanhController@destroy');
     Route::get('/inactive/{id}','ChiNhanhController@inactive');
     Route::get('/active/{id}','ChiNhanhController@active');
-    
+
 });
 
