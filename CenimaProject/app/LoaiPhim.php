@@ -15,7 +15,7 @@ class LoaiPhim extends Model
     ];
     public function phims()
     {
-        return $this->belongsToMany('App\Phim', 'phim_theloai', 'phim_id', 'theloai_id');
+        return $this->hasMany('App\Phim', 'loaiphim_id', 'id');
     }
 
    

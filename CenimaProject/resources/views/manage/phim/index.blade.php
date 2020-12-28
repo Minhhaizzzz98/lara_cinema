@@ -61,9 +61,16 @@
                     </div>
                 </div>
 
+                  <div class="form-group">
+                    <label class="text-dark">Chọn thể loại: </label>
+                    <select name="selectLoaiPhim" id="roleLoaiPhim">
+                      <option value="">option</option>
+                    </select>
+                  </div>
+
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <label class="text-dark" for="GiaPhim">GiaPhim</label>
+                    <label class="text-dark" for="GiaPhim">Giá phim</label>
                       <input type="number" name="GiaPhim" class="form-control form-control-user"  >
                       <p class="text-danger">{{ $errors->first('GiaPhim') }}</p>
                   </div>
@@ -149,6 +156,14 @@
                         <p class="text-danger">{{ $errors->first('ThoiLuong') }}</p>
                     </div>
                 </div>
+
+                <div class="form-group">
+                  <label class="text-dark">Chọn thể loại: </label>
+                  <select name="eselectLoaiPhim" id="eroleLoaiPhim">
+                    <option value="">option</option>
+                  </select>
+                </div> 
+
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
                     <label class="text-dark" for="GiaPhim">Giá phim</label>
@@ -213,6 +228,11 @@
                   <p class="text-danger">{{ $errors->first('DaoDien') }}</p>
                </div>
                <div class="form-group">
+                <label class="text-dark" for="DaoDien">Thể loại</label>
+                <input type="text" name="editTheLoai" class="form-control form-control-user" id="dtheloai" >
+                <p class="text-danger">{{ $errors->first('DaoDien') }}</p>
+              </div>
+               <div class="form-group">
                 <label class="text-dark">Trailer :</label>
                 <input type="text" name="editTrailer" class="form-control form-control-user" id="dtrailer" >
                 <p class="text-danger">{{ $errors->first('Trailer') }}</p>
@@ -263,7 +283,7 @@
 <div class="container-fluid">
     <!-- Page Heading -->
     <h1 class="h2 mb-1 text-center text-primary">QUẢN LÝ PHIM</h1>
-    <button data-toggle="modal" data-target="#add" class="btn btn-primary"><i class="fa fa-film" aria-hidden="true"> Thêm phim mới</i></button>
+    <button onclick="loadLoaiPhim()" data-toggle="modal" data-target="#add" class="btn btn-primary"><i class="fa fa-film" aria-hidden="true"> Thêm phim mới</i></button>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
@@ -301,7 +321,7 @@
                                    @endphp
                                 </td>
                                  <td>
-                                    <a href="javascript:void(0)" data-toggle="modal" onclick="suaPhim({{$item->id}})" data-target="#edit" class="btn btn-info" type="submit">Chỉnh sửa</a>|
+                                    <a href="javascript:void(0)" data-toggle="modal" onclick="suaPhim({{$item->id}});eloadLoaiPhim({{$item->loaiphim_id}})" data-target="#edit" class="btn btn-info" type="submit">Chỉnh sửa</a>|
                                     <a class="btn btn-info" type="submit" onclick="xemPhim({{$item->id}})">Details</a>
                                     <a href="javascript:void(0)"  class="btn btn-danger" onclick="xoaPhim({{$item->id}})" >Xóa phim</a> 
                                 </td>
@@ -322,6 +342,45 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 
+
+
+<script>
+   function loadLoaiPhim()
+  {      
+          $('#roleLoaiPhim').empty();
+          $.get('/LoaiPhim/get/', function(g){ 
+                  var array=JSON.parse(g);  
+                  for(var i=0;i<array.length;i++)
+                  {
+                      $('#roleLoaiPhim').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].TenLoaiPhim+'</option>');     
+                  }
+          });   
+  }
+</script>
+
+<script>
+  function eloadLoaiPhim(id)
+ {      
+        $(".modal-backdrop").remove();
+         $('#eroleLoaiPhim').empty();
+         $.get('/LoaiPhim/edit/'+id, function(g)
+         {
+           $('#eroleLoaiPhim').append('<option value='+g.id+'>'+g.id+': '+g.TenLoaiPhim+'</option>');     
+         });
+
+         $.get('/LoaiPhim/get/', function(g){ 
+                 var array=JSON.parse(g);  
+                 for(var i=0;i<array.length;i++)
+                 {
+                   if(array[i].loaiphim_id!=id)
+                   {
+                     $('#eroleLoaiPhim').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].TenLoaiPhim+'</option>');     
+                   }
+                     
+                 }
+         });   
+ }
+</script>
 
 <script>
   function eimage(input){
@@ -350,6 +409,7 @@
                   var ThoiLuong= $("input[name=ThoiLuong]").val();
                   var DaoDien= $("input[name=DaoDien]").val();
                   var QuocGia= $("input[name=QuocGia]").val();
+                  var loaiphim_id= $('select[name=selectLoaiPhim]').val() 
                   var Trailer= $("input[name=Trailer]").val();
                   var GiaPhim= $("input[name=GiaPhim]").val();
                   var HinhAnh= $("input[name=HinhAnh]").val();
@@ -366,6 +426,7 @@
                               NgayKetThuc:NgayKetThuc,
                               DaoDien:DaoDien,
                               Trailer:Trailer,
+                              loaiphim_id:loaiphim_id,
                               GioiHanTuoi:GioiHanTuoi,
                               QuocGia:QuocGia,
                               ThoiLuong:ThoiLuong,
@@ -396,7 +457,7 @@
                                 string+="<td>"+"Đã kết thúc"+"</td>"
                             } 
                            
-                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaPhim('"+array[i].id+"')"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
+                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaPhim('"+array[i].id+");eloadLoaiPhim("+array[i].loaiphim_id+")'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
                             string+="<a class='btn btn-info'  href='javascript:void(0)'  onclick= 'xemPhim("+array[i].id+")'"+">Details</a>|";
                             string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaPhim("+array[i].id+")'"+">Xóa phim</a>"+"</td></tr>";
                           }
@@ -456,6 +517,7 @@
         $("#dngaydkchieu").val(Phim.NgayDKChieu);
         $("#dngayketthuc").val(Phim.NgayKetThuc);
         $("#dquocgia").val(Phim.QuocGia);
+        $("#dtheloai").val(Phim.theloais.TenLoaiPhim);
         $("#dgioihantuoi").val(Phim.GioiHanTuoi);
         $("#dgiaphim").val(Phim.GiaPhim);
         $("#dimage").attr("src",Phim.HinhAnh);
@@ -472,7 +534,8 @@
         $("#tenphim").val(Phim.TenPhim);
         $("#daodien").val(Phim.DaoDien);
         $("#thoiluong").val(Phim.ThoiLuong);
-        $("#trailer").val(Phim.Trailer);      
+        $("#trailer").val(Phim.Trailer);  
+            
         $("#ngaydkchieu").val(Phim.NgayDKChieu);
         $("#ngayketthuc").val(Phim.NgayKetThuc);
         $("#quocgia").val(Phim.QuocGia);
@@ -494,6 +557,7 @@
                   var ThoiLuong= $("input[name=editThoiLuong]").val();
                   var DaoDien= $("input[name=editDaoDien]").val();
                   var QuocGia= $("input[name=editQuocGia]").val();
+                  var loaiphim_id= $('select[name=eselectLoaiPhim]').val() 
                   var Trailer= $("input[name=editTrailer]").val();
                   var GiaPhim= $("input[name=editGiaPhim]").val();
                   var HinhAnh= $("input[name=editHinhAnh]").val();
@@ -511,6 +575,7 @@
                               Trailer:Trailer,
                               GioiHanTuoi:GioiHanTuoi,
                               QuocGia:QuocGia,
+                              loaiphim_id:loaiphim_id,
                               ThoiLuong:ThoiLuong,
                               HinhAnh:HinhAnh,
                               GiaPhim:GiaPhim,

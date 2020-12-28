@@ -18,7 +18,7 @@ class PhimController extends Controller
      */
     public function index()
     {    
-        $list['phims']= Phim::where('TrangThai',1)->paginate(5);
+        $list['phims']= Phim::with('theloais')->where('TrangThai',1)->paginate(5);
         return view('manage.phim.index')->with($list);
     }
 
@@ -30,14 +30,7 @@ class PhimController extends Controller
     public function create()
     {
         //
-        $quocgia = QuocGia::all();
-        $data= GioiHanTuoi::all();
        
-        return view('manage.phim.create')->with([
-        'gioihantuoi' => $data,
-        'quocgia'=>$quocgia,
-		
-	]);
     }
 
     /**
@@ -90,6 +83,7 @@ class PhimController extends Controller
         $phim->GioiHanTuoi= $request->GioiHanTuoi;
         $phim->DaoDien= $request->DaoDien;
         $phim->QuocGia = $request->QuocGia;
+        $phim->loaiphim_id = $request->loaiphim_id;
         $phim->GiaPhim=$request->GiaPhim;
         $temp= substr($request->HinhAnh, 12);  
         $phim->Trailer= $request->Trailer;
@@ -143,7 +137,7 @@ class PhimController extends Controller
     public function show($id)
     {
         //
-        $phim = Phim::find($id);
+        $phim = Phim::with('theloais')->find($id);
         return response()->json($phim);
     }
     /**
@@ -187,7 +181,6 @@ class PhimController extends Controller
             'NgayDKChieu' => 'required',
             'NgayKetThuc' => 'required',
             'ThoiLuong' => 'required',
-            'HinhAnh' => 'required',
             'GiaPhim' => 'required',
             'DaoDien'=>'required|min:5|max:255',
             'QuocGia'=>'required|min:2|max:255',
@@ -205,9 +198,15 @@ class PhimController extends Controller
         $phim->DaoDien= $request->DaoDien;
         $phim->QuocGia = $request->QuocGia;
         $phim->GiaPhim=$request->GiaPhim;
-        $temp= substr($request->HinhAnh, 12);  
+        $phim->loaiphim_id = $request->loaiphim_id;
         $phim->Trailer= $request->Trailer;
-        $phim->HinhAnh="http://localhost:8000/data/".$temp;     
+
+        if(empty($request->HinhAnh)==false)
+        {
+            $temp= substr($request->HinhAnh, 12); 
+            $phim->HinhAnh="http://localhost:8000/data/".$temp;
+        }
+             
         $flag= $phim->save();
         $data= Phim::where('TrangThai',1)->get();
 

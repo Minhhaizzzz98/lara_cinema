@@ -11,7 +11,7 @@ class Phim extends Model
     protected $table = 'phims';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'TenPhim','NgayDKChieu','quocgia_id','gioihantuoi_id','NgayKetThuc','ThoiLuong','HinhAnh', 'TrangThai'
+        'TenPhim','NgayDKChieu','loaiphim_id','GiaPhim','NgayKetThuc','ThoiLuong','HinhAnh', 'TrangThai'
     ];
 
     public function dienviens() {
@@ -19,16 +19,9 @@ class Phim extends Model
     }
 
     public function theloais() {
-        return $this->belongsToMany('App\LoaiPhim', 'phim_theloai', 'phim_id', 'loaiphim_id');
+        return $this->belongsTo('App\LoaiPhim', 'loaiphim_id', 'id');
     }
 
-    public function quocgias() {
-        return $this->belongsTo('App\QuocGia', 'quocgia_id', 'id');
-    }
-    public function gioihantuoi() {
-        return $this->belongsTo('App\GioiHanTuoi', 'gioihantuoi_id', 'id');
-    }
-    
 
     public function lichchieus()
     {

@@ -22,11 +22,18 @@
                </select>
              </div>
              <div class="form-group">
+              <label class="text-dark">Chọn rạp: </label>
+               <select name="selectRap" id="roleRap">
+                 <option value="">option</option>
+               </select>
+             </div>
+             <div class="form-group">
                 <label class="text-dark">Chọn giờ chiếu: </label>
                  <select name="selectGioChieu" id="roleGioChieu">
                    <option value="">option</option>
                  </select>
                </div>
+
              <div class="form-group">
                     <label class="text-dark">Ngày chiếu</label>
                     <input  type="date"  name="NgayChieu" class="form-control form-control-user" >
@@ -63,6 +70,12 @@
              <div class="form-group">
                 <label class="text-dark">Chọn phim: </label>
                  <select name="eselectPhim" id="erolePhim">
+                   <option value="">option</option>
+                 </select>
+               </div>
+               <div class="form-group">
+                <label class="text-dark">Chọn rạp: </label>
+                 <select name="eselectRap" id="eroleRap">
                    <option value="">option</option>
                  </select>
                </div>
@@ -119,7 +132,7 @@
                                 <td>{{$item->giochieu->GioBatDau}}</td>  
                                 <td>{{$item->giochieu->loaitgchieu->Gia_TG + $item->phim->GiaPhim}}</td>      
                                  <td>
-                                     <a href="javascript:void(0)" data-toggle="modal" onclick="suaSuatChieu({{$item->id}});erolePhim({{$item->phim_id}});eroleGioChieu({{$item->giochieu_id}});" data-target="#edit" class="btn btn-info" type="submit">Chỉnh sửa</a>|
+                                     <a href="javascript:void(0)" data-toggle="modal" onclick="suaSuatChieu({{$item->id}});erolePhim({{$item->phim_id}});eroleGioChieu({{$item->giochieu_id}});eroleRap({{$item->rap_id}});" data-target="#edit" class="btn btn-info" type="submit">Chỉnh sửa</a>|
                                      <a href="javascript:void(0)"  class="btn btn-danger" onclick="xoaSuatChieu({{$item->id}})" >Xóa suất chiếu</a>
                                 </td>
                             </tr>
@@ -163,6 +176,15 @@
                       $('#roleGioChieu').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].GioBatDau+'</option>');     
                   }
           });   
+
+          $('#roleRap').empty();
+          $.get('/rap/get', function(g){ 
+                  var array=JSON.parse(g);  
+                  for(var i=0;i<array.length;i++)
+                  {
+                      $('#roleRap').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].TenRap+'</option>');     
+                  }
+          });   
   }
 
 </script>
@@ -178,6 +200,7 @@
                   var GioChieu = $('select[name=selectGioChieu]').val() 
                   var Phim = $('select[name=selectPhim]').val() 
                   var NgayChieu = $('input[name=NgayChieu]').val();
+                  var Rap = $('select[name=selectRap]').val() 
                   var token= $("input[name=_token]").val();
 
                   $.ajax({
@@ -187,6 +210,7 @@
                             GioChieu:GioChieu,
                             Phim:Phim,
                             NgayChieu:NgayChieu,
+                            Rap:Rap,
                             _token:token
                         },
                         success:function(response){ 
@@ -266,7 +290,7 @@
                         $('#erolePhim').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].TenPhim+'</option>');  
                      }   
                   }
-          });    
+          });     
   }
 </script>
 
@@ -294,6 +318,33 @@
 </script>
 
 <script>
+  function eroleRap(id)
+  {
+      $('#eroleRap').empty();
+        $.get('/rap/getId/'+id, function(g){ 
+              //   var array=JSON.parse(g);  
+              $('#eroleRap').append('<option value='+g.id+'>'+g.id+': '+g.TenRap+'</option>'); 
+        });
+
+        $.get('/rap/get', function(g){ 
+                var array=JSON.parse(g);  
+                for(var i=0;i<array.length;i++)
+                {
+                    if(array[i].id != id)
+                    {
+                      $('#eroleRap').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].TenRap+'</option>');     
+                    }
+                }
+        });   
+  }
+   
+</script>
+
+
+
+
+
+<script>
 
     function suaSuatChieu(id)
     { 
@@ -310,6 +361,7 @@
               e.stopImmediatePropagation();
               var id =$("input[name=MaSuatChieu]").val();
               var GioChieu = $('select[name=eselectGioChieu]').val() 
+              var Rap = $('select[name=eselectRap]').val() 
               var Phim = $('select[name=eselectPhim]').val() 
               var NgayChieu = $('input[name=eNgayChieu]').val();
               var token= $("input[name=_token]").val();
@@ -321,6 +373,7 @@
                          GioChieu:GioChieu,
                          Phim:Phim,
                          NgayChieu:NgayChieu,
+                         Rap:Rap,
                         _token:token
                     },
 

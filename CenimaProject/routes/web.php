@@ -72,6 +72,7 @@ Route::group(['prefix' => 'Phim'], function() {
 Route::group(['prefix' => 'LoaiPhim'], function() {
     Route::get('/index','LoaiPhimController@index')->name('LoaiPhim.index');
     Route::get('/create','LoaiPhimController@create');
+    Route::get('/get','LoaiPhimController@get');
     Route::post('/create','LoaiPhimController@store')->name('LoaiPhim.add');
     Route::get('/edit/{id}','LoaiPhimController@edit');
     Route::post('/update/{id}','LoaiPhimController@update');
@@ -146,6 +147,8 @@ Route::group(['prefix' => 'rap'], function() {
     Route::get('/','RapController@index');
     Route::get('/index','RapController@index');
     Route::get('/create','RapController@create');  
+    Route::get('/get','RapController@get');  
+    Route::get('/getId','RapController@getId');  
     Route::post('/create','RapController@store');
     Route::get('/details/{id}','RapController@show');
     Route::get('/edit/{id}','RapController@edit');
