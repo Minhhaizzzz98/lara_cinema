@@ -18,5 +18,9 @@ class Rap extends Model
     {
         return $this->hasMany('App\Phong', 'rap_id', 'id');
     }
+    public function suatchieu()
+    {
+        return $this->hasMany('App\SuatChieu', 'rap_id', 'id');
+    }
     
 }

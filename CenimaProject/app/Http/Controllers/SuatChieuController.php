@@ -42,6 +42,7 @@ class SuatChieuController extends Controller
         $sc->phim_id = $request->Phim;
         $sc->giochieu_id = $request->GioChieu;
         $sc->NgayChieu = $request->NgayChieu;
+        $sc->rap_id = $request->Rap;
         $sc->GiaSuatChieu=0;
         $flag = $sc->save();
 
@@ -91,6 +92,7 @@ class SuatChieuController extends Controller
         $sc = SuatChieu::find($id);
         $sc->phim_id = $request->Phim;
         $sc->giochieu_id = $request->GioChieu;
+        $sc->rap_id = $request->Rap;
         $sc->NgayChieu = $request->NgayChieu;
         $sc->GiaSuatChieu=0;
         $flag = $sc->save();

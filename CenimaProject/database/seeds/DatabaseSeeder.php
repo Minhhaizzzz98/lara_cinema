@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             // ChucVuSeeder::class,
             // Phim_DienVienSeeder::class,
            
-            // LoaiPhimSeeder::class,
+           
             // Phim_TheLoaiSeeder::class,
             
             // ChiNhanhSeeder::class,
@@ -32,9 +32,10 @@ class DatabaseSeeder extends Seeder
             // GheSeeder::class,
             // VeSeeder::class,
 
-            // PhimSeeder::class,
-            // DienVienSeeder::class,
-            // Phim_DienVienSeeder::class,
+            LoaiPhimSeeder::class,
+            PhimSeeder::class,
+            DienVienSeeder::class,
+            Phim_DienVienSeeder::class,
             // GheSeeder::class,
 
 

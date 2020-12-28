@@ -19,6 +19,10 @@ class RapController extends Controller
         
         return view('manage.rap.index', compact('list'));
     }
+    public function getId($id)
+    {
+        return response()->json(Rap::find($id));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -78,6 +82,11 @@ class RapController extends Controller
         $data = Rap::with('phongs')->where('id', $id)->where('TrangThai', '<>', '-1')->first();
         
         return view('manage.rap.details', compact('data'));
+    }
+    public function get()
+    {
+        $list = Rap::where('TrangThai', '<>', '-1')->get();
+        return json_encode($list);
     }
 
     /**

@@ -29,6 +29,12 @@ class LoaiPhimController extends Controller
         return view('manage.LoaiPhim.create');
     }
 
+    public function get()
+    {
+        $list = LoaiPhim::where('TrangThai','1')->get();
+        return json_encode($list);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

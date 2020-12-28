@@ -15,7 +15,7 @@ class PhimController extends Controller
      */
     public function index()
     {
-        $data = Phim::where('TrangThai', 1) ->get();
+        $data = Phim::with('theloais')->where('TrangThai',1)->get();
         return response()->json($data);
     }
 
@@ -36,6 +36,20 @@ class PhimController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function search($key)
+    {
+        $list =  Phim::where('TrangThai',1)->get();
+        $data = array();
+       foreach($list as $item)
+        {
+            if($item->TenPhim==$key)
+            {
+                array_push($data, $item);
+            }
+        }
+        return json_encode($data);
+    }
     public function show($id)
     {
         //
