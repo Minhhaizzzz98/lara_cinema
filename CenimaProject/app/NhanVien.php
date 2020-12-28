@@ -20,7 +20,7 @@ class NhanVien extends Authenticatable
     protected $fillable = [
         'HoNV',
         'TenNV',
-        'ChucVu',
+        'ChucVu_ID',
         'TenTK',
         'password',
         'Ma_NQL',
@@ -37,7 +37,7 @@ class NhanVien extends Authenticatable
 
     public function chucvu()
     {
-        return $this->belongsTo('App\ChucVu');
+        return $this->belongsTo('App\ChucVu','MaCV','ChucVu_ID');
     }
 
 

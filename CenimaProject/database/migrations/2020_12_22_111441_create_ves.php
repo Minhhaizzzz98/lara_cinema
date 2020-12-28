@@ -19,6 +19,9 @@ class CreateVes extends Migration
             $table->foreign('suatchieu_id')->references('id')->on('suat_chieus');
             $table->integer('ghe_id')->unsigned();
             $table->foreign('ghe_id')->references('id')->on('ghes');
+
+            $table->integer('kh_id')->unsigned();
+            $table->foreign('kh_id')->references('id')->on('khach_hangs');
             $table->double('GiaVe');
             $table->integer('TrangThai')->default(1);
             $table->timestamps();

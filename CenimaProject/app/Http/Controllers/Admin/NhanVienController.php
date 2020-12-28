@@ -18,10 +18,12 @@ class NhanVienController extends Controller
     public function index()
     {
         $nhanviens = DB::table('nhan_viens as nv')
-        ->join('chuc_vus as cv','nv.ChucVu', 'cv.MaCV')->orderBy('cv.MaCV','asc')
-        ->get();
+        ->join('chuc_vus as cv','nv.ChucVu_ID', 'cv.MaCV')->where('nv.status','1')->orderBy('cv.MaCV','asc')
+        ->paginate(5);
 
-            return view('manage.NhanVien.index',compact('nhanviens'));
+        $chucvus = DB::table('chuc_vus')->where('TrangThai','1')->get();
+
+            return view('manage.NhanVien.index',['nhanviens' => $nhanviens, 'chucvus'=>$chucvus]);
     }
 
     /**
@@ -31,9 +33,9 @@ class NhanVienController extends Controller
      */
     public function create()
     {
-        $nhanviens= NhanVien::where('ChucVu','1')->get();
+
         $chucvus = ChucVu::where('TrangThai','1')->get();
-        return view('manage.NhanVien.create',compact('chucvus','nhanviens'));
+        return view('manage.NhanVien.create',compact('chucvus'));
     }
 
     /**
@@ -42,28 +44,27 @@ class NhanVienController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(NhanVienRequest $request)
+    public function store(Request $request)
     {
 
         $nhanvien = new NhanVien();
 
-        $nhanvien->HoNV = $request->HoNV;
-        $nhanvien->TenNV = $request->TenNV;
+        $nhanvien->HoTen = $request->HoTen;
         $nhanvien->TenTK = $request->TenTK;
         $nhanvien->password = Hash::make($request->password);
 
-        $nhanvien->ChucVu = $request->ChucVu;
-        $nhanvien->Ma_NQL = $request->Ma_NQL;
+
+        $nhanvien->ChucVu_ID = $request->ChucVu;
         $nhanvien->NgSinh = $request->NgSinh;
         $nhanvien->DiaChi = $request->DiaChi;
         $nhanvien->SDT = $request->SDT;
         $nhanvien->Email = $request->Email;
 
-        $nhanvien->isLocked = 0;
-        $nhanvien->isBigAdmin = 0;
+        $nhanvien->status = 1;
 
+        if($request->Anh !=null)
 
-        $tennv = convert_vi_to_en($nhanvien->HoNV." ".$nhanvien->TenNV);
+        {   $tennv = $nhanvien->TenTK;
 
         $extension = $request->Anh->extension();
         $imageName = $tennv.'.'.$extension;
@@ -72,12 +73,12 @@ class NhanVienController extends Controller
         $request->Anh->move(public_path('images/nhanviens'), $imageName);
 
         $nhanvien->Anh = $imageName;
+     }
+     else $nhanvien->Anh = null;
 
-        $nhanvien->save();
+     $nhanvien->save();
 
-        return redirect()->route('employees.index');
-
-
+     return redirect()->route('employees.index');
     }
 
     /**
@@ -88,12 +89,10 @@ class NhanVienController extends Controller
      */
     public function show($id)
     {
+
         $nhanvien = NhanVien::find($id);
 
-        $chucvu = ChucVu::find($nhanvien->ChucVu);
-
-
-
+        $chucvu = ChucVu::find($nhanvien->ChucVu_ID);
 
             return view('manage.NhanVien.show',compact('nhanvien','chucvu'));
     }
@@ -107,9 +106,9 @@ class NhanVienController extends Controller
     public function edit($id)
     {
         $nhanvien = NhanVien::find($id);
-        $nhanviens= NhanVien::where('ChucVu','1')->get();
+
         $chucvus = ChucVu::where('TrangThai','1')->get();
-        return view('manage.NhanVien.edit',compact('nhanvien','chucvus','nhanviens'));
+        return view('manage.NhanVien.edit',compact('nhanvien','chucvus'));
     }
 
     /**
@@ -123,11 +122,9 @@ class NhanVienController extends Controller
     {
         $nhanvien = NhanVien::find($id);
 
-        $nhanvien->HoNV = $request->HoNV;
-        $nhanvien->TenNV = $request->TenNV;
+        $nhanvien->HoTen = $request->HoTen;
+        $nhanvien->ChucVu_ID = $request->ChucVu;
 
-        $nhanvien->ChucVu = $request->ChucVu;
-        $nhanvien->Ma_NQL = $request->Ma_NQL;
         $nhanvien->NgSinh = $request->NgSinh;
         $nhanvien->DiaChi = $request->DiaChi;
         $nhanvien->SDT = $request->SDT;
@@ -136,19 +133,23 @@ class NhanVienController extends Controller
 
         if($request->Anh !=null)
         {
-        $tennv = convert_vi_to_en($nhanvien->HoNV." ".$nhanvien->TenNV);
 
-        $extension = $request->Anh->extension();
-        $imageName = $tennv.'.'.$extension;
+            $tennv = ($nhanvien->TenTK);
 
+            $extension = $request->Anh->extension();
+            $imageName = $tennv.'.'.$extension;
 
         $request->Anh->move(public_path('images/nhanviens'), $imageName);
 
         $nhanvien->Anh = $imageName;
         }
-        $nhanvien->save();
+
+        if($nhanvien->save())
 
         return redirect()->route('employees.index');
+
+        else
+        return redirect()->route('employees.edit');
     }
 
     /**
@@ -160,33 +161,18 @@ class NhanVienController extends Controller
     public function destroy($id)
     {
         $nhanvien = NhanVien::find($id);
-        if($nhanvien->isLocked == 0)
-        $nhanvien->isLocked = 1;
+        if($nhanvien->status == 0)
+        $nhanvien->status = 1;
         else
-        if($nhanvien->isLocked == 1)
-        $nhanvien->isLocked = 0;
+        if($nhanvien->status == 1)
+        $nhanvien->status = 0;
 
 
         $nhanvien->save();
-        return redirect()->route('employees.index');
+
+
+      return redirect()->route('employees.index');
     }
 }
 
-function convert_vi_to_en($str) {
-    $str = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/", "a", $str);
-    $str = preg_replace("/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/", "e", $str);
-    $str = preg_replace("/(ì|í|ị|ỉ|ĩ)/", "i", $str);
-    $str = preg_replace("/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/", "o", $str);
-    $str = preg_replace("/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/", "u", $str);
-    $str = preg_replace("/(ỳ|ý|ỵ|ỷ|ỹ)/", "y", $str);
-    $str = preg_replace("/(đ)/", "d", $str);
-    $str = preg_replace("/(À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ)/", "A", $str);
-    $str = preg_replace("/(È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ)/", "E", $str);
-    $str = preg_replace("/(Ì|Í|Ị|Ỉ|Ĩ)/", "I", $str);
-    $str = preg_replace("/(Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ)/", "O", $str);
-    $str = preg_replace("/(Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ)/", "U", $str);
-    $str = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", "Y", $str);
-    $str = preg_replace("/(Đ)/", "D", $str);
-    $str = str_replace(" ", "-",$str);
-    return $str;
-}
+

@@ -9,12 +9,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-   <meta name="csrf-token" content="{{csrf_token()}}"> 
+   <meta name="csrf-token" content="{{csrf_token()}}">
 
     <link rel="shortcut icon"  href="{{asset('img/clapperboard.svg')}}"/>
     <title>Quản lý rạp chiếu phim</title>
     <!-- Custom fonts for this template-->
-    <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+
 
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
 
@@ -104,20 +104,27 @@
             <div class="sidebar-heading">
                 Management
             </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('customers.index')}}">
+                        <i class="fas fa-users "></i>
+                        <span>Khách hàng</span></a>
+                </li>
+
             <li class="nav-item">
             <a class="nav-link" href="{{route('employees.index')}}">
                     <i class="fas fa-users "></i>
-                    <span>Employees</span></a>
+                    <span>Nhân viên</span></a>
             </li>
 
 
             <li class="nav-item">
                 <a class="nav-link" href="{{route('positions.index')}}">
                         <i class="fas fa-user "></i>
-                        <span>Positions</span></a>
+                        <span>Chức vụ</span></a>
             </li>
 
-            
+
             <li class="nav-item">
                 <a class="nav-link" href="/Phim/index">
                         <i class="fas fa-film"></i>
@@ -128,7 +135,16 @@
                     <i class="fas fa-film"></i>
                     <span>Thể loại</span></a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/Phim_DienVien/index">
+                  <i class="fas fa-user-friends"></i>
+                  <span>Diễn viên</span></a>
+            </li>
+
+
            
+
             <li class="nav-item">
                 <a class="nav-link" href="{{url('/ghe/')}}">
                     <i class="fas fa-chair"></i>
@@ -165,8 +181,8 @@
                        <i class="fas fa-user-friends"></i>
                         <span>Loại TG chiếu</span></a>
             </li>
-        
-   
+
+
 
             <!-- Divider -->
 
@@ -414,7 +430,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle" src="{{asset('img/undraw_profile.svg')}}">
-                               
+
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -504,10 +520,10 @@
             }
         }
     </script>
-  
+
     <!-- Bootstrap core JavaScript-->
-    
-   
+
+
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 

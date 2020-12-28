@@ -7,7 +7,8 @@ use App\NhanVien;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ChucVuRequest;
 use Illuminate\Http\Request;
-
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Validation\Validator;
 class ChucVuController extends Controller
 {
     /**
@@ -17,9 +18,10 @@ class ChucVuController extends Controller
      */
     public function index()
     {
-        $chucvus = ChucVu::all();
 
-       return view('manage.ChucVu.index',compact('chucvus'));
+        $chucvus = DB::table('chuc_vus')->where('TrangThai','1')->orderBy('created_at','desc')->get();
+
+       return view('manage.ChucVu.index',['chucvus' => $chucvus]);
     }
 
     /**
@@ -29,7 +31,7 @@ class ChucVuController extends Controller
      */
     public function create()
     {
-        return view('manage.ChucVu.create');
+
     }
 
     /**
@@ -40,17 +42,17 @@ class ChucVuController extends Controller
      */
     public function store(ChucVuRequest $request)
     {
-       $chucvu = new ChucVu();
-       $chucvu->TenCV = $request->TenCV;
-       $chucvu->TrangThai = 1;
+     if($request->TenCV ==null)
+     { return response()->json([ 'error' => true, 'messages' => "Lỗi", ], 422); }
 
-       if($chucvu->save())
-       return redirect()->route('positions.index');
-       else
-       return redirect()->route('positions.create');
+    $chucvu = new ChucVu();
+    $chucvu->TenCV = $request->TenCV;
+    $chucvu->TrangThai = 1;
+    $chucvu->save();
+    $chucvus = DB::table('chuc_vus')->where('TrangThai','1')->orderBy('created_at','desc')->get();
+    return json_encode($chucvus);
+ }
 
-
-    }
 
     /**
      * Display the specified resource.
@@ -60,11 +62,7 @@ class ChucVuController extends Controller
      */
     public function show($id)
     {
-        $nhanviens = DB::table('nhan_viens as nv')
-        ->join('chuc_vus as cv','nv.ChucVu', 'cv.MaCV')
-        ->where('cv.MaCV',$id)->get();
-
-            return view('manage.ChucVu.show',compact('nhanviens'));
+         $chucvu = ChucVu::find($id); return response()->json([ 'error' => false, 'chucvu' => $chucvu, ], 200);
     }
 
     /**
@@ -88,10 +86,20 @@ class ChucVuController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        // $chucvu = ChucVu::find($id);
+        // $chucvu->TenCV = $request->TenCV;
+        // $chucvu->save();
+        // return redirect()->route('positions.index');
         $chucvu = ChucVu::find($id);
-        $chucvu->TenCV = $request->TenCV;
-        $chucvu->save();
-        return redirect()->route('positions.index');
+        if($request->TenCV ==null)
+        { return response()->json([ 'error' => true, 'messages' => "Lỗi", ], 422); }
+
+         $chucvu->TenCV = $request->input('TenCV');
+
+         $chucvu->save();
+         $chucvus = DB::table('chuc_vus')->where('TrangThai','1')->orderBy('created_at','desc')->get();
+         return json_encode($chucvus);
     }
 
     /**
@@ -102,16 +110,16 @@ class ChucVuController extends Controller
      */
     public function destroy($id)
     {
+
         $chucvu = ChucVu::find($id);
         if($chucvu->TrangThai == 0)
         $chucvu->TrangThai = 1;
         else
         if($chucvu->TrangThai == 1)
         $chucvu->TrangThai = 0;
-
-
         $chucvu->save();
-        return redirect()->route('positions.index');
+        $chucvus = DB::table('chuc_vus')->where('TrangThai','1')->orderBy('created_at','desc')->get();
+        return json_encode($chucvus);
 
     }
 }
