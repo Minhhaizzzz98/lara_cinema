@@ -223,7 +223,7 @@
   function erole(id){
           $('#erole').empty();
 
-          $.get('/GioChieu/getId'+id, function(a){ 
+          $.get('/GioChieu/getId/'+id, function(a){ 
              $('#erole').append('<option value='+a.id+'>'+a.id+': '+a.TenLoaiTGChieu+'</option>');              
            });   
 
