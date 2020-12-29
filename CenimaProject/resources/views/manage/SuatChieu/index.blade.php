@@ -348,8 +348,7 @@
 <script>
 
     function suaSuatChieu(id)
-    { 
-       
+    {   
        $.get('/SuatChieu/edit/'+id, function(g){  
         $("#MaSuatChieu").val(g.id); 
         $("#eNgayChieu").val(g.NgayChieu);
@@ -360,8 +359,7 @@
     $(document).ready(function(){
         $('#form-edit').on('submit',function(e){
               e.preventDefault();
-              e.stopImmediatePropagation();
-             
+              e.stopImmediatePropagation();      
               var id =$("input[name=MaSuatChieu]").val();
               var GioChieu = $('select[name=eselectGioChieu]').val() 
               var Rap = $('select[name=eselectRap]').val() 
