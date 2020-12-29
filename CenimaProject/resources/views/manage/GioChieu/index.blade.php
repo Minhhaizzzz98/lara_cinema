@@ -102,7 +102,7 @@
                                 <td>{{$item->GioBatDau}}</td>
                                 <td>{{$item->loaitgchieu->TenLoaiTGChieu}}</td>     
                                  <td>
-                                     <a href="javascript:void(0)" data-toggle="modal" onclick="suaGioChieu({{$item->id}});erole();" data-target="#edit" class="btn btn-info" type="submit">Chỉnh sửa</a>|
+                                     <a href="javascript:void(0)" data-toggle="modal" onclick="suaGioChieu({{$item->id}});erole({{$item->loaitgchieu_id}});" data-target="#edit" class="btn btn-info" type="submit">Chỉnh sửa</a>|
                                      <a href="javascript:void(0)"  class="btn btn-danger" onclick="xoaGioChieu({{$item->id}})" >Xóa giờ chiếu</a>
                                 </td>
                             </tr>
@@ -170,7 +170,7 @@
                           {
                             string+="<tr id='sid"+array[i].id +"'"+"><td>"+array[i].id+"</td>"+"<td>"+array[i].GioBatDau+"</td>";
                             string+="<td>"+array[i].loaitgchieu.TenLoaiTGChieu+"</td>";
-                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaGioChieu("+array[i].id+");erole();'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
+                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaGioChieu("+array[i].id+");erole("+array[i].loaitgchieu_id+");'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
                             string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaGioChieu("+array[i].id+")'"+">Xóa loại TG</a>"+"</td></tr>"
                           }
                             $(".modal-backdrop").remove();
@@ -220,13 +220,22 @@
 
 <script>
 
-  function erole(){
-    $('#erole').empty();
+  function erole(id){
+          $('#erole').empty();
+
+          $.get('/GioChieu/getId'+id, function(a){ 
+             $('#erole').append('<option value='+a.id+'>'+a.id+': '+a.TenLoaiTGChieu+'</option>');              
+           });   
+
           $.get('/GioChieu/get', function(g){ 
                   var array=JSON.parse(g);  
                   for(var i=0;i<array.length;i++)
                   {
+                    if(array[i].id != id)
+                    {
                       $('#erole').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].TenLoaiTGChieu+'</option>');     
+                    }
+                      
                   }
          });   
   }
@@ -269,7 +278,7 @@
                           {
                             string+="<tr id='sid"+array[i].id +"'"+"><td>"+array[i].id+"</td>"+"<td>"+array[i].GioBatDau+"</td>";
                             string+="<td>"+array[i].loaitgchieu.TenLoaiTGChieu+"</td>";
-                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaGioChieu("+array[i].id+");erole();'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
+                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaGioChieu("+array[i].id+");erole("+array[i].loaitgchieu_id+");'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
                             string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaGioChieu("+array[i].id+")'"+">Xóa loại TG</a>"+"</td></tr>"
                           }
                             $(".modal-backdrop").remove();

@@ -14,6 +14,12 @@ class CreateDanhGias extends Migration
     public function up()
     {
         //
+        Schema::create('danh_gias', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('DanhGia');
+            $table->integer('TrangThai')->default(1);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -24,5 +30,6 @@ class CreateDanhGias extends Migration
     public function down()
     {
         //
+        Schema::dropIfExists('danh_gias');
     }
 }

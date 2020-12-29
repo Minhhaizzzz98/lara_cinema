@@ -14,6 +14,12 @@ class CreateBinhLuans extends Migration
     public function up()
     {
         //
+        Schema::create('binh_luans', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('NoiDung');
+            $table->integer('TrangThai')->default(1);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -24,5 +30,6 @@ class CreateBinhLuans extends Migration
     public function down()
     {
         //
+        Schema::dropIfExists('binh_luans');
     }
 }

@@ -87,6 +87,7 @@ Route::group(['prefix' => 'GioChieu'], function() {
     Route::post('/create','GioChieuController@store')->name('GioChieu.add');
     Route::get('/edit/{id}','GioChieuController@edit');
     Route::get('/get','GioChieuController@get');
+    Route::get('/getId/{id}','GioChieuController@getId');
     Route::get('/getGioChieuID/{id}','GioChieuController@getGioChieuID');
     Route::get('/getGioChieu','GioChieuController@getGioChieu');
     Route::post('/update/{id}','GioChieuController@update');
@@ -150,7 +151,7 @@ Route::group(['prefix' => 'rap'], function() {
     Route::get('/index','RapController@index');
     Route::get('/create','RapController@create');  
     Route::get('/get','RapController@get');  
-    Route::get('/getId','RapController@getId');  
+    Route::get('/getId/{id}','RapController@getId');  
     Route::get('/create','RapController@create');
     Route::post('/create','RapController@store');
     Route::get('/details/{id}','RapController@show');
