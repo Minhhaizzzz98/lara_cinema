@@ -46,7 +46,7 @@ class SuatChieuController extends Controller
         $sc->GiaSuatChieu=0;
         $flag = $sc->save();
 
-        $data = SuatChieu::with('phim','giochieu')->where('TrangThai',1)->get();
+        $data = SuatChieu::with('phim','rap','giochieu')->where('TrangThai',1)->get();
         if($flag)
         {
             return json_encode($data);
@@ -97,7 +97,7 @@ class SuatChieuController extends Controller
         $sc->GiaSuatChieu=0;
         $flag = $sc->save();
 
-        $data = SuatChieu::with('phim','giochieu')->where('TrangThai',1)->get();
+        $data = SuatChieu::with('phim','rap','giochieu')->where('TrangThai',1)->get();
         if($flag)
         {
             return json_encode($data);

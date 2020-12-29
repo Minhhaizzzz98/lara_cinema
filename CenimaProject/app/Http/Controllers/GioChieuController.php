@@ -71,6 +71,12 @@ class GioChieuController extends Controller
         return json_encode($data);
     }
 
+    public function getId($id)
+    {
+        $data = LoaiTGChieu::find($id);
+        return response()->json($data);
+    }
+
     public function get()
     {
         $data = LoaiTGChieu::where('TrangThai',1)->get();
