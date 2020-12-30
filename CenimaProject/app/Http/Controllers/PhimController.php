@@ -68,6 +68,7 @@ class PhimController extends Controller
             'HinhAnh' => 'required',
             'GiaPhim' => 'required',
             'DaoDien'=>'required|min:5|max:255',
+            'MoTa'=>'required|min:5|max:255',
             'QuocGia'=>'required|min:2|max:255',
             'GioiHanTuoi'=>'required|min:2|max:255',
             'Trailer'=>'required|min:2|max:255',
@@ -82,6 +83,7 @@ class PhimController extends Controller
         $phim->ThoiLuong=$request->ThoiLuong;
         $phim->GioiHanTuoi= $request->GioiHanTuoi;
         $phim->DaoDien= $request->DaoDien;
+        $phim->MoTa= $request->MoTa;
         $phim->QuocGia = $request->QuocGia;
         $phim->loaiphim_id = $request->loaiphim_id;
         $phim->GiaPhim=$request->GiaPhim;
@@ -182,6 +184,7 @@ class PhimController extends Controller
             'NgayKetThuc' => 'required',
             'ThoiLuong' => 'required',
             'GiaPhim' => 'required',
+            'MoTa'=>'required|min:5|max:255',
             'DaoDien'=>'required|min:5|max:255',
             'QuocGia'=>'required|min:2|max:255',
             'GioiHanTuoi'=>'required|min:2|max:255',
@@ -196,6 +199,7 @@ class PhimController extends Controller
         $phim->ThoiLuong=$request->ThoiLuong;
         $phim->GioiHanTuoi= $request->GioiHanTuoi;
         $phim->DaoDien= $request->DaoDien;
+        $phim->MoTa= $request->MoTa;
         $phim->QuocGia = $request->QuocGia;
         $phim->GiaPhim=$request->GiaPhim;
         $phim->loaiphim_id = $request->loaiphim_id;

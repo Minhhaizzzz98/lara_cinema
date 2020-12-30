@@ -15,23 +15,23 @@
             <form class="user" id="form-add">
                 {{ csrf_field() }}
                   <div class="form-group">
-                     <label class="text-dark" for="TenPhim">Tên phim</label>
+                     <label class="text-dark" for="TenPhim">Tên phim:</label>
                      <input type="text" name="TenPhim" class="form-control form-control-user"  >
                      <p class="text-danger">{{ $errors->first('TenPhim') }}</p>
                   </div>
                   <div class="form-group">
-                      <label class="text-dark" for="NgayDKChieu">Ngày ĐK chiếu</label>
+                      <label class="text-dark" for="NgayDKChieu">Ngày ĐK chiếu:</label>
                       <input type="date" name="NgayDKChieu" class="form-control form-control-user"  >
                       <p class="text-danger">{{ $errors->first('NgayDKChieu') }}</p>
                   </div>
                   <div class="form-group">
-                    <label class="text-dark" for="NgayKetThuc">Ngày kết thúc</label>
+                    <label class="text-dark" for="NgayKetThuc">Ngày kết thúc:</label>
                     <input type="date" name="NgayKetThuc" class="form-control form-control-user"  >
                     <p class="text-danger">{{ $errors->first('NgayKetThuc') }}</p>
                   </div>
 
                   <div class="form-group">
-                    <label class="text-dark" for="DaoDien">Đạo diễn</label>
+                    <label class="text-dark" for="DaoDien">Đạo diễn:</label>
                     <input type="text" name="DaoDien" class="form-control form-control-user"  >
                     <p class="text-danger">{{ $errors->first('DaoDien') }}</p>
                  </div>
@@ -43,19 +43,19 @@
 
 
                   <div class="form-group">
-                    <label class="text-dark">Giới hạn tuổi :</label>
+                    <label class="text-dark">Giới hạn tuổi:</label>
                     <input type="text" name="GioiHanTuoi" class="form-control form-control-user"  >
                     <p class="text-danger">{{ $errors->first('GioiHanTuoi') }}</p>
                   </div>
                   <div class="form-group">
-                    <label class="text-dark">Quốc gia :</label>
+                    <label class="text-dark">Quốc gia:</label>
                     <input type="text" name="QuocGia" class="form-control form-control-user" >
                     <p class="text-danger">{{ $errors->first('QuocGia') }}</p>
                   </div>
 
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                      <label class="text-dark" for="ThoiLuong">Thời lượng</label>
+                      <label class="text-dark" for="ThoiLuong">Thời lượng:</label>
                         <input type="number" name="ThoiLuong" class="form-control form-control-user"  >
                         <p class="text-danger">{{ $errors->first('ThoiLuong') }}</p>
                     </div>
@@ -70,17 +70,26 @@
 
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <label class="text-dark" for="GiaPhim">Giá phim</label>
+                    <label class="text-dark" for="GiaPhim">Giá phim:</label>
                       <input type="number" name="GiaPhim" class="form-control form-control-user"  >
                       <p class="text-danger">{{ $errors->first('GiaPhim') }}</p>
                   </div>
                 </div>
                 
                   <div class="form-group">
-                    <label class="text-dark" for="HinhAnh">Hình ảnh</label><br>
+                    <label class="text-dark" for="HinhAnh">Hình ảnh:</label><br>
                     <input type="file" name="HinhAnh" alt="Profile Image" onchange="previewFile(this)"  >
                     <img id="previewImage" width="300px" height="200px"  alt="">
                     <p class="text-danger">{{ $errors->first('HinhAnh') }}</p>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                      <label class="text-dark" for="MoTa">Mô tả :</label>
+                        {{-- <input type="text" name="MoTa" class="form-control form-control-user"  > --}}
+                        <textarea name="MoTa" id="idMoTa" cols="40" rows="10"></textarea>
+                        <p class="text-danger">{{ $errors->first('MoTa') }}</p>
+                    </div>
                   </div>
                   <button type="submit" id="add-data" class="btn btn-primary">Thêm mới</button>
               </form>
@@ -144,21 +153,21 @@
                     <p class="text-danger">{{ $errors->first('GioiHanTuoi') }}</p>
                   </div>
                   <div class="form-group">
-                    <label class="text-dark">Quốc gia :</label>
+                    <label class="text-dark">Quốc gia:</label>
                     <input type="text" name="editQuocGia" class="form-control form-control-user" id="quocgia" >
                     <p class="text-danger">{{ $errors->first('QuocGia') }}</p>
                   </div>
 
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                      <label class="text-dark" for="ThoiLuong">Thời lượng</label>
+                      <label class="text-dark" for="ThoiLuong">Thời lượng :</label>
                         <input type="number" name="editThoiLuong" class="form-control form-control-user" id="thoiluong" >
                         <p class="text-danger">{{ $errors->first('ThoiLuong') }}</p>
                     </div>
                 </div>
 
                 <div class="form-group">
-                  <label class="text-dark">Chọn thể loại: </label>
+                  <label class="text-dark">Chọn thể loại : </label>
                   <select name="eselectLoaiPhim" id="eroleLoaiPhim">
                     <option value="">option</option>
                   </select>
@@ -166,18 +175,26 @@
 
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <label class="text-dark" for="GiaPhim">Giá phim</label>
+                    <label class="text-dark" for="GiaPhim">Giá phim :</label>
                       <input type="number" name="editGiaPhim" class="form-control form-control-user" id="giaphim" >
                       <p class="text-danger">{{ $errors->first('ThoiLuong') }}</p>
                   </div>
               </div>
                 
               <div class="form-group">
-                    <label class="text-dark" for="HinhAnh">Hình ảnh</label><br>
+                    <label class="text-dark" for="HinhAnh">Hình ảnh :</label><br>
                     <input type="file" name="editHinhAnh" alt="Profile Image" onchange="eimage(this)" id="hinhanh" >
                     <img id="eimage" width="300px" height="200px"  >
                     <p class="text-danger">{{ $errors->first('HinhAnh') }}</p>
               </div>
+
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <label class="text-dark" for="MoTa">Mô tả :</label>
+                    <textarea name="editMoTa" id="editMoTa" cols="40" rows="10"></textarea>
+                    <p class="text-danger">{{ $errors->first('MoTa') }}</p>
+                </div>
+             </div>
                   <button type="submit" id="add-data" class="btn btn-primary">Lưu lại</button>
               </form>
          <div class="modal-footer">
@@ -268,6 +285,12 @@
                   <label class="text-dark" for="HinhAnh">Hình ảnh</label><br>
                   <img id="dimage" width="300px" height="200px"  >
                   <p class="text-danger">{{ $errors->first('HinhAnh') }}</p>
+            </div>
+
+              <div class="form-group">
+                  <label class="text-dark" for="MoTa">Mô tả</label><br>
+                   <textarea  id="dmota" cols="40" rows="10"></textarea>
+                  <p class="text-danger">{{ $errors->first('MoTa') }}</p>
             </div>
             </form>
        <div class="modal-footer">
@@ -360,8 +383,8 @@
 
 <script>
   function eloadLoaiPhim(id)
- {      
-        $(".modal-backdrop").remove();
+  {      
+        
          $('#eroleLoaiPhim').empty();
          $.get('/LoaiPhim/edit/'+id, function(g)
          {
@@ -412,6 +435,7 @@
                   var loaiphim_id= $('select[name=selectLoaiPhim]').val() 
                   var Trailer= $("input[name=Trailer]").val();
                   var GiaPhim= $("input[name=GiaPhim]").val();
+                  var MoTa = document.getElementById("idMoTa").value;
                   var HinhAnh= $("input[name=HinhAnh]").val();
                   var GioiHanTuoi= $("input[name=GioiHanTuoi]").val();
                   var _token= $("input[name=_token]").val();
@@ -429,6 +453,7 @@
                               loaiphim_id:loaiphim_id,
                               GioiHanTuoi:GioiHanTuoi,
                               QuocGia:QuocGia,
+                              MoTa:MoTa,
                               ThoiLuong:ThoiLuong,
                               HinhAnh:HinhAnh,
                               GiaPhim:GiaPhim,
@@ -517,6 +542,7 @@
         $("#dngaydkchieu").val(Phim.NgayDKChieu);
         $("#dngayketthuc").val(Phim.NgayKetThuc);
         $("#dquocgia").val(Phim.QuocGia);
+        $("#dmota").val(Phim.MoTa);
         $("#dtheloai").val(Phim.theloais.TenLoaiPhim);
         $("#dgioihantuoi").val(Phim.GioiHanTuoi);
         $("#dgiaphim").val(Phim.GiaPhim);
@@ -535,7 +561,7 @@
         $("#daodien").val(Phim.DaoDien);
         $("#thoiluong").val(Phim.ThoiLuong);
         $("#trailer").val(Phim.Trailer);  
-            
+        $("#editMoTa").val(Phim.MoTa);
         $("#ngaydkchieu").val(Phim.NgayDKChieu);
         $("#ngayketthuc").val(Phim.NgayKetThuc);
         $("#quocgia").val(Phim.QuocGia);
@@ -557,6 +583,8 @@
                   var ThoiLuong= $("input[name=editThoiLuong]").val();
                   var DaoDien= $("input[name=editDaoDien]").val();
                   var QuocGia= $("input[name=editQuocGia]").val();
+                  // var Mota= $("input[name=editMoTa]").val();
+                  var MoTa = document.getElementById("editMoTa").value;
                   var loaiphim_id= $('select[name=eselectLoaiPhim]').val() 
                   var Trailer= $("input[name=editTrailer]").val();
                   var GiaPhim= $("input[name=editGiaPhim]").val();
@@ -575,6 +603,7 @@
                               Trailer:Trailer,
                               GioiHanTuoi:GioiHanTuoi,
                               QuocGia:QuocGia,
+                              MoTa:MoTa,
                               loaiphim_id:loaiphim_id,
                               ThoiLuong:ThoiLuong,
                               HinhAnh:HinhAnh,
