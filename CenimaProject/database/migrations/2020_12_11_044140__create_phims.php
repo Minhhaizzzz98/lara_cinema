@@ -21,13 +21,12 @@ class CreatePhims extends Migration
             $table->string('HinhAnh');
             $table->string('Trailer');
             $table->string('DaoDien');
-
             $table->integer('loaiphim_id')->unsigned();
             $table->foreign('loaiphim_id')->references('id')->on('loai_phims');
-            
             $table->string('QuocGia');
             $table->string('GioiHanTuoi');
             $table->double('GiaPhim'); 
+            $table->string('MoTa');
             $table->integer('TrangThai')->default(1);
             $table->timestamps();
         });
