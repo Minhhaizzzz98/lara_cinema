@@ -16,9 +16,9 @@ class CreateKhachHangs extends Migration
         Schema::create('khach_hangs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('HoTen');
-            $table->string('TenTK',50)->unique(); //
+            //$table->string('TenTK',50)->unique(); //
             $table->string('password');  //
-
+            $table->date("NgaySinh");
             $table->string('DiaChi')->nullable();
             $table->string('SDT',15)->unique();
             $table->string('Email',100)->unique();
