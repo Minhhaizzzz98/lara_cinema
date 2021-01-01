@@ -17,13 +17,13 @@ class DatabaseSeeder extends Seeder
             // GioiHanTuoiSeeder::class,
             // PhimSeeder::class,
             // DienVienSeeder::class,
-           
+
             // ChucVuSeeder::class,
             // Phim_DienVienSeeder::class,
-           
-           
+
+
             // Phim_TheLoaiSeeder::class,
-            
+
             // ChiNhanhSeeder::class,
             // GiaSeeder::class,
             // ThoiGianChieuSeeder::class,
@@ -47,6 +47,10 @@ class DatabaseSeeder extends Seeder
             PhongSeeder::class,
             GheSeeder::class,
 
+
+            KhachHangSeeder::class,
+            ChucVuSeeder::class,
+            NhanVienSeeder::class,
             //tiếp theo
 
         ]);
