@@ -145,6 +145,9 @@
 
 
 
+
+
+
             <li class="nav-item">
                 <a class="nav-link" href="{{url('/ghe/')}}">
                     <i class="fas fa-chair"></i>
@@ -160,11 +163,11 @@
                     <i class="fas fa-home"></i>
                     <span>Rạp</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/Phim_DienVien/index">
-                     <i class="fas fa-user-friends"></i>
-                   <span>Diễn viên phim</span></a>
-            </li>
+
+          
+
+        
+
             <li class="nav-item">
                 <a class="nav-link" href="/SuatChieu/index">
                     <i class="fas fa-ticket-alt"></i>
