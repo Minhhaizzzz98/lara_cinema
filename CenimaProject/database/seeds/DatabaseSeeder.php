@@ -32,6 +32,10 @@ class DatabaseSeeder extends Seeder
             // GheSeeder::class,
             // VeSeeder::class,
 
+            LoaiTGChieuSeeder::class,
+            GioChieuSeeder::class,
+            SuatChieuSeeder::class,
+
             LoaiPhimSeeder::class,
             PhimSeeder::class,
             DienVienSeeder::class,
