@@ -22,6 +22,7 @@ Route::apiResource('/Phim', 'Api\PhimController');
 Route::apiResource('/LoaiPhim', 'Api\LoaiPhimController');
 Route::apiResource('/GioiHanTuoi', 'Api\GioiHanTuoiController');
 Route::apiResource('KhachHang','Api\KhachHangController');
+Route::post('/KhachHang_Login','Api\KhachHangController@Login');
 Route::apiResource('/DienVien', 'Api\DienVienController');
 
 Route::apiResource('/GioChieu', 'Api\GioChieuApi');
@@ -33,4 +34,8 @@ Route::apiResource('/Phong', 'Api\PhongController');
 Route::apiResource('/Rap', 'Api\RapController');
 
 Route::apiResource('NhanVien','Api\NhanVienController');
+
+// dang ky khach hàng
 Route::post("/KhachHang_Dk",'Api\KhachHangController@KhachHang_Regis');
+
+

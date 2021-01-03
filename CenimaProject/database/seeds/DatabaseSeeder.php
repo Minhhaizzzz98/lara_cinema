@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
             DienVienSeeder::class,
             Phim_DienVienSeeder::class,
             // GheSeeder::class,
-
+            KhachHangSeeder::class,
 
             // ViTriSeeder::class,
 
