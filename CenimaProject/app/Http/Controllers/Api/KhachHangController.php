@@ -64,6 +64,7 @@ class KhachHangController extends Controller
     {
         //
     }
+
     public function Login(Request $request)
     {
         $khachhang=KhachHang::where("Email",$request->email)->first();
@@ -78,13 +79,11 @@ class KhachHangController extends Controller
             else
             {
                 
-                return response()->json("false1");
+                return response()->json("false");
             }
         }
         return response()->json("false");
        
-
-
     }
     public function KhachHang_Regis(Request $request)
     {

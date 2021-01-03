@@ -143,7 +143,10 @@
             </li>
 
 
-           
+
+
+
+
 
             <li class="nav-item">
                 <a class="nav-link" href="{{url('/ghe/')}}">
@@ -160,11 +163,11 @@
                     <i class="fas fa-home"></i>
                     <span>Rạp</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/Phim_DienVien/index">  
-                     <i class="fas fa-user-friends"></i>
-                   <span>Diễn viên phim</span></a>
-            </li>
+
+          
+
+        
+
             <li class="nav-item">
                 <a class="nav-link" href="/SuatChieu/index">
                     <i class="fas fa-ticket-alt"></i>
@@ -428,8 +431,8 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="{{asset('img/undraw_profile.svg')}}">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->HoTen}}</span>
+                                <img class="img-profile rounded-circle" src="{{asset('images/nhanviens/'.Auth::user()->Anh)}}">
 
                             </a>
                             <!-- Dropdown - User Information -->
@@ -448,10 +451,13 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
+                                <form action="{{url('/logout')}}"method="POST" class="dropdown-item" >
+                                    @csrf
+                                    <button>
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Đăng xuất
+                                    </button>
+                                </form>
                             </div>
                         </li>
 

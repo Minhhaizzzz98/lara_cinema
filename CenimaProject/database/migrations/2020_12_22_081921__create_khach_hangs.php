@@ -18,7 +18,10 @@ class CreateKhachHangs extends Migration
             $table->string('HoTen');
             //$table->string('TenTK',50)->unique(); //
             $table->string('password');  //
+
             $table->date("NgaySinh")->nullable();
+
+
             $table->string('DiaChi')->nullable();
             $table->string('SDT',15)->unique();
             $table->string('Email',100)->unique();

@@ -3,7 +3,7 @@
 
   
   <!-- Modal -->
-  <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal fade" id="add" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -50,7 +50,7 @@
     </div>
   </div>
 
-  <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal fade" id="edit" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -117,6 +117,7 @@
                         <tr>
                             <th>Mã suất chiếu</th>
                             <th>Tên phim</th>
+                            <th>Rạp</th>
                             <th>Ngày chiếu</th>
                             <th>Giờ chiếu</th>                 
                             <th>Giá suất chiếu</th>
@@ -128,9 +129,10 @@
                             <tr id="sid{{$item->id}}">
                                 <td>{{ $item->id }}</td>
                                 <td>{{$item->phim->TenPhim}}</td>
+                                <td>{{$item->rap->TenRap}}</td>
                                 <td>{{$item->NgayChieu}}</td>  
                                 <td>{{$item->giochieu->GioBatDau}}</td>  
-                                <td>{{$item->giochieu->loaitgchieu->Gia_TG + $item->phim->GiaPhim}}</td>      
+                                <td>{{number_format($item->giochieu->loaitgchieu->Gia_TG + $item->phim->GiaPhim)}} VND  </td>      
                                  <td>
                                      <a href="javascript:void(0)" data-toggle="modal" onclick="suaSuatChieu({{$item->id}});erolePhim({{$item->phim_id}});eroleGioChieu({{$item->giochieu_id}});eroleRap({{$item->rap_id}});" data-target="#edit" class="btn btn-info" type="submit">Chỉnh sửa</a>|
                                      <a href="javascript:void(0)"  class="btn btn-danger" onclick="xoaSuatChieu({{$item->id}})" >Xóa suất chiếu</a>
@@ -194,7 +196,6 @@
    $(document).ready(function(){
 
           $("#form-add").on('submit',function(e){
-
                   e.preventDefault();
                   e.stopImmediatePropagation();
                   var GioChieu = $('select[name=selectGioChieu]').val() 
@@ -217,18 +218,21 @@
                           alert("Thành công");   
                           var array=JSON.parse(response);               
                           var string="";
-                          $("#add").modal('hide');
+                          $("#add").modal('hide'); 
+                          $(".modal-backdrop").remove();  
                           for(let i =0; i<array.length;i++)
                           {
                             // var gia = array[i].giochieu.loaitgchieu.Gia_TG + array[i].phim.GiaPhim;
                             string+="<tr id='sid"+array[i].id +"'"+"><td>"+array[i].id+"</td>"+"<td>"+array[i].phim.TenPhim+"</td>";
+                            string+="<td>"+array[i].rap.TenRap+"</td>";
                             string+="<td>"+array[i].NgayChieu+"</td>";
                             string+="<td>"+array[i].giochieu.GioBatDau+"</td>";
                             string+="<td>"+(array[i].phim.GiaPhim+array[i].giochieu.loaitgchieu.Gia_TG)+"</td>";
-                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaSuatChieu("+array[i].id+");erole();'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
+                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaSuatChieu("+array[i].id+");eroleRap("+array[i].rap_id+");erolePhim("+array[i].phim_id+");eroleGioChieu("+array[i].giochieu_id+");'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
                             string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaSuatChieu("+array[i].id+")'"+">Xóa suất chiếu</a>"+"</td></tr>"
-                          }
-                            $(".modal-backdrop").remove();
+                          }           
+                       
+                          $(".modal-backdrop").remove();                                 
                             $("#body").html(string);
                         },
                         error: function(error){
@@ -275,6 +279,7 @@
 
 <script>
   function erolePhim(id){
+  
          $('#erolePhim').empty();
           $.get('/Phim/edit/'+id, function(g){ 
                 //   var array=JSON.parse(g);  
@@ -322,11 +327,10 @@
   {
       $('#eroleRap').empty();
         $.get('/rap/getId/'+id, function(g){ 
-              //   var array=JSON.parse(g);  
               $('#eroleRap').append('<option value='+g.id+'>'+g.id+': '+g.TenRap+'</option>'); 
         });
 
-        $.get('/rap/get', function(g){ 
+        $.get('/rap/get/', function(g){ 
                 var array=JSON.parse(g);  
                 for(var i=0;i<array.length;i++)
                 {
@@ -341,14 +345,11 @@
 </script>
 
 
-
-
-
 <script>
 
     function suaSuatChieu(id)
-    { 
-      $.get('/SuatChieu/edit/'+id, function(g){  
+    {   
+       $.get('/SuatChieu/edit/'+id, function(g){  
         $("#MaSuatChieu").val(g.id); 
         $("#eNgayChieu").val(g.NgayChieu);
         $("#edit").modal("toggle");
@@ -358,7 +359,7 @@
     $(document).ready(function(){
         $('#form-edit').on('submit',function(e){
               e.preventDefault();
-              e.stopImmediatePropagation();
+              e.stopImmediatePropagation();      
               var id =$("input[name=MaSuatChieu]").val();
               var GioChieu = $('select[name=eselectGioChieu]').val() 
               var Rap = $('select[name=eselectRap]').val() 
@@ -385,13 +386,14 @@
                           for(let i =0; i<array.length;i++)
                           {
                             string+="<tr id='sid"+array[i].id +"'"+"><td>"+array[i].id+"</td>"+"<td>"+array[i].phim.TenPhim+"</td>";
+                            string+="<td>"+array[i].rap.TenRap+"</td>";
                             string+="<td>"+array[i].NgayChieu+"</td>";
                             string+="<td>"+array[i].giochieu.GioBatDau+"</td>";
                             string+="<td>"+(array[i].phim.GiaPhim+array[i].giochieu.loaitgchieu.Gia_TG)+"</td>";
-                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaSuatChieu("+array[i].id+");erole();'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
+                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaSuatChieu("+array[i].id+");eroleRap("+array[i].rap_id+");erolePhim("+array[i].phim_id+");eroleGioChieu("+array[i].giochieu_id+");'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
                             string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaSuatChieu("+array[i].id+")'"+">Xóa suất chiếu</a>"+"</td></tr>"
-                          }
-                            $(".modal-backdrop").remove();
+                          }  
+                            $(".modal-backdrop")
                             $("#body").html(string);          
                     },
                     error: function(error){
