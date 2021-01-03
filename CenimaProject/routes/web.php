@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PhimDienVienController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,33 +16,35 @@ use App\Http\Controllers\PhimDienVienController;
 */
 
 Route::get('/', function () {
+
     return view('manage.home');
-});
+})->middleware('login');
 
 Route::get('/home', function () {
     return view('manage.home');
-});
+})->middleware('login');
 
 Route::get('/login', function () {
     return view('manage.login');
 });
-
+Route::post('login','BackController@Login_post');
+Route::post('logout','BackController@Logout_post');
 Route::get('/register', function () {
     return view('manage.register');
 });
 
 Route::get('/table', function () {
     return view('manage.table');
-});
+})->middleware('login');
 
-Route::resource('employees', 'Admin\NhanVienController');
+Route::resource('employees', 'Admin\NhanVienController')->middleware('login');
 
-Route::resource('positions', 'Admin\ChucVuController');
+Route::resource('positions', 'Admin\ChucVuController')->middleware('login');
 
-Route::resource('customers', 'Admin\KhachHangController');
+Route::resource('customers', 'Admin\KhachHangController')->middleware('login');
 
 
-Route::group(['prefix' => 'SuatChieu'], function() {
+Route::group(['prefix' => 'SuatChieu','middleware'=>'login'], function() {
     Route::get('/index','SuatChieuController@index')->name('SuatChieu.index');
     Route::get('/create','SuatChieuController@create');
     Route::post('/create','SuatChieuController@store')->name('SuatChieu.add');
@@ -50,7 +54,7 @@ Route::group(['prefix' => 'SuatChieu'], function() {
     Route::get('/delete/{id}','SuatChieuController@destroy');
 });
 
-Route::group(['prefix' => 'Phim_DienVien'], function() {
+Route::group(['prefix' => 'Phim_DienVien','middleware'=>'login'], function() {
     Route::get('/index','Phim_DienVienController@index')->name('Phim_DienVien.index');
     Route::get('/create','Phim_DienVienController@create');
     Route::post('/create','Phim_DienVienController@store')->name('Phim_DienVien.add');
@@ -59,7 +63,7 @@ Route::group(['prefix' => 'Phim_DienVien'], function() {
     Route::get('/delete/{id}','Phim_DienVienController@destroy');
 });
 
-Route::group(['prefix' => 'Phim'], function() {
+Route::group(['prefix' => 'Phim','middleware'=>'login'], function() {
     Route::get('/index','PhimController@index');
     Route::get('/create','PhimController@create');
     Route::get('/get','PhimController@get');
@@ -71,7 +75,7 @@ Route::group(['prefix' => 'Phim'], function() {
     Route::get('/delete/{id}','PhimController@destroy');
 });
 
-Route::group(['prefix' => 'LoaiPhim'], function() {
+Route::group(['prefix' => 'LoaiPhim','middleware'=>'login'], function() {
     Route::get('/index','LoaiPhimController@index')->name('LoaiPhim.index');
     Route::get('/create','LoaiPhimController@create');
     Route::get('/get','LoaiPhimController@get');
@@ -81,12 +85,13 @@ Route::group(['prefix' => 'LoaiPhim'], function() {
     Route::get('/delete/{id}','LoaiPhimController@destroy');
 });
 
-Route::group(['prefix' => 'GioChieu'], function() {
+Route::group(['prefix' => 'GioChieu','middleware'=>'login'], function() {
     Route::get('/index','GioChieuController@index')->name('GioChieu.index');
     Route::get('/create','GioChieuController@create');
     Route::post('/create','GioChieuController@store')->name('GioChieu.add');
     Route::get('/edit/{id}','GioChieuController@edit');
     Route::get('/get','GioChieuController@get');
+    Route::get('/getId/{id}','GioChieuController@getId');
     Route::get('/getGioChieuID/{id}','GioChieuController@getGioChieuID');
     Route::get('/getGioChieu','GioChieuController@getGioChieu');
     Route::post('/update/{id}','GioChieuController@update');
@@ -95,7 +100,7 @@ Route::group(['prefix' => 'GioChieu'], function() {
 
 
 
-Route::group(['prefix' => 'LoaiTGChieu'], function() {
+Route::group(['prefix' => 'LoaiTGChieu','middleware'=>'login'], function() {
     Route::get('/index','LoaiTGChieuController@index')->name('LoaiTGChieu.index');
     Route::get('/create','LoaiTGChieuController@create');
     Route::post('/create','LoaiTGChieuController@store')->name('LoaiTGChieu.add');
@@ -104,7 +109,7 @@ Route::group(['prefix' => 'LoaiTGChieu'], function() {
     Route::get('/delete/{id}','LoaiTGChieuController@destroy');
 });
 
-Route::group(['prefix' => 'DienVien'], function() {
+Route::group(['prefix' => 'DienVien','middleware'=>'login'], function() {
     Route::get('/index','DienVienController@index');
     Route::get('/create','DienVienController@create');
     Route::post('/create','DienVienController@store');
@@ -191,10 +196,11 @@ Route::group(['prefix' => 'phong'], function() {
 Route::group(['prefix' => 'rap'], function() {
     Route::get('/', 'RapController@index');
     Route::get('/index','RapController@index')->name('Rap.index');
+    Route::get('/getId/{id}','RapController@getId');
+    Route::get('/get','RapController@get');
     Route::get('/create','RapController@create');
     Route::post('/create','RapController@store')->name('Rap.add');
     Route::get('/edit/{id}','RapController@edit');
-    Route::get('/get','RapController@get');
     Route::post('/update/{id}','RapController@update');
     Route::get('/delete/{id}','RapController@destroy');
 });
