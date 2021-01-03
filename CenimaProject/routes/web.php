@@ -122,46 +122,85 @@ Route::group(['prefix' => 'DienVien','middleware'=>'login'], function() {
 
 
 //ghe
+// Route::group(['prefix' => 'ghe'], function() {
+//     Route::get('/','GheController@index');
+//     Route::get('/index','GheController@index');
+//     Route::get('/create','GheController@create');
+//     Route::post('/create','GheController@store');
+//     Route::get('/details/{id}','GheController@show');
+//     Route::get('/edit/{id}','GheController@edit');
+//     Route::post('/update/{id}','GheController@update');
+//     Route::get('/delete/{id}','GheController@destroy');
+//     Route::get('/inactive/{id}','GheController@inactive');
+//     Route::get('/active/{id}','GheController@active');
+
+// });
 Route::group(['prefix' => 'ghe'], function() {
-    Route::get('/','GheController@index');
-    Route::get('/index','GheController@index');
+    Route::get('/', 'GheController@index');
+    Route::get('/index','GheController@index')->name('Ghe.index');
     Route::get('/create','GheController@create');
-    Route::post('/create','GheController@store');
-    Route::get('/details/{id}','GheController@show');
+    Route::post('/create','GheController@store')->name('Ghe.add');
     Route::get('/edit/{id}','GheController@edit');
+    Route::get('/get','GheController@get');
+    Route::get('/getDay','GheController@getDay');
+    Route::get('/getSort','GheController@getSort');
     Route::post('/update/{id}','GheController@update');
     Route::get('/delete/{id}','GheController@destroy');
-    Route::get('/inactive/{id}','GheController@inactive');
-    Route::get('/active/{id}','GheController@active');
-
 });
+
+
+
 //phong
+// Route::group(['prefix' => 'phong'], function() {
+//     Route::get('/','PhongController@index');
+//     Route::get('/index','PhongController@index');
+//     Route::get('/create','PhongController@create');
+//     Route::post('/create','PhongController@store');
+//     Route::get('/details/{id}','PhongController@show');
+//     Route::get('/edit/{id}','PhongController@edit');
+//     Route::post('/update/{id}','PhongController@update');
+//     Route::get('/delete/{id}','PhongController@destroy');
+//     Route::get('/inactive/{id}','PhongController@inactive');
+//     Route::get('/active/{id}','PhongController@active');
+
+// });
+
+
 Route::group(['prefix' => 'phong'], function() {
-    Route::get('/','PhongController@index');
-    Route::get('/index','PhongController@index');
+    Route::get('/', 'PhongController@index');
+    Route::get('/index','PhongController@index')->name('Phong.index');
     Route::get('/create','PhongController@create');
-    Route::post('/create','PhongController@store');
-    Route::get('/details/{id}','PhongController@show');
+    Route::post('/create','PhongController@store')->name('Phong.add');
     Route::get('/edit/{id}','PhongController@edit');
+    Route::get('/get','PhongController@get');
     Route::post('/update/{id}','PhongController@update');
     Route::get('/delete/{id}','PhongController@destroy');
-    Route::get('/inactive/{id}','PhongController@inactive');
-    Route::get('/active/{id}','PhongController@active');
-
 });
 //rap
+// Route::group(['prefix' => 'rap'], function() {
+//     Route::get('/','RapController@index');
+//     Route::get('/index','RapController@index');
+//     Route::get('/create','RapController@create');  
+//     Route::get('/get','RapController@get');  
+//     Route::get('/getId/{id}','RapController@getId');  
+//     Route::get('/create','RapController@create');
+//     Route::post('/create','RapController@store');
+//     Route::get('/details/{id}','RapController@show');
+//     Route::get('/edit/{id}','RapController@edit');
+//     Route::post('/update/{id}','RapController@update');
+//     Route::get('/delete/{id}','RapController@destroy');
+//     Route::get('/inactive/{id}','RapController@inactive');
+//     Route::get('/active/{id}','RapController@active');
+// });
+
 Route::group(['prefix' => 'rap'], function() {
-    Route::get('/','RapController@index');
-    Route::get('/index','RapController@index');
-    Route::get('/create','RapController@create');
-    Route::get('/get','RapController@get');
+    Route::get('/', 'RapController@index');
+    Route::get('/index','RapController@index')->name('Rap.index');
     Route::get('/getId/{id}','RapController@getId');
+    Route::get('/get','RapController@get');
     Route::get('/create','RapController@create');
-    Route::post('/create','RapController@store');
-    Route::get('/details/{id}','RapController@show');
+    Route::post('/create','RapController@store')->name('Rap.add');
     Route::get('/edit/{id}','RapController@edit');
     Route::post('/update/{id}','RapController@update');
     Route::get('/delete/{id}','RapController@destroy');
-    Route::get('/inactive/{id}','RapController@inactive');
-    Route::get('/active/{id}','RapController@active');
 });

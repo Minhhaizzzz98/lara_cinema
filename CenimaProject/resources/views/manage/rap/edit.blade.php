@@ -1,35 +1,43 @@
-@extends('layout')
-@section('content')
-
-<div class="card o-hidden border-0 shadow-lg my-5">
-  <div class="card-body p-0">
-    <div class="col">
-        <div class="col-lg-6">
-            <div class="p-5">
-                <div class="text-center">
-                    <h1 class="text-primary" style="text-transform: uppercase">SỬA {{$data->TenRap}}</h1>
-                </div>
-                  <form class="user" method="POST" action="{{url('/rap/update/'.$data->id)}}">
-                    {{ csrf_field() }}
-                      <div class="form-group">
-                        <label class="text-dark" for="TenRap">Tên rạp </label>
-                        <input type="text" name="TenRap" class="form-control form-control-user" id="exampleFirstName" value="{{$data->TenRap}}">
-                        <p class="text-danger">{{ $errors->first('TenRap') }}</p>
-
-                        <label class="text-dark" for="DiaChi">Địa chỉ: </label>
-                        <input type="text" name="DiaChi" class="form-control form-control-user" id="exampleFirstName" value="{{$data->DiaChi}}" placeholder="Điền địa chỉ">
-                        <p class="text-danger">{{ $errors->first('DiaChi') }}</p>
-
-                        <label class="text-dark" for="SDT">SĐT: </label>
-                        <input type="text" name="SDT" class="form-control form-control-user" id="exampleFirstName" value="{{$data->SDT}}" placeholder="Điền số điện thoại">
-                        <p class="text-danger">{{ $errors->first('SDT') }}</p>
-                      </div>
-                      <button class="btn btn-primary btn-user btn-block">Cập nhật</button>
-                  </form>
-                  <hr>
-              </div>
-          </div>
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5  class="modal-title" id="exampleModalLongTitle">Chỉnh sửa rạp</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <form  id="form-edit">
+        <div class="modal-body">
+            @csrf
+            <div class="form-group">
+              <label class="text-dark">Mã rạp</label>
+              <input disabled=true type="text" id="MaRap" name="id" class="form-control form-control-user" >
+              {{-- <p class="text-danger">{{ $errors->first('MaPhong') }}</p> --}}
+            </div>
+            <div class="form-group">
+              <label class="text-dark">Tên rạp</label>
+              <input type="text" id="eTenRap" name="eTenRap" class="form-control form-control-user" >
+              {{-- <p class="text-danger">{{ $errors->first('TenPhong') }}</p> --}}
+            </div>
+            <div class="form-group">
+              <label class="text-dark">Địa chỉ</label>
+              <input type="text" id="eDiaChi" name="eDiaChi" class="form-control form-control-user" >
+              {{-- <p class="text-danger">{{ $errors->first('TenPhong') }}</p> --}}
+            </div>
+            <div class="form-group">
+              <label class="text-dark">SĐT</label>
+              <input type="text" id="eSDT" name="eSDT" class="form-control form-control-user" >
+              {{-- <p class="text-danger">{{ $errors->first('TenPhong') }}</p> --}}
+            </div>
+              
+        
+        </div>
+        <div class="modal-footer">
+          <button type="submit" id="edit-data" class="btn btn-primary">Lưu lại</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
-@endsection
