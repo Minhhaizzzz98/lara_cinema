@@ -1,38 +1,39 @@
-@extends('layout')
-@section('content')
-
-<div class="card o-hidden border-0 shadow-lg my-5">
-  <div class="card-body p-0">
-    <div class="col">
-        <div class="col-lg-6">
-            <div class="p-5">
-                <div class="text-center">
-                    <h1 class="text-primary">SỬA PHÒNG {{ $data->TenPhong }}</h1>
-                </div>
-                <form class="user" method="POST" action="{{url('/phong/update/'.$data->id)}}">
-                  {{ csrf_field() }}
-                  <div class="form-group">
-                    <label class="text-dark" for="TenPhong">Tên phòng: </label>
-                    <input type="text" name="TenPhong" class="form-control form-control-user" id="exampleFirstName" placeholder="Nhập tên phòng" value="{{$data->TenPhong}}">
-                    <p class="text-danger">{{ $errors->first('TenPhong') }}</p>
-                    
-                    <label class="text-dark" for="Day">Rạp: </label>
-                    <select class="form-control" id="exampleFirstName" name="rap_id" >
-                        @foreach ($rap as $item)
-                            @if($item->id == $data->rap_id)
-                                <option value="{{$item->id}}" selected>{{$item->TenRap}}</option>
-                            @else
-                                <option value="{{$item->id}}">{{$item->TenRap}}</option>
-                            @endif
-                        @endforeach   
-                    </select>
-                  </div>
-                  <button class="btn btn-primary btn-user btn-block">Cập nhật</button>
-                </form>
-                <hr>
-              </div>
-          </div>
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5  class="modal-title" id="exampleModalLongTitle">Chỉnh sửa phòng</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+      <form  id="form-edit">
+          @csrf
+          <div class="form-group">
+            <label class="text-dark">Mã phòng</label>
+            <input disabled=true type="text" id="MaPhong" name="MaPhong" class="form-control form-control-user" >
+            <p class="text-danger">{{ $errors->first('MaPhong') }}</p>
+          </div>
+          <div class="form-group">
+            <label class="text-dark">Tên phòng</label>
+            <input type="text" id="eTenPhong" name="eTenPhong" class="form-control form-control-user" >
+            <p class="text-danger">{{ $errors->first('TenPhong') }}</p>
+          </div>
+            <div class="form-group">
+            <label class="text-dark">Chọn rạp: </label>
+              <select name="eselectRap" id="eroleRap" class="form-control">
+                <option value="">option</option>
+              </select>
+            </div>
+            
+            <button type="submit" id="edit-data" class="btn btn-primary">Lưu lại</button>
+      </form>
+      </div>
+      <div class="modal-footer">
+       
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+      </div>
+    </div>
   </div>
 </div>
-@endsection

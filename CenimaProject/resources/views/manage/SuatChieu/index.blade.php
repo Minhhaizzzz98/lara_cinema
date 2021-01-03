@@ -282,14 +282,14 @@
           });
 
           $.get('/Phim/get/', function(g){ 
-                  var array=JSON.parse(g);  
-                  for(var i=0;i<array.length;i++)
-                  {
-                      if(array[i].id != id)
-                     {
-                        $('#erolePhim').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].TenPhim+'</option>');  
-                     }   
-                  }
+            var array=JSON.parse(g);  
+            for(var i=0;i<array.length;i++)
+            {
+                if(array[i].id != id)
+                {
+                  $('#erolePhim').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].TenPhim+'</option>');  
+                }   
+            }
           });     
   }
 </script>
@@ -299,7 +299,6 @@
     {
         $('#eroleGioChieu').empty();
           $.get('/GioChieu/getGioChieuID/'+id, function(g){ 
-                //   var array=JSON.parse(g);  
                 $('#eroleGioChieu').append('<option value='+g.id+'>'+g.id+': '+g.GioBatDau+'</option>'); 
           });
 
