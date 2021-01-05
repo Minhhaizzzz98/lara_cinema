@@ -51,6 +51,7 @@ Route::group(['prefix' => 'SuatChieu','middleware'=>'login'], function() {
     Route::get('/edit/{id}','SuatChieuController@edit');
     Route::get('/get','SuatChieuController@get');
     Route::post('/update/{id}','SuatChieuController@update');
+    Route::post('/getPhong','SuatChieuController@getPhong')->name('SuatChieu.getPhong');
     Route::get('/delete/{id}','SuatChieuController@destroy');
 });
 

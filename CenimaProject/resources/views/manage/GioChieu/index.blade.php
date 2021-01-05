@@ -22,8 +22,12 @@
                </select>
              </div>
              <div class="form-group">
-                    <label class="text-dark">Giờ chiếu</label>
-                    <input  type="time" name="GioChieu" class="form-control form-control-user" >
+                    <label class="text-dark">Giờ chiếu</label>     
+                    <select name="GioChieu" id="">
+                      @for ($i = 7; $i <= 23; $i++)
+                       <option value="{{$i}}:00:00">{{$i}}:00</option>
+                      @endfor            
+                    </select>
                     <p class="text-danger">{{ $errors->first('GioChieu') }}</p>
              </div>
              <button type="submit" id="add-data" class="btn btn-primary">Thêm mới</button>
@@ -60,10 +64,14 @@
                 </select>
             </div>   
             <div class="form-group">
-              <label class="text-dark">Giờ chiếu</label>
-              <input  type="time" id="eGioChieu" name="eGioChieu" class="form-control form-control-user" >
+              <label class="text-dark">Giờ chiếu</label>     
+              <select name="eGioChieu" id="eGioChieu">
+                @for ($i = 7; $i <= 23; $i++)
+                 <option value="{{$i}}:00:00">{{$i}}:00</option>
+                @endfor            
+              </select>
               <p class="text-danger">{{ $errors->first('GioChieu') }}</p>
-           </div>
+       </div>
              <button type="submit" id="edit-data" class="btn btn-primary">Lưu lại</button>
          </form>
         </div>
@@ -140,7 +148,7 @@
   }
 
 </script>
-{{-- Thêm loại TG chiếu--}}
+{{-- Thêm giờ chiếu--}}
 <script>
 
    $(document).ready(function(){
@@ -149,7 +157,7 @@
 
                   e.preventDefault();
                   e.stopImmediatePropagation();
-                  var GioChieu= $("input[name=GioChieu]").val();
+                  var GioChieu= $('select[name=GioChieu]').val()
                   var LoaiTGChieu= $('select[name=select]').val() 
                   var token= $("input[name=_token]").val();
 
@@ -237,7 +245,9 @@
                     }
                       
                   }
-         });   
+         }); 
+
+
   }
 </script>
 <script>
@@ -256,7 +266,7 @@
               e.preventDefault();
               e.stopImmediatePropagation();
               var id =$("input[name=eid]").val();
-              var GioChieu= $("input[name=eGioChieu]").val();
+              var GioChieu=  $('select[name=eGioChieu]').val() 
               var LoaiTGChieu= $('select[name=eselect]').val() 
               var token= $("input[name=_token]").val();
             

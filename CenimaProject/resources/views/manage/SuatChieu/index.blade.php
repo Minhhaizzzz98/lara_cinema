@@ -39,6 +39,15 @@
                     <input  type="date"  name="NgayChieu" class="form-control form-control-user" >
                     <p class="text-danger">{{ $errors->first('NgayChieu') }}</p>
              </div>
+             
+             <div class="form-group">
+              <a onclick="getPhong()" id="btnGetPhong" class="btn btn-success">Xem phòng chiếu</a>:
+               <select name="selectPhong" id="rolePhong">
+                 <option value="">Trống</option>
+               </select>
+             </div>
+
+
              <button type="submit" id="add-data" class="btn btn-primary">Thêm mới</button>
          </form>
          <div class="alert alert-success" style="display: none"></div>
@@ -129,7 +138,7 @@
                             <tr id="sid{{$item->id}}">
                                 <td>{{ $item->id }}</td>
                                 <td>{{$item->phim->TenPhim}}</td>
-                                <td>{{$item->rap->TenRap}}</td>
+                                <td>{{$item->phong->rap->TenRap}}</td>
                                 <td>{{$item->NgayChieu}}</td>  
                                 <td>{{$item->giochieu->GioBatDau}}</td>  
                                 <td>{{number_format($item->giochieu->loaitgchieu->Gia_TG + $item->phim->GiaPhim)}} VND  </td>      
@@ -157,6 +166,46 @@
 
 
 
+<script>
+  function getPhong()
+  {   
+        $('#rolePhong').empty();
+        var GioChieu = $('select[name=selectGioChieu]').val() 
+        var Phim = $('select[name=selectPhim]').val() 
+        var NgayChieu = $('input[name=NgayChieu]').val();
+        var Rap = $('select[name=selectRap]').val() 
+        var token= $("input[name=_token]").val();
+       
+        $.ajax({
+                        type:'POST',
+                        url:"{{route('SuatChieu.getPhong')}}",
+                        data:{
+                            GioChieu:GioChieu,
+                            Phim:Phim,
+                            NgayChieu:NgayChieu,
+                            Rap:Rap,
+                            _token:token
+                        },
+                        success:function(response){ 
+
+                            console.log(response);
+                          
+                            var array=JSON.parse(response);  
+                            for(let i =0; i<array.length;i++)
+                            {
+                              $('#rolePhong').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].TenPhong+'</option>');
+                            }
+                  
+                        },
+                        error: function(error){
+                          alert("Thêm thất bại");
+                        }            
+                 });
+    
+  }
+
+
+</script>
 
 <script>
   function rolePhim_GioChieu()
@@ -202,6 +251,7 @@
                   var Phim = $('select[name=selectPhim]').val() 
                   var NgayChieu = $('input[name=NgayChieu]').val();
                   var Rap = $('select[name=selectRap]').val() 
+                  var Phong = $('select[name=selectPhong]').val() 
                   var token= $("input[name=_token]").val();
 
                   $.ajax({
@@ -212,28 +262,41 @@
                             Phim:Phim,
                             NgayChieu:NgayChieu,
                             Rap:Rap,
+                            Phong:Phong,
                             _token:token
                         },
                         success:function(response){ 
-                          alert("Thành công");   
-                          var array=JSON.parse(response);               
-                          var string="";
-                          $("#add").modal('hide'); 
-                          $(".modal-backdrop").remove();  
-                          for(let i =0; i<array.length;i++)
-                          {
-                            // var gia = array[i].giochieu.loaitgchieu.Gia_TG + array[i].phim.GiaPhim;
-                            string+="<tr id='sid"+array[i].id +"'"+"><td>"+array[i].id+"</td>"+"<td>"+array[i].phim.TenPhim+"</td>";
-                            string+="<td>"+array[i].rap.TenRap+"</td>";
-                            string+="<td>"+array[i].NgayChieu+"</td>";
-                            string+="<td>"+array[i].giochieu.GioBatDau+"</td>";
-                            string+="<td>"+(array[i].phim.GiaPhim+array[i].giochieu.loaitgchieu.Gia_TG)+"</td>";
-                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaSuatChieu("+array[i].id+");eroleRap("+array[i].rap_id+");erolePhim("+array[i].phim_id+");eroleGioChieu("+array[i].giochieu_id+");'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
-                            string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaSuatChieu("+array[i].id+")'"+">Xóa suất chiếu</a>"+"</td></tr>"
-                          }           
+                             
+                            // alert('Thành công')
+                           
+                            console.log(response);
+                            if(response == "")  
+                            {
+                               alert('Suất chiếu đã tồn tại');
+                            }  
+                            else
+                            {
+                              var array=JSON.parse(response); 
+                              var string="";
+                              $("#add").modal('hide'); 
+                              $(".modal-backdrop").remove();  
+                              for(let i =0; i<array.length;i++)
+                              {
+                              // var gia = array[i].giochieu.loaitgchieu.Gia_TG + array[i].phim.GiaPhim;
+                              string+="<tr id='sid"+array[i].id +"'"+"><td>"+array[i].id+"</td>"+"<td>"+array[i].phim.TenPhim+"</td>";
+                              string+="<td>"+array[i].phong.rap.TenRap+"</td>";
+                              string+="<td>"+array[i].NgayChieu+"</td>";
+                              string+="<td>"+array[i].giochieu.GioBatDau+"</td>";
+                              string+="<td>"+(array[i].phim.GiaPhim+array[i].giochieu.loaitgchieu.Gia_TG)+"</td>";
+                              string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaSuatChieu("+array[i].id+");eroleRap("+array[i].phong.rap.id+");erolePhim("+array[i].phim_id+");eroleGioChieu("+array[i].giochieu_id+");'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
+                              string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaSuatChieu("+array[i].id+")'"+">Xóa suất chiếu</a>"+"</td></tr>"
+                              }           
+                              $(".modal-backdrop").remove();                                 
+                              $("#body").html(string);
                        
-                          $(".modal-backdrop").remove();                                 
-                            $("#body").html(string);
+                            }      
+                           
+                          
                         },
                         error: function(error){
                           alert("Thêm thất bại");
@@ -385,11 +448,11 @@
                           for(let i =0; i<array.length;i++)
                           {
                             string+="<tr id='sid"+array[i].id +"'"+"><td>"+array[i].id+"</td>"+"<td>"+array[i].phim.TenPhim+"</td>";
-                            string+="<td>"+array[i].rap.TenRap+"</td>";
+                            string+="<td>"+array[i].phong.rap.TenRap+"</td>";
                             string+="<td>"+array[i].NgayChieu+"</td>";
                             string+="<td>"+array[i].giochieu.GioBatDau+"</td>";
                             string+="<td>"+(array[i].phim.GiaPhim+array[i].giochieu.loaitgchieu.Gia_TG)+"</td>";
-                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaSuatChieu("+array[i].id+");eroleRap("+array[i].rap_id+");erolePhim("+array[i].phim_id+");eroleGioChieu("+array[i].giochieu_id+");'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
+                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaSuatChieu("+array[i].id+");eroleRap("+array[i].phong.rap.id+");erolePhim("+array[i].phim_id+");eroleGioChieu("+array[i].giochieu_id+");'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
                             string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaSuatChieu("+array[i].id+")'"+">Xóa suất chiếu</a>"+"</td></tr>"
                           }  
                             $(".modal-backdrop")
