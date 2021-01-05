@@ -39,7 +39,18 @@ class KhachHangSeeder extends Seeder
              'NgaySinh'=>'2000-12-01',
              'Email'=>'hongtrong@gmail.com',
              'TrangThai'=>1,
-            ]
+            ],
+            ['HoTen' => 'Nguyễn Minh Anh',
+                'password'=>Hash::make('rose'),
+                'DiaChi'=>'Ho Chi Minh city',
+                'SDT'=>'0123456789',
+                'NgaySinh'=>'2000-10-04',
+                'Email'=>'minhanh@gmail.com',
+                'TrangThai'=>1,
+            ],
+
+            
+
 
 
        ]);

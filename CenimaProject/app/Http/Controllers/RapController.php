@@ -15,7 +15,7 @@ class RapController extends Controller
      */
     public function index()
     {
-        $list = Rap::where('TrangThai', '<>', '-1')->orderBy('id', 'desc')->paginate(3);
+        $list = Rap::where('TrangThai', '<>', '-1')->orderBy('id', 'desc')->get();
         
         return view('manage.rap.index', compact('list'));
     }
@@ -42,31 +42,33 @@ class RapController extends Controller
      */
     public function store(Request $request)
     {
-        $arr_validate = [
-            'TenRap.required' => 'Vui lòng nhập tên rạp',
-            'TenRap.min' => 'Vui lòng nhập tối thiểu 5 kí tự',
-            'TenRap.max' => 'Vui lòng nhập tối đa 255 kí tự',
+        // $arr_validate = [
+        //     'TenRap.required' => 'Vui lòng nhập tên rạp',
+        //     'TenRap.min' => 'Vui lòng nhập tối thiểu 5 kí tự',
+        //     'TenRap.max' => 'Vui lòng nhập tối đa 255 kí tự',
 
-            'DiaChi.required' => 'Vui lòng nhập địa chỉ',
+        //     'DiaChi.required' => 'Vui lòng nhập địa chỉ',
 
-            'SDT.required' => 'Vui lòng nhập số điện thoại liên hệ của rạp',
-            'SDT.numeric' => 'Vui lòng chỉ nhập số'
-        ];
-        $validate = $request->validate([
-            'TenRap' => 'required|min:5|max:255',
-            'DiaChi' => 'required',
-            'SDT' => 'required|numeric'
-        ], $arr_validate);
+        //     'SDT.required' => 'Vui lòng nhập số điện thoại liên hệ của rạp',
+        //     'SDT.numeric' => 'Vui lòng chỉ nhập số'
+        // ];
+        // $validate = $request->validate([
+        //     'TenRap' => 'required|min:5|max:255',
+        //     'DiaChi' => 'required',
+        //     'SDT' => 'required|numeric'
+        // ], $arr_validate);
         
-        $data = new Rap();
-        $data->TenRap = $request->TenRap;
-        $data->DiaChi = $request->DiaChi;
-        $data->SDT = $request->SDT;
-        $data->TrangThai = 1;
-        $data->save();
-        if($data->count() > 0) {
-            return redirect('/rap/');
-        } 
+        $r = new Rap();
+        $r->TenRap = $request->TenRap;
+        $r->DiaChi = $request->DiaChi;
+        $r->SDT = $request->SDT;
+        $flag = $r->save();
+
+        $data = Rap::where('TrangThai', '<>', '-1')->orderBy('id', 'desc')->get();
+        if($flag)
+        {
+            return json_encode($data);
+        }
 
 
     }
@@ -97,8 +99,10 @@ class RapController extends Controller
      */
     public function edit($id)
     {
-        $data = Rap::findOrFail($id);
-        return view('manage.rap.edit', compact('data'));
+        // $data = Rap::findOrFail($id);
+        // return view('manage.rap.edit', compact('data'));
+        $data = Rap::find($id);
+        return response()->json($data);   
     }
 
     /**
@@ -110,30 +114,19 @@ class RapController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $arr_validate = [
-            'TenRap.required' => 'Vui lòng nhập tên rạp cần sửa',
-            'TenRap.min' => 'Vui lòng nhập tối thiểu 5 kí tự',
-            'TenRap.max' => 'Vui lòng nhập tối đa 255 kí tự',
 
-            'DiaChi.required' => 'Vui lòng nhập địa chỉ cần sửa',
+        $r = Rap::find($id);
+        $r->TenRap = $request->eTenRap;
+        $r->DiaChi = $request->eDiaChi;
+        $r->SDT = $request->eSDT;           
+        $r->TrangThai = 1;
+        $flag = $r->save();
 
-            'SDT.required' => 'Vui lòng nhập số điện thoại liên hệ của rạp',
-            'SDT.numeric' => 'Vui lòng chỉ nhập số'
-        ];
-        $validate = $request->validate([
-            'TenRap' => 'required|min:5|max:255',
-            'DiaChi' => 'required',
-            'SDT' => 'required|numeric'
-        ], $arr_validate);
-        $data = Rap::findOrFail($id);
-        $data->TenRap = $request->TenRap;
-        $data->DiaChi = $request->DiaChi;
-        $data->SDT = $request->SDT;
-        $data->TrangThai = 1;
-        $data->save();
-        if($data->count() > 0) {
-            return redirect('/rap/');
-        } 
+        $data = Rap::where('TrangThai', '<>', '-1')->orderBy('id', 'desc')->get();
+        if($flag)
+        {
+            return json_encode($data);
+        }
     }
 
     /**
@@ -144,12 +137,17 @@ class RapController extends Controller
      */
     public function destroy($id)
     {
-        $data = Rap::findOrFail($id);
-        $data->TrangThai = -1;
-        $data->save();
-        if($data->count() > 0) {
-            return redirect('/rap/');
-        }
+        // $data = Rap::findOrFail($id);
+        // $data->TrangThai = -1;
+        // $data->save();
+        // if($data->count() > 0) {
+        //     return redirect('/rap/');
+        // }
+
+        $r = Rap::find($id);
+        $r->TrangThai=-1;
+        $r->save();
+        return response()->json($r);
     }
     public function inactive($id) 
     {

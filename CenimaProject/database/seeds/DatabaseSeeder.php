@@ -15,8 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
 
          
-
-                // seed rạp, phòng, ghế
+          // seed rạp, phòng, ghế
             RapSeeder::class,
             PhongSeeder::class,
             GheSeeder::class,
@@ -37,8 +36,6 @@ class DatabaseSeeder extends Seeder
 
             VeSeeder::class,
 
-        
-            //tiếp theo
 
         ]);
     }
