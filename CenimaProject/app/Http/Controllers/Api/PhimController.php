@@ -19,6 +19,17 @@ class PhimController extends Controller
         return response()->json($data);
     }
 
+    public function getFiveFilm()
+    {
+       $data = Phim::with('theloais')->where('TrangThai',1)->get();
+       $list = array();
+       for( $i=0; $i < 5;$i++)
+       {
+           array_push($list, $data[$i]);
+       }
+       return json_encode($list);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
