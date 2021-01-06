@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\KhachHang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class KhachHangController extends Controller
 {
@@ -63,10 +64,30 @@ class KhachHangController extends Controller
     {
         //
     }
+
+    public function Login(Request $request)
+    {
+        $khachhang=KhachHang::where("Email",$request->email)->first();
+        
+        // $khachhang->password;
+        if($khachhang!=null)
+        {
+            if(Hash::check($request->mk,$khachhang->password))
+            {
+                return response()->json($khachhang);
+            }
+            else
+            {
+                
+                return response()->json("false");
+            }
+        }
+        return response()->json("false");
+       
+    }
     public function KhachHang_Regis(Request $request)
     {
-        if($request->hoten!=null&&$request->pass!=null&&$request->ngaysinh!=null&&
-        $request->diachi!=null&&$request->sdt!=null&&$request->email!=null)
+        if($request->hoten!=null&&$request->pass!=null&&$request->sdt!=null&&$request->email!=null)
         {
             $khachhang=new KhachHang();
             $khachhang->HoTen=$request->hoten;
@@ -79,14 +100,14 @@ class KhachHangController extends Controller
             $flag=$khachhang->save();
             if($flag)
             {
-                return response()->json($khachhang);
+                return response()->json("true");
             }
             else
             {
-                return response()->json("Thất bại");
+                return response()->json("false");
             }
         }
-        return response()->json("Thất bại");
+        return response()->json("false");
 
     }
 }

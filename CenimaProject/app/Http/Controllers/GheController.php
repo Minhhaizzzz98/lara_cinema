@@ -15,7 +15,7 @@ class GheController extends Controller
      */
     public function index()
     {
-        $list = Ghe::with('phong')->where('TrangThai', '<>', '-1')->orderBy('id', 'desc')->paginate(3);
+        $list = Ghe::with('phong')->where('TrangThai', '<>', '-1')->orderBy('id', 'desc')->get();
         return view('manage.Ghe.index', compact('list'));
     }
 
@@ -26,12 +26,19 @@ class GheController extends Controller
      */
     public function create()
     {
-        $day = ['A', 'B', 'C', 'D'];
-        $vitri = ['1', '2', '3', '4', '5'];
-        $phong = Phong::where('TrangThai', '<>', '-1')->get();
-        return view('manage.Ghe.create', compact('day', 'vitri', 'phong'));
+        // $day = ['A', 'B', 'C', 'D'];
+        // $vitri = ['1', '2', '3', '4', '5'];
+        // $phong = Phong::where('TrangThai', '<>', '-1')->get();
+        // return view('manage.Ghe.create', compact('day', 'vitri', 'phong'));
     }
-
+    public function getDay() {
+        $list = ['A', 'B', 'C', 'D'];
+        return json_encode($list);
+    }
+    public function getSort() {
+        $vitri = ['1', '2', '3', '4', '5'];
+        return json_encode($vitri);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -40,16 +47,31 @@ class GheController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new Ghe();
-        $data->phong_id = $request->phong_id;
-        $data->GiaGhe = $request->GiaGhe;
-        $data->Day = $request->Day;
-        $data->sort = $request->sort;
-        $data->TrangThai = 1;
+        // $data = new Ghe();
+        // $data->phong_id = $request->phong_id;
+        // $data->GiaGhe = $request->GiaGhe;
+        // $data->Day = $request->Day;
+        // $data->sort = $request->sort;
+        // $data->TrangThai = 1;
 
-        $data->save();
-        if($data->count() > 0) {
-            return redirect('/ghe/');
+        // $data->save();
+        // if($data->count() > 0) {
+        //     return redirect('/ghe/');
+        // }
+
+
+        $g = new Ghe();
+        $g->Day = $request->Day;
+        $g->sort = $request->sort;
+        $g->phong_id = $request->phong_id;
+        $g->GiaGhe = $request->GiaGhe;
+        $g->TrangThai = 1;
+        $flag = $g->save();
+
+        $data = Ghe::with('phong')->where('TrangThai', '<>', '-1')->orderBy('id', 'desc')->get();
+        if($flag)
+        {
+            return json_encode($data);
         }
     }
 
@@ -108,12 +130,17 @@ class GheController extends Controller
      */
     public function destroy($id)
     {
-        $data = Ghe::findOrFail($id);
-        $data->TrangThai = -1;
-        $data->save();
-        if($data->count() > 0) {
-            return redirect('/ghe/');
-        }
+        // $data = Ghe::findOrFail($id);
+        // $data->TrangThai = -1;
+        // $data->save();
+        // if($data->count() > 0) {
+        //     return redirect('/ghe/');
+        // }
+
+        $g = Ghe::find($id);
+        $g->TrangThai=-1;
+        $g->save();
+        return response()->json($g);
     }
 
     public function inactive($id) 

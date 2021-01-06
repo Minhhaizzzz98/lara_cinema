@@ -12,6 +12,7 @@ class PhimSeeder extends Seeder
     public function run()
     {
         DB::table('phims')->insert([
+
             ['TenPhim' => 'John Wick 1','NgayDKChieu'=>'2020-12-01','NgayKetThuc'=>'2020-01-01','ThoiLuong'=>120,'HinhAnh'=>'http://localhost:8000/data/phim_tiger.jpg','Trailer'=>'https://www.youtube.com/watch?v=dradHKlm5Ws&list=RDdradHKlm5Ws&start_radio=1','DaoDien'=>'Nguyễn Quốc Trọng','loaiphim_id'=>1,'QuocGia'=>'Mỹ','GioiHanTuoi'=>'Trên 18 tuổi','GiaPhim'=>10000,'MoTa'=>'Đây là bộ phim tình cảm cực mạnh', 'TrangThai' => 1],
             ['TenPhim' => 'John Wick 2','NgayDKChieu'=>'2020-12-01','NgayKetThuc'=>'2020-01-01','ThoiLuong'=>120,'HinhAnh'=>'http://localhost:8000/data/phim_tiger.jpg','Trailer'=>'https://www.youtube.com/watch?v=dradHKlm5Ws&list=RDdradHKlm5Ws&start_radio=1','DaoDien'=>'Nguyễn Quốc Trung','loaiphim_id'=>1,'QuocGia'=>'Mỹ','GioiHanTuoi'=>'Trên 18 tuổi','GiaPhim'=>10000,'MoTa'=>'Đây là bộ phim tình cảm cực mạnh', 'TrangThai' => 1],
             ['TenPhim' => 'John Wick 3','NgayDKChieu'=>'2020-12-01','NgayKetThuc'=>'2020-01-01','ThoiLuong'=>120,'HinhAnh'=>'http://localhost:8000/data/phim_tiger.jpg','Trailer'=>'https://www.youtube.com/watch?v=dradHKlm5Ws&list=RDdradHKlm5Ws&start_radio=1','DaoDien'=>'Nguyễn Quốc Quốc','loaiphim_id'=>1,'QuocGia'=>'Mỹ','GioiHanTuoi'=>'Trên 18 tuổi','GiaPhim'=>10000,'MoTa'=>'Đây là bộ phim tình cảm cực mạnh', 'TrangThai' => 1],

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-   <meta name="csrf-token" content="{{csrf_token()}}">
+    <meta name="csrf-token" content="{{csrf_token()}}">
 
     <link rel="shortcut icon"  href="{{asset('img/clapperboard.svg')}}"/>
     <title>Quản lý rạp chiếu phim</title>
@@ -24,6 +24,8 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+
+    
 
 </head>
 
@@ -528,8 +530,10 @@
     </script>
 
     <!-- Bootstrap core JavaScript-->
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript" charset="utf-8" async defer></script>
+    
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
@@ -546,6 +550,8 @@
     <script src="{{asset('js/demo/chart-area-demo.js')}}"></script>
     <script src="{{asset('js/demo/chart-pie-demo.js')}}"></script>
 
+    {{-- ajax rap, phong, ghe
+    <script src="{{asset('js/ajax/app.js')}}"></script> --}}
 </body>
 
 </html>
