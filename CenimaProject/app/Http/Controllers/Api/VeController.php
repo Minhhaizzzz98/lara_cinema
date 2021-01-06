@@ -32,6 +32,20 @@ class VeController extends Controller
     public function store(Request $request)
     {
         //
+        $ve = new Ve();
+        $ve->suatchieu_id = $request->suatchieu_id;
+        $ve->ghe_id = $request->ghe_id;
+        $ve->kh_id = $request->kh_id;
+        $ve->GiaVe = 0;
+        $flag = $ve->save();
+        if($flag)
+        {
+            return json_encode("1");
+        }
+        else
+        {
+            return json_encode("0");
+        }
     }
 
     /**
