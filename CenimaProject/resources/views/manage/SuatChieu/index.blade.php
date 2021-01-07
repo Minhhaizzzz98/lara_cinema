@@ -188,13 +188,22 @@
                         },
                         success:function(response){ 
 
+                            var i = parseInt(response);
                             console.log(response);
-                          
-                            var array=JSON.parse(response);  
-                            for(let i =0; i<array.length;i++)
+                            if(i==1)
                             {
-                              $('#rolePhong').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].TenPhong+'</option>');
+                              alert('Suất chiếu đã tồn tại! Không có phòng trống');
                             }
+                            else
+                            {
+                              var array=JSON.parse(response);  
+                              for(let i =0; i<array.length;i++)
+                              {
+                                $('#rolePhong').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].TenPhong+'</option>');
+                              }
+                            }
+                          
+                         
                   
                         },
                         error: function(error){
