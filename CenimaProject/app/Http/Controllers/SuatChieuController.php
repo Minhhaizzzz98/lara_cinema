@@ -63,34 +63,52 @@ class SuatChieuController extends Controller
     {
         $phongs = Phong::where('rap_id',$request->Rap)->get(); 
 
-        $suatchieus = SuatChieu::where('TrangThai',1)->get(); 
+        $suatchieus = SuatChieu::where('TrangThai',1)->where('rap_id',$request->Rap)->get(); 
 
         $list = array();
         $temp = 0;
+
+        if($suatchieus==null)
+        {
+            return json_encode($phongs);
+        }
+
         foreach($phongs as $phong)
         {
-            foreach($suatchieus as $item)
-            {
-                if( $item->phong_id == $phong->id)
+           
+                foreach($suatchieus as $item)
                 {
-                    if( $item->giochieu_id == $request->GioChieu && $item->NgayChieu == $request->NgayChieu)
+                    if( $item->phong_id == $phong->id)
                     {
-                       
+                        if( $item->giochieu_id == $request->GioChieu && $item->NgayChieu == $request->NgayChieu)
+                        {
+                            $temp++;
+                        }
+                        else
+                        {
+                            array_push($list,$phong);
+                        }         
                     }
                     else
-                    {
+                    {                  
                         array_push($list,$phong);
                     }
-                  
+                   
                 }
-                else if($item->phong)
-                {
-                    
-                    // array_push($list,$phong);
-                }
-            }
+            
+           
         }
-        return json_encode($list);
+
+        if($temp == sizeof($phongs))
+        {
+            return json_encode(1);
+        }
+        else if(empty($list))
+        {
+            return json_encode($phongs);
+        }
+        else  
+            return json_encode($list);
     }
 
 
