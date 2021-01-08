@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Tinh;
 use Illuminate\Http\Request;
-use App\Rap;
+use Illuminate\Support\Facades\Hash;
 
-class RapController extends Controller
+class TinhController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,18 @@ class RapController extends Controller
      */
     public function index()
     {
-        $data = Rap::get();
+        $data = Tinh::where('TrangThai','1')->get();
         return response()->json($data);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -37,6 +48,17 @@ class RapController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
         //
     }

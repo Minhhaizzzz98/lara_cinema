@@ -34,6 +34,7 @@ Route::apiResource('/Phong', 'Api\PhongController');
 Route::apiResource('/Rap', 'Api\RapController');
 
 Route::apiResource('NhanVien','Api\NhanVienController');
+Route::apiResource('/Tinh','Api\TinhController');
 
 // dang ky khach hàng
 Route::post("/KhachHang_Dk",'Api\KhachHangController@KhachHang_Regis');

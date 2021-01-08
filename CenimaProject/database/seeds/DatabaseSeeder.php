@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
 
             LoaiTGChieuSeeder::class,
             GioChieuSeeder::class,
-            SuatChieuSeeder::class,
+            // SuatChieuSeeder::class,
 
             LoaiPhimSeeder::class,
             PhimSeeder::class,
@@ -51,12 +51,12 @@ class DatabaseSeeder extends Seeder
             PhongSeeder::class,
             GheSeeder::class,
 
-
-            KhachHangSeeder::class,
             ChucVuSeeder::class,
             NhanVienSeeder::class,
             //tiếp theo
 
+            TinhSeeder::class,
+            
         ]);
     }
 }
