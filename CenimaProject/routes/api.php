@@ -18,8 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/Phim_GetFive', 'Api\PhimController@getFiveFilm');
 Route::apiResource('/Phim', 'Api\PhimController');
 Route::apiResource('/LoaiPhim', 'Api\LoaiPhimController');
+
 Route::apiResource('/GioiHanTuoi', 'Api\GioiHanTuoiController');
 Route::apiResource('KhachHang','Api\KhachHangController');
 Route::post('/KhachHang_Login','Api\KhachHangController@Login');
@@ -27,6 +29,10 @@ Route::apiResource('/DienVien', 'Api\DienVienController');
 
 Route::apiResource('/GioChieu', 'Api\GioChieuApi');
 Route::apiResource('/SuatChieu', 'Api\SuatChieuController');
+Route::post('/SuatChieu/getGioChieu','Api\SuatChieuController@getGioChieu');
+
+//vé
+Route::apiResource('/Ve', 'Api\VeController');
 
 //api rạp, phòng, ghế
 Route::apiResource('/Ghe', 'Api\GheController');

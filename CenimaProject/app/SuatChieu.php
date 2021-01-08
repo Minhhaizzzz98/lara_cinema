@@ -11,7 +11,7 @@ class SuatChieu extends Model
     protected $table = 'suat_chieus';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'phim_id', 'phong_id', 'giochieu_id','rap_id', 'GiaSuatChieu','NgayChieu', 'TrangThai'
+        'phim_id', 'phong_id', 'giochieu_id','rap_id','phong_id', 'GiaSuatChieu','NgayChieu', 'TrangThai'
     ];
 
     public function phim()
@@ -23,6 +23,11 @@ class SuatChieu extends Model
     {
         return $this->belongsTo('App\GioChieu', 'giochieu_id', 'id')->with('loaitgchieu');
     }
+    public function phong()
+    {
+        return $this->belongsTo('App\Phong', 'phong_id', 'id')->with('rap');
+    }
+
     public function rap()
     {
         return $this->belongsTo('App\Rap', 'rap_id', 'id');

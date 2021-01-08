@@ -10,13 +10,16 @@ class Ve extends Model
     protected $table = 'ves';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'Gia', 'lichchieu_id', 'ghe_id', 'TrangThai'
+         'suatchieu_id', 'ghe_id','kh_id','GiaVe','TrangThai'
     ];
 
     public function ghe() {
         return $this->belongsTo('App\Ghe', 'ghe_id', 'id');
     }
-    public function lichchieu() {
-        return $this->belongsTo('App\LichChieu', 'lichchieu_id', 'id');
+    public function suatchieu() {
+        return $this->belongsTo('App\SuatChieu', 'suatchieu_id', 'id');
+    }
+    public function khachhang() {
+        return $this->belongsTo('App\KhachHang', 'kh_id', 'id');
     }
 }

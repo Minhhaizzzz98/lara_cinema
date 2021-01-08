@@ -38,16 +38,18 @@ class GioChieuController extends Controller
      */
     public function store(Request $request)
     {
-        //
-       $g= new GioChieu();
+       $g= new GioChieu();  
        $g->loaitgchieu_id = $request->loaitgchieu_id;
        $g->GioBatDau = $request->GioBatDau;
        $flag = $g->save();
        $data = GioChieu::with('loaitgchieu')->where('TrangThai',1)->get();
        if($flag)
-       {
-        return json_encode($data);
-       }
+        {
+             return json_encode($data);
+        }
+            
+      
+      
     }
 
     /**
@@ -75,6 +77,19 @@ class GioChieuController extends Controller
     {
         $data = LoaiTGChieu::find($id);
         return response()->json($data);
+    }
+
+    public function kiemtratrung($giochieu)
+    {
+         $list = GioChieu::with('loaitgchieu')->where('TrangThai',1)->get();  
+         foreach($list as $item)
+         {
+             if($item->GioBatDau==$giochieu)
+             {
+                 return true;
+             }
+         }
+         return false;
     }
 
     public function get()

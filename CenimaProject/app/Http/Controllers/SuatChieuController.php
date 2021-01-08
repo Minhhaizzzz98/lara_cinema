@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\SuatChieu;
+use App\Phong;
 
 class SuatChieuController extends Controller
 {
@@ -37,23 +38,79 @@ class SuatChieuController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $sc = new SuatChieu();
-        $sc->phim_id = $request->Phim;
-        $sc->giochieu_id = $request->GioChieu;
-        $sc->NgayChieu = $request->NgayChieu;
-        $sc->rap_id = $request->Rap;
-        $sc->GiaSuatChieu=0;
-        $flag = $sc->save();
+        //xử lí phòng trống của rạp
 
-        $data = SuatChieu::with('phim','rap','giochieu')->where('TrangThai',1)->get();
+        //Lấy danh sách tất cả các phòng của rạp
+        $phongs = Phong::where('rap_id',$request->Rap)->get();   
+        $suatchieus = SuatChieu::where('TrangThai',1)->get();      
+
+        $sc = new SuatChieu();
+        $sc->phong_id = $phongs[0]->id;
+        $sc->giochieu_id = $request->GioChieu;
+        $sc->phim_id = $request->Phim;
+        $sc->rap_id = $request->Rap;
+        $sc->phong_id = $request->Phong;
+        $sc->NgayChieu = $request->NgayChieu;
+        $sc->GiaSuatChieu = 0;
+        $flag = $sc->save();
+        $data = SuatChieu::with('phim','phong','giochieu')->where('TrangThai',1)->get();
         if($flag)
         {
             return json_encode($data);
+        }     
+    }
+    public function getPhong(Request $request)
+    {
+        $phongs = Phong::where('rap_id',$request->Rap)->get(); 
+
+        $suatchieus = SuatChieu::where('TrangThai',1)->where('rap_id',$request->Rap)->get(); 
+
+        $list = array();
+        $temp = 0;
+
+        if($suatchieus==null)
+        {
+            return json_encode($phongs);
         }
 
+        foreach($phongs as $phong)
+        {
+           
+                foreach($suatchieus as $item)
+                {
+                    if( $item->phong_id == $phong->id)
+                    {
+                        if( $item->giochieu_id == $request->GioChieu && $item->NgayChieu == $request->NgayChieu)
+                        {
+                            $temp++;
+                        }
+                        else
+                        {
+                            array_push($list,$phong);
+                        }         
+                    }
+                    else
+                    {                  
+                        array_push($list,$phong);
+                    }
+                   
+                }
+            
+           
+        }
 
+        if($temp == sizeof($phongs))
+        {
+            return json_encode(1);
+        }
+        else if(empty($list))
+        {
+            return json_encode($phongs);
+        }
+        else  
+            return json_encode($list);
     }
+
 
     /**
      * Display the specified resource.

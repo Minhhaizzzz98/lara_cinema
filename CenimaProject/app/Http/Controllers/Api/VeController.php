@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\SuatChieu;
+use App\Ve;
 
-class SuatChieuController extends Controller
+class VeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,11 @@ class SuatChieuController extends Controller
      */
     public function index()
     {
-        $data = SuatChieu::with('phim','phong','giochieu')->where('TrangThai', 1) ->get();
+        $data = Ve::join('khach_hangs', 'ves.kh_id', '=', 'khach_hangs.id')
+        ->join('suat_chieus', 'ves.suatchieu_id', '=', 'suat_chieus.id')
+        ->join('ghes', 'ves.ghe_id', '=', 'ghes.id')
+        ->select('ves.id','khach_hangs.HoTen','suat_chieus.NgayChieu','ghes.Day','GiaVe')
+        ->get();
         return response()->json($data);
     }
 
@@ -28,13 +32,21 @@ class SuatChieuController extends Controller
     public function store(Request $request)
     {
         //
+        $ve = new Ve();
+        $ve->suatchieu_id = $request->suatchieu_id;
+        $ve->ghe_id = $request->ghe_id;
+        $ve->kh_id = $request->kh_id;
+        $ve->GiaVe = 0;
+        $flag = $ve->save();
+        if($flag)
+        {
+            return json_encode("1");
+        }
+        else
+        {
+            return json_encode("0");
+        }
     }
-    public function getGioChieu(Request $request)
-    {
-        $list = SuatChieu::join('gio_chieus', 'suat_chieus.giochieu_id', '=', 'gio_chieus.id')->select('giochieu_id','gio_chieus.GioBatDau')->where('rap_id',$request->rap_id)->where('phim_id',$request->phim_id)->where('NgayChieu',$request->NgayChieu)->get();
-        return json_encode($list);      
-    }
-
 
     /**
      * Display the specified resource.
@@ -45,11 +57,6 @@ class SuatChieuController extends Controller
     public function show($id)
     {
         //
-    }
-    public function test()
-    {
-        $list = SuatChieu::join('gio_chieus', 'suat_chieus.giochieu_id', '=', 'gio_chieus.id')->select('giochieu_id','gio_chieus.GioBatDau')->where('rap_id',1)->where('phim_id',1)->where('NgayChieu','2021-01-01')->get();
-        return json_encode($list);
     }
 
     /**
