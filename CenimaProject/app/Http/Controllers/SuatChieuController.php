@@ -175,4 +175,12 @@ class SuatChieuController extends Controller
         $sc->save();
         return response()->json($sc);
     }
+    public function getGioChieu (Request $request){
+        $rap_id=(int)$request->rap_id;
+        $phim_id=(int)$request->phim_id;
+
+        //return json_encode($request->NgayChieu);
+        $list = SuatChieu::join('gio_chieus', 'suat_chieus.giochieu_id', '=', 'gio_chieus.id')->select('giochieu_id','gio_chieus.GioBatDau')->where('rap_id',$rap_id)->where('phim_id',$phim_id)->where('NgayChieu',"2021-01-07")->get();
+        return json_encode($list);
+    }
 }

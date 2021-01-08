@@ -15,9 +15,9 @@ class KhachHangSeeder extends Seeder
         //
         DB::table('khach_hangs')->insert([
             ['HoTen' => 'Huỳnh Văn Bình',
-            'password'=>Hash::make('0914614144'),
+            'password'=>Hash::make('914614144'),
              'DiaChi'=>'Tây Ninh city',
-             'SDT'=>'0914614144',
+             'SDT'=>'0914614143',
              'NgaySinh'=>'2000-12-01',
              'Email'=>'vanbinh@gmail.com',
              'TrangThai'=>1,
@@ -48,11 +48,6 @@ class KhachHangSeeder extends Seeder
                 'Email'=>'minhanh@gmail.com',
                 'TrangThai'=>1,
             ],
-
-            
-
-
-
        ]);
     }
 }
