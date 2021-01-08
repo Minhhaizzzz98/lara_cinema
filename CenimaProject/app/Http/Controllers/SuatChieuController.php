@@ -66,6 +66,7 @@ class SuatChieuController extends Controller
         $suatchieus = SuatChieu::where('TrangThai',1)->where('rap_id',$request->Rap)->get(); 
 
         $list = array();
+        
         $temp = 0;
 
         if($suatchieus==null)
@@ -94,8 +95,7 @@ class SuatChieuController extends Controller
                         array_push($list,$phong);
                     }
                    
-                }
-            
+                }       
            
         }
 

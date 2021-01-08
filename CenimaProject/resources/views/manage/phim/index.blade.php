@@ -2,7 +2,7 @@
 @section('content')
 
 <!-- Modal add -->
-<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -44,7 +44,11 @@
 
                   <div class="form-group">
                     <label class="text-dark">Giới hạn tuổi:</label>
-                    <input type="text" name="GioiHanTuoi" class="form-control form-control-user"  >
+                    <select name="GioiHanTuoi" >
+                      <option value="20+">20+</option>
+                      <option value="18+">18+</option>
+                      <option value="16+">16+</option>
+                    </select>
                     <p class="text-danger">{{ $errors->first('GioiHanTuoi') }}</p>
                   </div>
                   <div class="form-group">
@@ -149,7 +153,11 @@
 
                   <div class="form-group">
                     <label class="text-dark">Giới hạn tuổi :</label>
-                    <input type="text" name="editGioiHanTuoi" class="form-control form-control-user" id="gioihantuoi" >
+                    <select id="gioihantuoi" name="editGioiHanTuoi">
+                      <option value="20+">20+</option>
+                      <option value="18+">18+</option>
+                      <option value="16+">16+</option>
+                    </select>
                     <p class="text-danger">{{ $errors->first('GioiHanTuoi') }}</p>
                   </div>
                   <div class="form-group">
@@ -437,7 +445,7 @@
                   var GiaPhim= $("input[name=GiaPhim]").val();
                   var MoTa = document.getElementById("idMoTa").value;
                   var HinhAnh= $("input[name=HinhAnh]").val();
-                  var GioiHanTuoi= $("input[name=GioiHanTuoi]").val();
+                  var GioiHanTuoi= $("select[name=GioiHanTuoi]").val();
                   var _token= $("input[name=_token]").val();
 
                   $.ajax({
@@ -482,10 +490,12 @@
                                 string+="<td>"+"Đã kết thúc"+"</td>"
                             } 
                            
-                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaPhim('"+array[i].id+");eloadLoaiPhim("+array[i].loaiphim_id+")'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
+                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaPhim("+array[i].id+");eloadLoaiPhim("+array[i].loaiphim_id+")'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
                             string+="<a class='btn btn-info'  href='javascript:void(0)'  onclick= 'xemPhim("+array[i].id+")'"+">Details</a>|";
                             string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaPhim("+array[i].id+")'"+">Xóa phim</a>"+"</td></tr>";
                           }
+                            // location.reload();
+                           $("#form-add").trigger('reset');
                             $(".modal-backdrop").remove();
                             $("#body").html(string);
                         },
@@ -589,7 +599,7 @@
                   var Trailer= $("input[name=editTrailer]").val();
                   var GiaPhim= $("input[name=editGiaPhim]").val();
                   var HinhAnh= $("input[name=editHinhAnh]").val();
-                  var GioiHanTuoi= $("input[name=editGioiHanTuoi]").val();
+                  var GioiHanTuoi= $("select[name=editGioiHanTuoi]").val();
                   var _token= $("input[name=_token]").val();
             
              $.ajax({
@@ -614,7 +624,6 @@
                       var array=JSON.parse(response);               
                           var string="";
                           $("#edit").modal('hide');
-                          $(".modal-backdrop").remove();
                           for(let i =0; i<array.length;i++)
                           {
                             string+="<tr id='sid"+array[i].id +"'"+">";
@@ -630,13 +639,12 @@
                             else
                             { 
                                 string+="<td>"+"Đã kết thúc"+"</td>"
-                            } 
-                           
-                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaPhim('"+array[i].id+"')"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
+                            }              
+                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaPhim("+array[i].id+");eloadLoaiPhim("+array[i].loaiphim_id+")'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
                             string+="<a class='btn btn-info'  href='javascript:void(0)'  onclick= 'xemPhim("+array[i].id+")'"+">Details</a>|";
                             string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaPhim("+array[i].id+")'"+">Xóa phim</a>"+"</td></tr>";
                           }
-                          
+                          $(".modal-backdrop").remove();
                             $("#body").html(string);           
                     },
                     error: function(error){
