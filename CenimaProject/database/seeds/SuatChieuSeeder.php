@@ -15,9 +15,10 @@ class SuatChieuSeeder extends Seeder
         DB::table('suat_chieus')->insert([
             ['phim_id' => '1','giochieu_id'=>1,'rap_id'=>1,'phong_id'=>1,'GiaSuatChieu'=>0,'NgayChieu'=>'2020-12-02'],
             ['phim_id' => '2','giochieu_id'=>1,'rap_id'=>1,'phong_id'=>2,'GiaSuatChieu'=>0,'NgayChieu'=>'2020-12-02'],
-            ['phim_id' => '3','giochieu_id'=>1,'rap_id'=>1,'phong_id'=>3,'GiaSuatChieu'=>0,'NgayChieu'=>'2020-12-02'],
-            ['phim_id' => '4','giochieu_id'=>1,'rap_id'=>1,'phong_id'=>4,'GiaSuatChieu'=>0,'NgayChieu'=>'2020-12-02'],
-            ['phim_id' => '5','giochieu_id'=>1,'rap_id'=>1,'phong_id'=>5,'GiaSuatChieu'=>0,'NgayChieu'=>'2020-12-02'],
+            ['phim_id' => '3','giochieu_id'=>1,'rap_id'=>2,'phong_id'=>3,'GiaSuatChieu'=>0,'NgayChieu'=>'2020-12-02'],
+            ['phim_id' => '4','giochieu_id'=>1,'rap_id'=>2,'phong_id'=>4,'GiaSuatChieu'=>0,'NgayChieu'=>'2020-12-02'],
+            ['phim_id' => '5','giochieu_id'=>1,'rap_id'=>3,'phong_id'=>5,'GiaSuatChieu'=>0,'NgayChieu'=>'2020-12-02'],
+            ['phim_id' => '5','giochieu_id'=>1,'rap_id'=>3,'phong_id'=>6,'GiaSuatChieu'=>0,'NgayChieu'=>'2020-12-02'],
         ]);
     }
 }

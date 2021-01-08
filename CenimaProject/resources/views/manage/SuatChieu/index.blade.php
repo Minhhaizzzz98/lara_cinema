@@ -3,7 +3,7 @@
 
   
   <!-- Modal -->
-  <div class="modal fade" id="add" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal" id="add" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -114,7 +114,7 @@
     <!-- Page Heading -->
     <h1 class="h2 mb-2 text-center text-primary">QUẢN LÝ SUẤT CHIẾU</h1>
 
-    <button onclick="rolePhim_GioChieu()" data-toggle="modal" data-target="#add" class="btn btn-primary"><i class="fa fa-film" aria-hidden="true"> Thêm mới</i></button>
+    <button onclick="rolePhim_GioChieu()" data-toggle="modal"  id="minhhai" class="btn btn-primary"><i class="fa fa-film" aria-hidden="true"> Thêm mới</i></button>
 
     
     <div class="card shadow mb-4">
@@ -143,7 +143,7 @@
                                 <td>{{$item->giochieu->GioBatDau}}</td>  
                                 <td>{{number_format($item->giochieu->loaitgchieu->Gia_TG + $item->phim->GiaPhim)}} VND  </td>      
                                  <td>
-                                     <a href="javascript:void(0)" data-toggle="modal" onclick="suaSuatChieu({{$item->id}});erolePhim({{$item->phim_id}});eroleGioChieu({{$item->giochieu_id}});eroleRap({{$item->rap_id}});" data-target="#edit" class="btn btn-info" type="submit">Chỉnh sửa</a>|
+                                     <a href="javascript:void(0)" data-toggle="modal" onclick="suaSuatChieu({{$item->id}});erolePhim({{$item->phim_id}});eroleGioChieu({{$item->giochieu_id}});eroleRap({{$item->rap_id}});" id="trong" class="btn btn-info" type="submit">Chỉnh sửa</a>|
                                      <a href="javascript:void(0)"  class="btn btn-danger" onclick="xoaSuatChieu({{$item->id}})" >Xóa suất chiếu</a>
                                 </td>
                             </tr>
@@ -202,8 +202,7 @@
                                 $('#rolePhong').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].TenPhong+'</option>');
                               }
                             }
-                          
-                         
+                  
                   
                         },
                         error: function(error){
@@ -219,6 +218,7 @@
 <script>
   function rolePhim_GioChieu()
   {      
+         
           $('#rolePhim').empty();
           $.get('/Phim/get', function(g){ 
                   var array=JSON.parse(g);  
@@ -245,6 +245,8 @@
                       $('#roleRap').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].TenRap+'</option>');     
                   }
           });   
+
+          $("#minhhai").attr("data-target", "#add");
   }
 
 </script>
@@ -424,6 +426,7 @@
         $("#MaSuatChieu").val(g.id); 
         $("#eNgayChieu").val(g.NgayChieu);
         $("#edit").modal("toggle");
+        $("#trong").attr("data-target", "#edit");
       });
     } 
 

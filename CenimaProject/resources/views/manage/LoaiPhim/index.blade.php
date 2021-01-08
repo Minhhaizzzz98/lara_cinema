@@ -3,7 +3,7 @@
 
   
   <!-- Modal -->
-  <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="fasle">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal fade" id="edit" role="dialog" aria-hidden="false">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -68,7 +68,7 @@
     <!-- Page Heading -->
     <h1 class="h2 mb-2 text-center text-primary">QUẢN LÝ THỂ LOẠI PHIM</h1>
 
-    <button data-toggle="modal" data-target="#add" class="btn btn-primary"><i class="fa fa-film" aria-hidden="true"> Thêm mới</i></button>
+    <button data-toggle="modal" data-target="#add" class="btn btn-primary"><i class="fa fa-film" aria-hidden="false"> Thêm mới</i></button>
 
     
     <div class="card shadow mb-4">
@@ -157,7 +157,7 @@
                             string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaLoaiPhim("+array[i].id+")'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
                             string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaLoaiPhim("+array[i].id+")'"+">Xóa thể loại</a>"+"</td></tr>"
                           }
-                            $(".modal-backdrop").remove();
+                           
                             $("#body").html(string);
                         },
                         error: function(error){

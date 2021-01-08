@@ -145,8 +145,15 @@
                             {
                                 
                                 string+="<tr id='sid"+array[i].id +"'"+"><td>"+array[i].Day + array[i].sort+"</td>";
-                                string+="<td>"+array[i].GiaGhe+" VND</td>";  
-                                string+="<td>"+array[i].phong.TenPhong+"</td>";  
+                                string+="<td>"+array[i].GiaGhe+" VND</td>";                               
+                                string+="<td>"+array[i].phong.TenPhong+"</td>";
+                                if(array[i].TrangThai== 1) 
+                                      string+="<td><a class='btn btn-success'>Có người</a></td>"; 
+                                   
+                                else if(array[i].TrangThai == 0) 
+                                       string+="<td><a class='btn btn-success'>Chưa có người</a></td>";
+                                   
+                               
                                 string+="<td><a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaGhe("+array[i].id+")'"+">Xóa</a>"+"</td></tr>"
                             }
                             $("#body").html(string);
