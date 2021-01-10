@@ -38,7 +38,8 @@ class GheController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Ghe::where('phong_id',$id)->get();
+        return response()->json($data);
     }
 
     /**
