@@ -73,7 +73,7 @@ class NhanVienController extends Controller
         $request->Anh->move(public_path('images/nhanviens'), $imageName);
 
         $nhanvien->Anh = $imageName;
-     }
+      }
      else $nhanvien->Anh = null;
 
      $nhanvien->save();

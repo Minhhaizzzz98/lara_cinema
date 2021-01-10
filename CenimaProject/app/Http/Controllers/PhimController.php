@@ -87,9 +87,16 @@ class PhimController extends Controller
         $phim->QuocGia = $request->QuocGia;
         $phim->loaiphim_id = $request->loaiphim_id;
         $phim->GiaPhim=$request->GiaPhim;
-        $temp= substr($request->HinhAnh, 12);  
+        $temp = substr($request->HinhAnh, 12);  
         $phim->Trailer= $request->Trailer;
-        $phim->HinhAnh="http://localhost:8000/data/".$temp;     
+        $phim->HinhAnh=$temp;  
+        
+        // $tenphim = $request->TenPhim;
+        // $extension = $temp->extension();
+        // $imageName = $tenphim.'.'.$extension;
+
+        // $request->HinhAnh->move(public_path('data'), $imageName);
+        
         $flag=$phim->save();
         $data= Phim::where('TrangThai',1)->get();
 
