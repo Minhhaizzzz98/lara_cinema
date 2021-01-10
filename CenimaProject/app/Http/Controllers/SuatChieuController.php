@@ -15,7 +15,6 @@ class SuatChieuController extends Controller
      */
     public function index()
     {
-        //
         $data = SuatChieu::with('phim','giochieu')->where('TrangThai',1)->get();
         return view('manage.SuatChieu.index')->with('list',$data);
     }
@@ -38,17 +37,9 @@ class SuatChieuController extends Controller
      */
     public function store(Request $request)
     {
-        //xử lí phòng trống của rạp
-
-        //Lấy danh sách tất cả các phòng của rạp
-        $phongs = Phong::where('rap_id',$request->Rap)->get();   
-        $suatchieus = SuatChieu::where('TrangThai',1)->get();      
-
         $sc = new SuatChieu();
-        $sc->phong_id = $phongs[0]->id;
         $sc->giochieu_id = $request->GioChieu;
         $sc->phim_id = $request->Phim;
-        $sc->rap_id = $request->Rap;
         $sc->phong_id = $request->Phong;
         $sc->NgayChieu = $request->NgayChieu;
         $sc->GiaSuatChieu = 0;
@@ -59,56 +50,47 @@ class SuatChieuController extends Controller
             return json_encode($data);
         }     
     }
+
     public function getPhong(Request $request)
     {
         $phongs = Phong::where('rap_id',$request->Rap)->get(); 
+        $resultPhongs = Phong::where('rap_id',$request->Rap)->get(); 
 
-        $suatchieus = SuatChieu::where('TrangThai',1)->where('rap_id',$request->Rap)->get(); 
-
-        $list = array();
-        
-        $temp = 0;
+        $suatchieus = SuatChieu::where('TrangThai',1)->get(); 
 
         if($suatchieus==null)
         {
             return json_encode($phongs);
+            
         }
 
-        foreach($phongs as $phong)
+        for($i = 0; $i < sizeof($phongs); $i++)
         {
-           
                 foreach($suatchieus as $item)
                 {
-                    if( $item->phong_id == $phong->id)
+                    if($phongs[$i]->id != $item->phong_id)
                     {
-                        if( $item->giochieu_id == $request->GioChieu && $item->NgayChieu == $request->NgayChieu)
-                        {
-                            $temp++;
-                        }
-                        else
-                        {
-                            array_push($list,$phong);
-                        }         
+                                                  
                     }
                     else
                     {                  
-                        array_push($list,$phong);
-                    }
-                   
-                }       
-           
+                        if( $item->giochieu_id == $request->GioChieu && $item->NgayChieu == $request->NgayChieu)
+                        {
+                          $resultPhongs[$i]=null;                         
+                        }
+                        else
+                        {
+                        
+                        }    
+                    }                                
+                }                 
         }
-
-        if($temp == sizeof($phongs))
+        if($resultPhongs[0]==null)
         {
             return json_encode(1);
         }
-        else if(empty($list))
-        {
-            return json_encode($phongs);
-        }
         else  
-            return json_encode($list);
+            return json_encode($resultPhongs);
     }
 
 

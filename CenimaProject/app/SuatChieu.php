@@ -28,11 +28,7 @@ class SuatChieu extends Model
         return $this->belongsTo('App\Phong', 'phong_id', 'id')->with('rap');
     }
 
-    public function rap()
-    {
-        return $this->belongsTo('App\Rap', 'rap_id', 'id');
-    }
-
+    
     // public function rap()
     // {
     //     return $this->belongsTo('App\Rap', 'rap_id', 'id');

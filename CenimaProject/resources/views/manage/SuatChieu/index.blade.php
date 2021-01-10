@@ -182,24 +182,33 @@
                         data:{
                             GioChieu:GioChieu,
                             Phim:Phim,
-                            NgayChieu:NgayChieu,
                             Rap:Rap,
+                            NgayChieu:NgayChieu,
                             _token:token
                         },
                         success:function(response){ 
-
-                            var i = parseInt(response);
+                            $('#rolePhong').empty();
+                            var temp = parseInt(response);
                             console.log(response);
-                            if(i==1)
+                             
+                            if(temp==1)
                             {
                               alert('Suất chiếu đã tồn tại! Không có phòng trống');
                             }
                             else
                             {
                               var array=JSON.parse(response);  
-                              for(let i =0; i<array.length;i++)
+                              for(let i = 0; i<array.length;i++)
                               {
-                                $('#rolePhong').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].TenPhong+'</option>');
+                                if(array[i]==null)
+                                {
+
+                                }
+                                else
+                                {
+                                  $('#rolePhong').append('<option value='+array[i].id+'>'+array[i].id+': '+array[i].TenPhong+'</option>');
+                                }
+                                
                               }
                             }
                   
@@ -261,7 +270,7 @@
                   var GioChieu = $('select[name=selectGioChieu]').val() 
                   var Phim = $('select[name=selectPhim]').val() 
                   var NgayChieu = $('input[name=NgayChieu]').val();
-                  var Rap = $('select[name=selectRap]').val() 
+                  // var Rap = $('select[name=selectRap]').val() 
                   var Phong = $('select[name=selectPhong]').val() 
                   var token= $("input[name=_token]").val();
 
@@ -272,7 +281,7 @@
                             GioChieu:GioChieu,
                             Phim:Phim,
                             NgayChieu:NgayChieu,
-                            Rap:Rap,
+                            // Rap:Rap,
                             Phong:Phong,
                             _token:token
                         },

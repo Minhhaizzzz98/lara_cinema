@@ -3,7 +3,7 @@
 
   
   <!-- Modal -->
-  <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -151,7 +151,7 @@
                           {
                             string+="<tr id='sid"+array[i].id +"'"+"><td>"+array[i].id+"</td>"+"<td>"+array[i].TenLoaiTGChieu+"</td>";
                             string+="<td>"+array[i].Gia_TG+"</td>";
-                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaLoaiTG('"+array[i].id+"')"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
+                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaLoaiTG("+array[i].id+")'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
                             string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaLoaiTG("+array[i].id+")'"+">Xóa loại TG</a>"+"</td></tr>"
                           }
                             $(".modal-backdrop").remove();
@@ -236,7 +236,7 @@
                           {
                             string+="<tr id='sid"+array[i].id +"'"+"><td>"+array[i].id+"</td>"+"<td>"+array[i].TenLoaiTGChieu+"</td>";
                             string+="<td>"+array[i].Gia_TG+"</td>";
-                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaLoaiTG('"+array[i].id+"')"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
+                            string+="<td>"+"<a href='javascript:void(0)' data-toggle='modal' onclick= 'suaLoaiTG("+array[i].id+")'"+" data-target='#edit' class='btn btn-info' type='submit'>Chỉnh sửa</a>|";
                             string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaLoaiTG("+array[i].id+")'"+">Xóa thể loại</a>"+"</td></tr>"
                           }
                             $(".modal-backdrop").remove();

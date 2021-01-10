@@ -340,7 +340,7 @@
                                 <td>{{$item->TenPhim}}</td>
                                 <td>{{$item->DaoDien}}</td>
                                 <td>{{$item->ThoiLuong}} Phút</td>
-                                <td><img width="100px" height="80px" src="{{$item->HinhAnh}}" alt=""></td>
+                                <td><img width="100px" height="80px" src="http://localhost:8000/data/{{$item->HinhAnh}}" alt=""></td>
                                 <td>
                                     @php
                                     if($item->TrangThai==1){
@@ -472,6 +472,7 @@
                         success:function(response){    
                           var array=JSON.parse(response);               
                           var string="";
+                          alert("Thêm thành công");
                           $("#add").modal('hide');
                           for(let i =0; i<array.length;i++)
                           {
@@ -480,7 +481,7 @@
                             string+="<td>"+array[i].TenPhim+"</td>";
                             string+="<td>"+array[i].DaoDien+"</td>";
                             string+="<td>"+array[i].ThoiLuong+"</td>";
-                            string+="<td>"+"<img width='100px' height='80px' src='"+array[i].HinhAnh+"'></td>";
+                            string+="<td>"+"<img width='100px' height='80px' src='http://localhost:8000/data/"+array[i].HinhAnh+"'></td>";
                             if(array[i].TrangThai==1)
                             {
                                 string+="<td>"+"Đang chiếu"+"</td>"
@@ -623,6 +624,7 @@
                     success:function(response){          
                       var array=JSON.parse(response);               
                           var string="";
+                          alert("Thêm thành công");
                           $("#edit").modal('hide');
                           for(let i =0; i<array.length;i++)
                           {
@@ -631,7 +633,7 @@
                             string+="<td>"+array[i].TenPhim+"</td>";
                             string+="<td>"+array[i].DaoDien+"</td>";
                             string+="<td>"+array[i].ThoiLuong+"</td>";
-                            string+="<td>"+"<img width='100px' height='80px' src='"+array[i].HinhAnh+"'></td>";
+                            string+="<td>"+"<img width='100px' height='80px' src='http://localhost:8000/data/"+array[i].HinhAnh+"'></td>";
                             if(array[i].TrangThai==1)
                             {
                                 string+="<td>"+"Đang chiếu"+"</td>"
