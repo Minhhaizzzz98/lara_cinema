@@ -31,6 +31,18 @@ Route::apiResource('/GioChieu', 'Api\GioChieuApi');
 Route::apiResource('/SuatChieu', 'Api\SuatChieuController');
 Route::post('/SuatChieu/getGioChieu','Api\SuatChieuController@getGioChieu');
 
+//Đánh giá
+Route::apiResource('/DanhGia', 'Api\DanhGiaController');
+Route::post('/DanhGia/create','Api\DanhGiaController@store');
+Route::get('/DanhGia/delete/{id}','Api\DanhGiaController@destroy');
+Route::get('/DanhGia/phim/{id}','Api\DanhGiaController@avgPhim');
+
+
+//Bình luận
+Route::apiResource('/BinhLuan', 'Api\BinhLuanController');
+Route::post('/BinhLuan/create','Api\BinhLuanController@store');
+Route::get('/BinhLuan/delete/{id}','Api\BinhLuanController@destroy');
+
 //vé
 Route::apiResource('/Ve', 'Api\VeController');
 
