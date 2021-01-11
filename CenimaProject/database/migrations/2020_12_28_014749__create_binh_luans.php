@@ -16,7 +16,12 @@ class CreateBinhLuans extends Migration
         //
         Schema::create('binh_luans', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('NoiDung');
+            $table->integer('khachhang_id')->unsigned();
+            $table->foreign('khachhang_id')->references('id')->on('khach_hangs');
+            $table->integer('phim_id')->unsigned();
+            $table->foreign('phim_id')->references('id')->on('phims');
+            $table->datetime('NgayBinhLuan');
+            $table->string('NoiDung');
             $table->integer('TrangThai')->default(1);
             $table->timestamps();
         });
