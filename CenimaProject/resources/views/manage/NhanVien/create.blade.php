@@ -31,11 +31,9 @@
                                         <input class="form-control" name="password" type="password" />
 
                                     </div>
-
                                     <div class="form-group">
                                         <label class="control-label"> Xác nhận mật khẩu </label>
                                         <input class="form-control" name="repassword" type="password" />
-
                                     </div>
 
                                     <div class="form-group">

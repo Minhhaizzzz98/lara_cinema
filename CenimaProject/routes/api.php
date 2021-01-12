@@ -22,7 +22,7 @@ Route::get('/Phim_GetFive', 'Api\PhimController@getFiveFilm');
 Route::apiResource('/Phim', 'Api\PhimController');
 Route::apiResource('/LoaiPhim', 'Api\LoaiPhimController');
 
-Route::apiResource('/GioiHanTuoi', 'Api\GioiHanTuoiController');
+//Route::apiResource('/GioiHanTuoi', 'Api\GioiHanTuoiController');
 Route::apiResource('KhachHang','Api\KhachHangController');
 Route::post('/KhachHang_Login','Api\KhachHangController@Login');
 Route::apiResource('/DienVien', 'Api\DienVienController');
