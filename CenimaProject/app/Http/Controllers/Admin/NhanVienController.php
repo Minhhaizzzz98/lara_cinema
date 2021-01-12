@@ -53,7 +53,7 @@ class NhanVienController extends Controller
         $nhanvien->TenTK = $request->TenTK;
         $nhanvien->password = Hash::make($request->password);
 
-
+        
         $nhanvien->ChucVu_ID = $request->ChucVu;
         $nhanvien->NgSinh = $request->NgSinh;
         $nhanvien->DiaChi = $request->DiaChi;

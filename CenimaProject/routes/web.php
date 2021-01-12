@@ -33,6 +33,8 @@ Route::get('/register', function () {
     return view('manage.register');
 });
 
+Route::post('/register', 'Admin\AccountController@register')->middleware('login');
+
 Route::get('/table', function () {
     return view('manage.table');
 })->middleware('login');
@@ -205,3 +207,4 @@ Route::group(['prefix' => 'rap'], function() {
     Route::post('/update/{id}','RapController@update');
     Route::get('/delete/{id}','RapController@destroy');
 });
+
