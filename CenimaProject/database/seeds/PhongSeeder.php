@@ -18,6 +18,8 @@ class PhongSeeder extends Seeder
             ['TenPhong' => 'Phòng chiếu 2', 'rap_id' => 2, 'TrangThai' => 1],
             ['TenPhong' => 'Phòng chiếu 1', 'rap_id' => 3, 'TrangThai' => 1],
             ['TenPhong' => 'Phòng chiếu 2', 'rap_id' => 3, 'TrangThai' => 1],
+            ['TenPhong' => 'Phòng chiếu 1', 'rap_id' => 4, 'TrangThai' => 1],
+            ['TenPhong' => 'Phòng chiếu 2', 'rap_id' => 4, 'TrangThai' => 1],
            
         ]);
     }

@@ -48,7 +48,7 @@ class SuatChieuController extends Controller
     }
     public function test()
     {
-        $list = SuatChieu::join('gio_chieus', 'suat_chieus.giochieu_id', '=', 'gio_chieus.id')->select('giochieu_id','gio_chieus.GioBatDau')->where('rap_id',1)->where('phim_id',1)->where('NgayChieu','2021-01-01')->get();
+        $list = SuatChieu::join('gio_chieus', 'suat_chieus.giochieu_id', '=', 'gio_chieus.id')->select('giochieu_id','gio_chieus.GioBatDau')->where('phim_id',1)->where('NgayChieu','2021-01-01')->get();
         return json_encode($list);
     }
 

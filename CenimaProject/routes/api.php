@@ -43,6 +43,10 @@ Route::apiResource('/BinhLuan', 'Api\BinhLuanController');
 Route::post('/BinhLuan/create','Api\BinhLuanController@store');
 Route::get('/BinhLuan/delete/{id}','Api\BinhLuanController@destroy');
 
+Route::get('/BinhLuan/get/{id}','Api\BinhLuanController@get');
+Route::get('/BinhLuan/getFive/{id}','Api\BinhLuanController@getFive');
+
+
 //vé
 Route::apiResource('/Ve', 'Api\VeController');
 

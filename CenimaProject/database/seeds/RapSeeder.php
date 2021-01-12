@@ -13,9 +13,10 @@ class RapSeeder extends Seeder
     {
         //
         DB::table('raps')->insert([
-            ['TenRap' => 'CGV Lý Chính Thắng', 'DiaChi' => 'Lý Chính Thắng', 'SDT' => '11111', 'TrangThai' => 1],
-            ['TenRap' => 'CGV Nam Kỳ Khởi Nghĩa', 'DiaChi' => 'Nam Kỳ Khởi Nghĩa', 'SDT' => '11111', 'TrangThai' => 1],
-            ['TenRap' => 'CGV Huỳnh Thúc Kháng', 'DiaChi' => 'Huỳnh Thúc Kháng', 'SDT' => '11111', 'TrangThai' => 1],
+            ['TenRap' => 'CGV Lý Chính Thắng', 'DiaChi' => 'Lý Chính Thắng TP HCM', 'SDT' => '11111', 'TrangThai' => 1],
+            ['TenRap' => 'CGV Nam Kỳ Khởi Nghĩa', 'DiaChi' => 'Nam Kỳ Khởi Nghĩa, TP HCM', 'SDT' => '22222', 'TrangThai' => 1],
+            ['TenRap' => 'CGV Huỳnh Thúc Kháng', 'DiaChi' => 'Huỳnh Thúc Kháng, TP HCM', 'SDT' => '33333', 'TrangThai' => 1],
+            ['TenRap' => 'CGV Hàm Nghi', 'DiaChi' => 'Hàm Nghi, TP HCM', 'SDT' => '444444', 'TrangThai' => 1],
            
         ]);
     }

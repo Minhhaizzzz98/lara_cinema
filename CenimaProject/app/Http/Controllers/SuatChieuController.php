@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\SuatChieu;
+use App\Phim;
+use App\GioChieu;
 use App\Phong;
 
 class SuatChieuController extends Controller
@@ -38,11 +40,16 @@ class SuatChieuController extends Controller
     public function store(Request $request)
     {
         $sc = new SuatChieu();
+
+        $phim = Phim::find($request->Phim);
+        $giochieu = GioChieu::find($request->GioChieu);
+
+        $sc->GiaSuatChieu = $phim->GiaPhim + $giochieu->loaitgchieu->Gia_TG ;
         $sc->giochieu_id = $request->GioChieu;
         $sc->phim_id = $request->Phim;
         $sc->phong_id = $request->Phong;
         $sc->NgayChieu = $request->NgayChieu;
-        $sc->GiaSuatChieu = 0;
+      
         $flag = $sc->save();
         $data = SuatChieu::with('phim','phong','giochieu')->where('TrangThai',1)->get();
         if($flag)
@@ -129,14 +136,19 @@ class SuatChieuController extends Controller
     {
         //
         $sc = SuatChieu::find($id);
+
+        $phim = Phim::find($request->Phim);
+        $giochieu = GioChieu::find($request->GioChieu);
+   
+        $sc->GiaSuatChieu = $phim->GiaPhim + $giochieu->loaitgchieu->Gia_TG;
         $sc->phim_id = $request->Phim;
         $sc->giochieu_id = $request->GioChieu;
-        $sc->rap_id = $request->Rap;
+        $sc->phong_id = $request->Phong;
         $sc->NgayChieu = $request->NgayChieu;
-        $sc->GiaSuatChieu=0;
+       
         $flag = $sc->save();
 
-        $data = SuatChieu::with('phim','rap','giochieu')->where('TrangThai',1)->get();
+        $data = SuatChieu::with('phim','phong','giochieu')->where('TrangThai',1)->get();
         if($flag)
         {
             return json_encode($data);
