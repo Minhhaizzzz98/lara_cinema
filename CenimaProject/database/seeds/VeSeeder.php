@@ -14,8 +14,7 @@ class VeSeeder extends Seeder
         //
         DB::table('ves')->insert([
             ['GiaVe' => 10000, 'suatchieu_id' => 1,'ghe_id'=>1,'kh_id'=>1,'TrangThai'=>1],
-           
-           
+        
            
         ]);
     }

@@ -18,6 +18,7 @@ class BinhLuanController extends Controller
         $data = BinhLuan::with('phim','khachhang')->where('TrangThai',1)->get();
         return response()->json($data);
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -57,6 +58,22 @@ class BinhLuanController extends Controller
         //
     }
 
+    public function get($phim_id)
+    {
+        $data = BinhLuan::with('phim','khachhang')->where('TrangThai',1)->where('phim_id', $phim_id)->get();  
+        return json_encode($data);
+    }
+
+    public function getFive($phim_id)
+    {
+        $data = BinhLuan::with('phim','khachhang')->where('TrangThai',1)->where('phim_id', $phim_id)->get();
+        $list = array();
+        for( $i = 0; $i < 5; $i++)
+        {
+            array_push($list, $data[$i]);
+        }
+        return json_encode($data);
+    }
     /**
      * Update the specified resource in storage.
      *

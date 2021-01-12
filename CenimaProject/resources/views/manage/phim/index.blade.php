@@ -12,7 +12,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form class="user" id="form-add">
+            <form class="user" id="form-add" enctype="multipart/form-data">
                 {{ csrf_field() }}
                   <div class="form-group">
                      <label class="text-dark" for="TenPhim">Tên phim:</label>
@@ -578,7 +578,7 @@
         $("#quocgia").val(Phim.QuocGia);
         $("#gioihantuoi").val(Phim.GioiHanTuoi);
         $("#giaphim").val(Phim.GiaPhim);
-        $("#eimage").attr("src",Phim.HinhAnh);
+        $("#eimage").attr("src",'http://localhost:8000/data/' + Phim.HinhAnh);
         $("#edit").modal("toggle");
       });
     } 
