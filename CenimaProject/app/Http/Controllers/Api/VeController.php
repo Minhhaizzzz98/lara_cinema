@@ -55,7 +55,11 @@ class VeController extends Controller
      */
     public function show($id)
     {
-        //
+        $list=Ve::join("ghes","ghes.id","ves.ghe_id")->select(
+            "ghes.id","ghes.Day","ghes.sort"
+        )->where("suatchieu_id",$id)->get();
+        return json_encode($list);
+
     }
 
     /**
