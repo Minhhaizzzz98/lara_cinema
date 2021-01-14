@@ -66,9 +66,19 @@
             <div class="form-group">
               <label class="text-dark">Giờ chiếu</label>     
               <select name="eGioChieu" id="eGioChieu">
-                @for ($i = 7; $i <= 23; $i++)
-                 <option value="{{$i}}:00:00">{{$i}}:00</option>
-                @endfor            
+                  @for ($i = 7; $i <= 23; $i++)
+                      @if ($i <= 9)
+                      {
+                        <option value="0{{$i}}:00:00">0{{$i}}:00</option>
+                      }
+                          
+                      @else
+                      {
+                        <option value="{{$i}}:00:00">{{$i}}:00</option>
+                      }
+                      @endif
+                  
+                  @endfor            
               </select>
               <p class="text-danger">{{ $errors->first('GioChieu') }}</p>
        </div>
@@ -171,7 +181,10 @@
                         },
                         success:function(response){ 
                           alert("Thành công");   
-                          var array=JSON.parse(response);               
+                          console.log(response);
+              
+                          var array=JSON.parse(response);            
+                          console.log(array);   
                           var string="";
                           $("#add").modal('hide');
                           for(let i =0; i<array.length;i++)
@@ -230,7 +243,6 @@
 
   function erole(id){
           $('#erole').empty();
-
           $.get('/GioChieu/getId/'+id, function(a){ 
              $('#erole').append('<option value='+a.id+'>'+a.id+': '+a.TenLoaiTGChieu+'</option>');              
            });   
@@ -256,7 +268,17 @@
     { 
       $.get('/GioChieu/edit/'+id, function(g){  
         $("#eid").val(g.id); 
-        $("#eGioChieu").val(g.GioBatDau);
+        // var temp = parseInt(g.GioBatDau.splice(2)) ;
+        // $("#eGioChieu").val(g.GioBatDau);
+        if(g.GioBatDau.length < 8 )
+        {
+          $("#eGioChieu").val("0"+g.GioBatDau);
+        }
+        else
+        {
+          $("#eGioChieu").val(g.GioBatDau);
+        }
+
         $("#edit").modal("toggle");
       });
     } 
@@ -280,10 +302,11 @@
                     },
 
                     success:function(response){ 
-                         alert("Cập nhật thành công");               
+                         alert("Cập nhật thành công");
+                         $("#edit").modal('hide');               
                          var array=JSON.parse(response);               
                           var string="";
-                          $("#edit").modal('hide');
+                        
                           for(let i =0; i<array.length;i++)
                           {
                             string+="<tr id='sid"+array[i].id +"'"+"><td>"+array[i].id+"</td>"+"<td>"+array[i].GioBatDau+"</td>";

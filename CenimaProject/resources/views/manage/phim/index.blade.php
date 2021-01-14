@@ -557,7 +557,7 @@
         $("#dtheloai").val(Phim.theloais.TenLoaiPhim);
         $("#dgioihantuoi").val(Phim.GioiHanTuoi);
         $("#dgiaphim").val(Phim.GiaPhim);
-        $("#dimage").attr("src",Phim.HinhAnh);
+        $("#dimage").attr("src","http://localhost:8000/data/"+Phim.HinhAnh);
 
         $("#detail").modal("toggle");
       });
@@ -624,7 +624,7 @@
                     success:function(response){          
                       var array=JSON.parse(response);               
                           var string="";
-                          alert("Thêm thành công");
+                          alert("Cập nhật thành công");
                           $("#edit").modal('hide');
                           for(let i =0; i<array.length;i++)
                           {
@@ -646,6 +646,7 @@
                             string+="<a class='btn btn-info'  href='javascript:void(0)'  onclick= 'xemPhim("+array[i].id+")'"+">Details</a>|";
                             string+="<a class='btn btn-danger'  href='javascript:void(0)'  onclick= 'xoaPhim("+array[i].id+")'"+">Xóa phim</a>"+"</td></tr>";
                           }
+                          // window.location.reload();
                           $(".modal-backdrop").remove();
                             $("#body").html(string);           
                     },
