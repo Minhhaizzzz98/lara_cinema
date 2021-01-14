@@ -20,7 +20,7 @@ class CreateBinhLuans extends Migration
             $table->foreign('khachhang_id')->references('id')->on('khach_hangs');
             $table->integer('phim_id')->unsigned();
             $table->foreign('phim_id')->references('id')->on('phims');
-            $table->datetime('NgayBinhLuan');
+            $table->timestamp('NgayBinhLuan')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->string('NoiDung');
             $table->integer('TrangThai')->default(1);
             $table->timestamps();

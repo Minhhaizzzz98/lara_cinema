@@ -92,7 +92,15 @@ class SuatChieuController extends Controller
                     }                                
                 }                 
         }
-        if($resultPhongs[0]==null)
+        $temp=0;
+        foreach($resultPhongs as $item)
+        {
+           if($item == "")
+           {
+               $temp++;
+           }
+        }
+        if($temp == sizeof($resultPhongs))
         {
             return json_encode(1);
         }

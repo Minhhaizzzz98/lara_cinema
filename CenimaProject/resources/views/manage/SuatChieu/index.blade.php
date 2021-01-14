@@ -357,7 +357,9 @@
                             {
                               var array=JSON.parse(response); 
                               var string="";
-                              $("#add").modal('hide'); 
+                              $('#rolePhong').empty();
+                              $("#add").modal('hide');
+                            
                               $(".modal-backdrop").remove();  
                               for(let i =0; i<array.length;i++)
                               {
@@ -493,6 +495,7 @@
        $.get('/SuatChieu/edit/'+id, function(g){  
         $("#MaSuatChieu").val(g.id); 
         $("#eNgayChieu").val(g.NgayChieu);
+        $('#erolePhong').empty();
         $("#edit").modal("toggle");
         $("#trong").attr("data-target", "#edit");
       });
@@ -524,6 +527,7 @@
                          alert("Cập nhật thành công");               
                          var array=JSON.parse(response);               
                           var string="";
+                          $('#erolePhong').empty();
                           $("#edit").modal('hide');
                           for(let i =0; i<array.length;i++)
                           {
